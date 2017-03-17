@@ -126,6 +126,7 @@ geotab.addin.geotabFuelSensor = function(api) {
 			// The api object exposes a method we can call to get the current user identity. This is useful for
 			// determining user context, such as regional settings, language preference and name. Use the api
 			// to retrieve the currently logged on user object.
+			console.log("Initializing page");
 			getVehicles();
 	    },
 
@@ -141,8 +142,10 @@ geotab.addin.geotabFuelSensor = function(api) {
          * @param page The page state object allows access to URL, page navigation and global group filter.
          */
 	    focus: function(api, state) {
+			console.log("Focusing");
 	    	initializeEventHandler();
 	    	populateVehicleSelect();
+			console.log("Populated Vehicle");
 		},
 		
 		/**
