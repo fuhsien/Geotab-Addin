@@ -9,8 +9,8 @@
  * @param state The state object allows access to URL, page navigation and global group filter.
  * @returns {{initialize: Function, focus: Function, blur: Function}}
  */
-geotab.addin.addinTemplate = function(api, state) {
-
+geotab.addin.geotabFuelSensor = function(api) {
+	"use strict";
 	// Your private functions and variables go here
 	var startDate = new Date(),
     endDate = new Date(),
@@ -22,7 +22,7 @@ geotab.addin.addinTemplate = function(api, state) {
 	console.log("End Date:",endDate);
 
 	/*****************************Get Data from Geotab***********************************/
-	var getVehicles = function (finishedCallback) {
+	var getVehicles = function () {
 	    api.call("Get", {
 	        typeName: "Device"
 	    }, function (results) {
@@ -38,7 +38,7 @@ geotab.addin.addinTemplate = function(api, state) {
 	    });
 	};
 
-	var getAux1 = function(vehicleID,finishedCallback){
+	var getAux1 = function(vehicleID){
 		api.call("Get", {                           // Get the correct Diagnostic info for Aux1
 		    "typeName": "Diagnostic",
 		    "search": { "name": "Analog aux 1"},
@@ -105,7 +105,7 @@ geotab.addin.addinTemplate = function(api, state) {
 				tripsSelect.style.display = "block";
 
 				//Get Aux Data for this vehicle
-				getAux1(selectedVehicleId,callback);
+				getAux1(selectedVehicleId);
 			}
 		},true);
 	};
@@ -126,7 +126,7 @@ geotab.addin.addinTemplate = function(api, state) {
 			// The api object exposes a method we can call to get the current user identity. This is useful for
 			// determining user context, such as regional settings, language preference and name. Use the api
 			// to retrieve the currently logged on user object.
-			getVehicles(callback);
+			getVehicles();
 	    },
 
         /**
