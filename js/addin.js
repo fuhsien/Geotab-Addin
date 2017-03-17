@@ -32,7 +32,6 @@ geotab.addin.geotabFuelSensor = function(api) {
 	                id: vehicle.id
 	            };
 	        });
-	        console.log("Initializing page");
 	        console.log("Vehicles loaded");
 	    }, function (errorString) {
 	        alert(errorString);
@@ -70,7 +69,6 @@ geotab.addin.geotabFuelSensor = function(api) {
 
 	/*****************************HTML functionality***********************************/
 	var populateVehicleSelect = function () {
-		console.log("Populated Vehicle");
 	    var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
 	    vehicleSelect.appendChild((function () {
 	        var defaultOption = document.createElement("option");
@@ -92,7 +90,7 @@ geotab.addin.geotabFuelSensor = function(api) {
 
 	var initializeEventHandler = function(){
 		var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
-		console.log("Focusing");
+
 		//After vehicle selected
 		vehicleSelect.addEventListener("change", function(evt){
 			var selectedVehicleId = this.value;
@@ -128,7 +126,7 @@ geotab.addin.geotabFuelSensor = function(api) {
 			// The api object exposes a method we can call to get the current user identity. This is useful for
 			// determining user context, such as regional settings, language preference and name. Use the api
 			// to retrieve the currently logged on user object.
-			
+			console.log("Initializing page");
 			getVehicles();
 	    },
 
@@ -144,10 +142,10 @@ geotab.addin.geotabFuelSensor = function(api) {
          * @param page The page state object allows access to URL, page navigation and global group filter.
          */
 	    focus: function(api, state) {
-			
+			console.log("Focusing");
 	    	initializeEventHandler();
 	    	populateVehicleSelect();
-			
+			console.log("Populated Vehicle");
 		},
 		
 		/**
