@@ -22,7 +22,7 @@ geotab.addin.geotabFuelSensor = function(api,state) {
 	console.log("End Date:",endDate);
 
 	/*****************************Get Data from Geotab***********************************/
-	var getVehicles = function () {
+	var getVehicles = function (finishedCallback) {
 	    api.call("Get", {
 	        typeName: "Device"
 	    }, function (results) {
@@ -33,6 +33,7 @@ geotab.addin.geotabFuelSensor = function(api,state) {
 	            };
 	        });
 	        console.log("Vehicles loaded");
+	        finishedCallback();
 	    }, function (errorString) {
 	        alert(errorString);
 	    });
@@ -127,8 +128,7 @@ geotab.addin.geotabFuelSensor = function(api,state) {
 			// determining user context, such as regional settings, language preference and name. Use the api
 			// to retrieve the currently logged on user object.
 			console.log("Initializing page");
-			getVehicles();
-			initializeCallback();
+			getVehicles(initializeCallback);			;
 	    },
 
         /**
