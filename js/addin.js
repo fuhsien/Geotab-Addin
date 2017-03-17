@@ -128,6 +128,7 @@ geotab.addin.geotabFuelSensor = function(api,state) {
 			// to retrieve the currently logged on user object.
 			console.log("Initializing page");
 			getVehicles();
+			initializeCallback();
 	    },
 
         /**
