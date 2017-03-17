@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add-In Template</title>
+    <title>Fuel Info</title>
+
     <link href="css/addin.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">    
     <script src="js/addin.js"></script>
 </head>
 <body>
-
-    <div id="template-container" style="display:none">
-        <h1>Hello <span id="template-displayName"></span></h1>
-        <h2><span id="template-visitCount">0</span> visits</h2>
+    <div id="mapreplay-options">
+        <form class="pure-form pure-form-stacked">
+            <fieldset>
+                <div class="pure-g">
+                    <select id="mapreplay-options-vehicle" class="pure-u-1-1"></select>
+                </div>
+            </fieldset>
+        </form>    
     </div>
-
 </body>
-</html>
-
-

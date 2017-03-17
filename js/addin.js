@@ -12,7 +12,103 @@
 geotab.addin.addinTemplate = function(api, state) {
 
 	// Your private functions and variables go here
-	var totalVisits = 0;
+	var startDate = new Date(),
+    endDate = new Date(),
+    vehicles;
+
+	startDate.setDate(startDate.getDate()-3);
+	endDate.setDate(endDate.getDate());
+	console.log("Start Date:",startDate);
+	console.log("End Date:",endDate);
+
+	/*****************************Get Data from Geotab***********************************/
+	var getVehicles = function (finishedCallback) {
+	    api.call("Get", {
+	        typeName: "Device"
+	    }, function (results) {
+	        vehicles = results.map(function (vehicle) {
+	            return {
+	                name: vehicle.name,
+	                id: vehicle.id
+	            };
+	        });
+	        console.log("Vehicles loaded");
+	    }, function (errorString) {
+	        alert(errorString);
+	    });
+	};
+
+	var getAux1 = function(vehicleID,finishedCallback){
+		api.call("Get", {                           // Get the correct Diagnostic info for Aux1
+		    "typeName": "Diagnostic",
+		    "search": { "name": "Analog aux 1"},
+		}, function(result) {
+		    //console.log("Result:",result);
+		    var auxID = result[0].id;                 //Assign specific ID to variable
+		  
+		    api.call("Get",{
+		        "typeName":"StatusData",
+		        "search": {
+		            diagnosticSearch:{ 
+		                "id": auxID
+		            },
+		            deviceSearch:{ 
+		                "id": vehicleID
+		            },
+		            fromDate: startDate,
+		            toDate: endDate
+		        },
+		        //resultsLimit: 10,
+		        }, function(results) {
+		        console.log("Selected Vehicle Aux:",results);
+		        });
+		}, function(e) {
+		    console.error("Failed:", e);
+		});
+	};	
+
+	/*****************************HTML functionality***********************************/
+	var populateVehicleSelect = function () {
+	    var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
+	    vehicleSelect.appendChild((function () {
+	        var defaultOption = document.createElement("option");
+	        defaultOption.default = true;
+	        defaultOption.selected = true;
+	        defaultOption.value = "";
+	        defaultOption.textContent = "Select a vehicle...";
+	        return defaultOption;
+	    })());
+	    if (vehicles) {
+	        vehicles.forEach(function (vehicle) {
+	            var opt = document.createElement("option");
+	            opt.value = vehicle.id;
+	            opt.textContent = vehicle.name;
+	            vehicleSelect.appendChild(opt);
+	        });
+	    }
+	};
+
+	var initializeEventHandler = function(){
+		var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
+
+		//After vehicle selected
+		vehicleSelect.addEventListener("change", function(evt){
+			var selectedVehicleId = this.value;
+			if (selectedVehicleId){
+
+				//loading
+				tripsSelect.appendChild((function () {
+					var loadingOpt = document.createElement("option");
+					loadingOpt.textContent = "Loading...";
+					return loadingOpt;
+				})());
+				tripsSelect.style.display = "block";
+
+				//Get Aux Data for this vehicle
+				getAux1(selectedVehicleId,callback);
+			}
+		},true);
+	};
 
 	return {
         /**
@@ -30,25 +126,7 @@ geotab.addin.addinTemplate = function(api, state) {
 			// The api object exposes a method we can call to get the current user identity. This is useful for
 			// determining user context, such as regional settings, language preference and name. Use the api
 			// to retrieve the currently logged on user object.
-			api.getSession(function (session) {
-				var currentUser = session.userName;
-				api.call("Get", {
-					"typeName" : "User",
-					"search" : {
-						"name" : currentUser
-					}
-				}, function (result) {
-					if (result.length === 0) {
-						throw "Unable to find currently logged on user."
-					}
-					document.getElementById("template-displayName").innerHTML = result[0].firstName + " " + result[0].lastName;
-					document.getElementById("template-container").style.display = "block";
-					initializeCallback();
-
-				}, function (error) {
-					throw "Error while trying to load currently logged on user. " + error;
-				});
-			});
+			getVehicles(callback);
 	    },
 
         /**
@@ -63,10 +141,8 @@ geotab.addin.addinTemplate = function(api, state) {
          * @param page The page state object allows access to URL, page navigation and global group filter.
          */
 	    focus: function(api, state) {
-
-			totalVisits = totalVisits + 1;
-			document.getElementById("template-visitCount").innerHTML = totalVisits;
-
+	    	initializeEventHandler();
+	    	populateVehicleSelect();
 		},
 		
 		/**
@@ -78,7 +154,9 @@ geotab.addin.addinTemplate = function(api, state) {
          * @param page The page state object allows access to URL, page navigation and global group filter.
 		 */
 		blur: function(api, state) {
-			console.log("Closing Template!")
+			
 		}
 	};
 };
+
+/*****************************Start Running***********************************/
