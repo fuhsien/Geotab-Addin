@@ -96,15 +96,6 @@ geotab.addin.geotabFuelSensor = function(api,state) {
 		vehicleSelect.addEventListener("change", function(evt){
 			var selectedVehicleId = this.value;
 			if (selectedVehicleId){
-
-				//loading
-				tripsSelect.appendChild((function () {
-					var loadingOpt = document.createElement("option");
-					loadingOpt.textContent = "Loading...";
-					return loadingOpt;
-				})());
-				tripsSelect.style.display = "block";
-
 				//Get Aux Data for this vehicle
 				getAux1(selectedVehicleId);
 			}
