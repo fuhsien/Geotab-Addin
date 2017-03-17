@@ -9,8 +9,8 @@
  * @param state The state object allows access to URL, page navigation and global group filter.
  * @returns {{initialize: Function, focus: Function, blur: Function}}
  */
-geotab.addin.geotabFuelSensor = function(api) {
-	"use strict";
+geotab.addin.geotabFuelSensor = function(api,state) {
+	//"use strict";
 	// Your private functions and variables go here
 	var startDate = new Date(),
     endDate = new Date(),
