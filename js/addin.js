@@ -13,18 +13,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     //"use strict";
     // Your private functions and variables go here
     var startDate = new Date(),
-        endDate = new Date().toISOString(),
+        endDate = new Date(),
         vehicles,
         rawData,
         holdTime = [],
         holdVolt = [];
 
     startDate.setDate(startDate.getDate() - 3);
-    startDate = startDate.toISOString();
-    
+    endDate.setDate(endDate.getDate());
     console.log("Start Date:", startDate);
     console.log("End Date:", endDate);
-
 
     /*****************************Get Data from Geotab***********************************/
     var getVehicles = function(finishedCallback) {
@@ -76,10 +74,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     var dataPoints = [];
                     console.log("Begin plotting Data...");
                     for (var i = 0; i < results.length; i++) {
-                        holdTime[i] = results[i].dateTime;
+                        holdTime[i] = (results[i].dateTime).toISOString();
                         holdVolt[i] = results[i].data;
                         dataPoints.push({
-                            x: holdTime[i],
+                            x: i,
                             y: holdVolt[i]
                         });
                     }
