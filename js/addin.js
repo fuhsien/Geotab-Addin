@@ -73,7 +73,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
     };
     /*****************************Additional functions***********************************/
-    var plotData = $(function(dataObj) {
+    var plotData = function(dataObj) {
         var data = [];
         var dataSeries = {
             type: "line"
@@ -110,7 +110,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
 
-    });
+    };
 
 
     /*****************************HTML functionality***********************************/
