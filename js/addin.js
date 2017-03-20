@@ -42,7 +42,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
     };
 
-    var getAux1 = function(vehicleID, finishedCallback) {
+    var getAux1 = function(vehicleID) {
         api.call("Get", { // Get the correct Diagnostic info for Aux1
             "typeName": "Diagnostic",
             "search": {
@@ -66,7 +66,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 },
                 //resultsLimit: 10,
             }, function(results) {
-                finishedCallback(results); //results is array of Object with Voltage and Time
+                $(function(results) {
+                	console.log("Debug successful!");
+                }) //results is array of Object with Voltage and Time
                 console.log("Selected Vehicle Aux:", results);
             });
         }, function(e) {
@@ -105,9 +107,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             var selectedVehicleId = this.value;
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
-                getAux1(selectedVehicleId, $(function(rawData) {
-                	console.log("Debug successful!");
-                })); //rawData is results from getAux1
+                getAux1(selectedVehicleId); //rawData is results from getAux1
             }
         }, true);
     };
