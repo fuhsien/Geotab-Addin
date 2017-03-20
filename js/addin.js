@@ -73,7 +73,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     };
                     var dataPoints = [];
                     console.log("Begin plotting Data...");
-                    for (var i = 0; i < results.length; i++) {
+					console.log("Array length", results.length,results[0].length);
+					console.table("Array table", results);
+					console.log("Array info outer",results[0]);
+					console.log("Array info inner",results[0][0]);
+
+
+
+                    /*for (var i = 0; i < results.length; i++) {
                         //holdTime[i] = (results[i].dateTime).toISOString();
                         holdVolt[i] = results[i].data;
                         dataPoints.push({
@@ -81,9 +88,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                             y: holdVolt[i]
                         });
                     }
-                    //console.log("Time variable",holdTime);
+                    console.log("Time variable",holdTime);
                     console.log("Data variable",holdVolt);
-                    /*dataSeries.dataPoints = dataPoints;
+                    dataSeries.dataPoints = dataPoints;
                     data.push(dataSeries);
 
                     //Better to construct options first and then pass it as a parameter
