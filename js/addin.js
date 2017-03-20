@@ -67,7 +67,41 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //resultsLimit: 10,
             }, function(results) {
                 $(function(results) {
-                	console.log("Debug successful!");
+                    var data = [];
+                    var dataSeries = {
+                        type: "line"
+                    };
+                    var dataPoints = [];
+                    console.log("Begin plotting Data...",results);
+                    for (var i = 0; i < results.length; i++) {
+                        holdTime[i] = results[i].dateTime;
+                        holdVolt[i] = results[i].data;
+                        dataPoints.push({
+                            x: holdTime[i],
+                            y: holdVolt[i]
+                        });
+                    }
+
+                    dataSeries.dataPoints = dataPoints;
+                    data.push(dataSeries);
+
+                    //Better to construct options first and then pass it as a parameter
+                    var options = {
+                        zoomEnabled: true,
+                        animationEnabled: true,
+                        title: {
+                            text: "Try Zooming - Panning"
+                        },
+                        axisX: {
+                            labelAngle: 30
+                        },
+                        axisY: {
+                            includeZero: false
+                        },
+                        data: data // random data
+                    };
+
+                    $("#chartContainer").CanvasJSChart(options);
                 }) //results is array of Object with Voltage and Time
                 console.log("Selected Vehicle Aux:", results);
             });
