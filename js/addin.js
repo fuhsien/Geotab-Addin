@@ -15,6 +15,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     var startDate = new Date(),
         endDate = new Date(),
         vehicles,
+        rawData,
         holdTime = [],
         holdVolt = [];
 
