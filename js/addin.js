@@ -74,8 +74,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     var dataPoints = [];
                     console.log("Begin plotting Data...");
 					console.log("Array length", results.length);
-					console.log("Array info 1",results[0 … 99]);
-					console.log("Array info 2",results[0...99]);
+					//console.log("Array info 1",results[0 99]);
+					console.log("Array info 2",results[0 ... 99]);
 
 
 
