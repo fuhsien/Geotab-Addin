@@ -14,7 +14,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
     var startDate = new Date(),
         endDate = new Date(),
-        vehicles;
+        vehicles,
+        holdTime = [],
+        holdVolt = [];
 
     startDate.setDate(startDate.getDate() - 3);
     endDate.setDate(endDate.getDate());
@@ -39,7 +41,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
     };
 
-    var getAux1 = function(vehicleID) {
+    var getAux1 = function(vehicleID, finishedCallback) {
         api.call("Get", { // Get the correct Diagnostic info for Aux1
             "typeName": "Diagnostic",
             "search": {
@@ -63,12 +65,52 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 },
                 //resultsLimit: 10,
             }, function(results) {
+                finishedCallback(results); //results is array of Object with Voltage and Time
                 console.log("Selected Vehicle Aux:", results);
             });
         }, function(e) {
             console.error("Failed:", e);
         });
     };
+    /*****************************Additional functions***********************************/
+    var plotData = $(function(dataObj) {
+        var data = [];
+        var dataSeries = {
+            type: "line"
+        };
+        var dataPoints = [];
+        for (var i = 0; i < rawData.length; i++) {
+            holdTime[i] = dataObj[i].dateTime;
+            holdVolt[i] = dataObj[i].data;
+            dataPoints.push({
+                x: holdTime[i],
+                y: holdVolt[i]
+            });
+        }
+        
+        dataSeries.dataPoints = dataPoints;
+        data.push(dataSeries);
+
+        //Better to construct options first and then pass it as a parameter
+        var options = {
+            zoomEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Try Zooming - Panning"
+            },
+            axisX: {
+                labelAngle: 30
+            },
+            axisY: {
+                includeZero: false
+            },
+            data: data // random data
+        };
+
+        $("#chartContainer").CanvasJSChart(options);
+
+    });
+
 
     /*****************************HTML functionality***********************************/
     var populateVehicleSelect = function() {
@@ -99,11 +141,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             var selectedVehicleId = this.value;
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
-                getAux1(selectedVehicleId);
+                getAux1(selectedVehicleId, plotData(rawData)); //rawData is results from getAux1
             }
         }, true);
     };
 
+    /**************************************Start the code***********************************/
     return {
         /**
          * initialize() is called only once when the Add-In is first loaded. Use this function to initialize the
@@ -121,43 +164,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             // determining user context, such as regional settings, language preference and name. Use the api
             // to retrieve the currently logged on user object.
             console.log("Initializing page");
-            $(function() {
-                var limit = 10000; //increase number of dataPoints by increasing the limit
-                var y = 0;
-                var data = [];
-                var dataSeries = {
-                    type: "line"
-                };
-                var dataPoints = [];
-                for (var i = 0; i < limit; i += 1) {
-                    y += (Math.random() * 10 - 5);
-                    dataPoints.push({
-                        x: i,
-                        y: y
-                    });
-                }
-                dataSeries.dataPoints = dataPoints;
-                data.push(dataSeries);
-
-                //Better to construct options first and then pass it as a parameter
-                var options = {
-                    zoomEnabled: true,
-                    animationEnabled: true,
-                    title: {
-                        text: "Try Zooming - Panning"
-                    },
-                    axisX: {
-                        labelAngle: 30
-                    },
-                    axisY: {
-                        includeZero: false
-                    },
-                    data: data // random data
-                };
-
-                $("#chartContainer").CanvasJSChart(options);
-
-            });
             getVehicles(initializeCallback);
         },
 
