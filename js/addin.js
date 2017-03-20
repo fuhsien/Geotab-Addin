@@ -77,12 +77,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         holdTime[i] = results[i].dateTime;
                         holdVolt[i] = results[i].data;
                         dataPoints.push({
-                            x: holdTime[i],
+                            x: i,
                             y: holdVolt[i]
                         });
                     }
-
-                    dataSeries.dataPoints = dataPoints;
+                    console.log("Time variable",holdTime);
+                    console.log("Data variable",holdVolt);
+                    /*dataSeries.dataPoints = dataPoints;
                     data.push(dataSeries);
 
                     //Better to construct options first and then pass it as a parameter
@@ -101,7 +102,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         data: data // random data
                     };
 
-                    $("#chartContainer").CanvasJSChart(options);
+                    $("#chartContainer").CanvasJSChart(options);*/
                 }) //results is array of Object with Voltage and Time
                 console.log("Selected Vehicle Aux:", results);
             });
