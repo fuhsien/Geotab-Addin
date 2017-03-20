@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fuel Info</title>
-
-    <link href="css/addin.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">    
-    <script src="js/addin.js"></script>
-</head>
+    <title>Fuel Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js"></script>
 <body>
     <div id="mapreplay-options">
         <form class="pure-form pure-form-stacked">
@@ -14,6 +12,7 @@
                 <div class="pure-g">
                     <select id="mapreplay-options-vehicle" class="pure-u-1-1"></select>
                 </div>
+                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
             </fieldset>
         </form>    
     </div>

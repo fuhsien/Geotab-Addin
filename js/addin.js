@@ -9,100 +9,102 @@
  * @param state The state object allows access to URL, page navigation and global group filter.
  * @returns {{initialize: Function, focus: Function, blur: Function}}
  */
-geotab.addin.geotabFuelSensor = function(api,state) {
-	//"use strict";
-	// Your private functions and variables go here
-	var startDate = new Date(),
-    endDate = new Date(),
-    vehicles;
+geotab.addin.geotabFuelSensor = function(api, state) {
+    //"use strict";
+    // Your private functions and variables go here
+    var startDate = new Date(),
+        endDate = new Date(),
+        vehicles;
 
-	startDate.setDate(startDate.getDate()-3);
-	endDate.setDate(endDate.getDate());
-	console.log("Start Date:",startDate);
-	console.log("End Date:",endDate);
+    startDate.setDate(startDate.getDate() - 3);
+    endDate.setDate(endDate.getDate());
+    console.log("Start Date:", startDate);
+    console.log("End Date:", endDate);
 
-	/*****************************Get Data from Geotab***********************************/
-	var getVehicles = function (finishedCallback) {
-	    api.call("Get", {
-	        typeName: "Device"
-	    }, function (results) {
-	        vehicles = results.map(function (vehicle) {
-	            return {
-	                name: vehicle.name,
-	                id: vehicle.id
-	            };
-	        });
-	        console.log("Vehicles loaded");
-	        finishedCallback();
-	    }, function (errorString) {
-	        alert(errorString);
-	    });
-	};
+    /*****************************Get Data from Geotab***********************************/
+    var getVehicles = function(finishedCallback) {
+        api.call("Get", {
+            typeName: "Device"
+        }, function(results) {
+            vehicles = results.map(function(vehicle) {
+                return {
+                    name: vehicle.name,
+                    id: vehicle.id
+                };
+            });
+            console.log("Vehicles loaded");
+            finishedCallback();
+        }, function(errorString) {
+            alert(errorString);
+        });
+    };
 
-	var getAux1 = function(vehicleID){
-		api.call("Get", {                           // Get the correct Diagnostic info for Aux1
-		    "typeName": "Diagnostic",
-		    "search": { "name": "Analog aux 1"},
-		}, function(result) {
-		    //console.log("Result:",result);
-		    var auxID = result[0].id;                 //Assign specific ID to variable
-		  
-		    api.call("Get",{
-		        "typeName":"StatusData",
-		        "search": {
-		            diagnosticSearch:{ 
-		                "id": auxID
-		            },
-		            deviceSearch:{ 
-		                "id": vehicleID
-		            },
-		            fromDate: startDate,
-		            toDate: endDate
-		        },
-		        //resultsLimit: 10,
-		        }, function(results) {
-		        console.log("Selected Vehicle Aux:",results);
-		        });
-		}, function(e) {
-		    console.error("Failed:", e);
-		});
-	};	
+    var getAux1 = function(vehicleID) {
+        api.call("Get", { // Get the correct Diagnostic info for Aux1
+            "typeName": "Diagnostic",
+            "search": {
+                "name": "Analog aux 1"
+            },
+        }, function(result) {
+            //console.log("Result:",result);
+            var auxID = result[0].id; //Assign specific ID to variable
 
-	/*****************************HTML functionality***********************************/
-	var populateVehicleSelect = function () {
-	    var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
-	    vehicleSelect.appendChild((function () {
-	        var defaultOption = document.createElement("option");
-	        defaultOption.default = true;
-	        defaultOption.selected = true;
-	        defaultOption.value = "";
-	        defaultOption.textContent = "Select a vehicle...";
-	        return defaultOption;
-	    })());
-	    if (vehicles) {
-	        vehicles.forEach(function (vehicle) {
-	            var opt = document.createElement("option");
-	            opt.value = vehicle.id;
-	            opt.textContent = vehicle.name;
-	            vehicleSelect.appendChild(opt);
-	        });
-	    }
-	};
+            api.call("Get", {
+                "typeName": "StatusData",
+                "search": {
+                    diagnosticSearch: {
+                        "id": auxID
+                    },
+                    deviceSearch: {
+                        "id": vehicleID
+                    },
+                    fromDate: startDate,
+                    toDate: endDate
+                },
+                //resultsLimit: 10,
+            }, function(results) {
+                console.log("Selected Vehicle Aux:", results);
+            });
+        }, function(e) {
+            console.error("Failed:", e);
+        });
+    };
 
-	var initializeEventHandler = function(){
-		var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
+    /*****************************HTML functionality***********************************/
+    var populateVehicleSelect = function() {
+        var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
+        vehicleSelect.appendChild((function() {
+            var defaultOption = document.createElement("option");
+            defaultOption.default = true;
+            defaultOption.selected = true;
+            defaultOption.value = "";
+            defaultOption.textContent = "Select a vehicle...";
+            return defaultOption;
+        })());
+        if (vehicles) {
+            vehicles.forEach(function(vehicle) {
+                var opt = document.createElement("option");
+                opt.value = vehicle.id;
+                opt.textContent = vehicle.name;
+                vehicleSelect.appendChild(opt);
+            });
+        }
+    };
 
-		//After vehicle selected
-		vehicleSelect.addEventListener("change", function(evt){
-			var selectedVehicleId = this.value;
-			if (selectedVehicleId){
-				//Get Aux Data for this vehicle
-				getAux1(selectedVehicleId);
-			}
-		},true);
-	};
+    var initializeEventHandler = function() {
+        var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
 
-	return {
+        //After vehicle selected
+        vehicleSelect.addEventListener("change", function(evt) {
+            var selectedVehicleId = this.value;
+            if (selectedVehicleId) {
+                //Get Aux Data for this vehicle
+                getAux1(selectedVehicleId);
+            }
+        }, true);
+    };
+
+    return {
         /**
          * initialize() is called only once when the Add-In is first loaded. Use this function to initialize the
          * Add-In's state such as default values or make API requests (MyGeotab or external) to ensure interface
@@ -113,14 +115,51 @@ geotab.addin.geotabFuelSensor = function(api,state) {
          *        might be doing asynchronous operations, you must call this method when the Add-In is ready
          *        for display to the user.
          */
-	    initialize: function(api, state, initializeCallback) {
+        initialize: function(api, state, initializeCallback) {
 
-			// The api object exposes a method we can call to get the current user identity. This is useful for
-			// determining user context, such as regional settings, language preference and name. Use the api
-			// to retrieve the currently logged on user object.
-			console.log("Initializing page");
-			getVehicles(initializeCallback);			;
-	    },
+            // The api object exposes a method we can call to get the current user identity. This is useful for
+            // determining user context, such as regional settings, language preference and name. Use the api
+            // to retrieve the currently logged on user object.
+            console.log("Initializing page");
+            $(function() {
+                var limit = 10000; //increase number of dataPoints by increasing the limit
+                var y = 0;
+                var data = [];
+                var dataSeries = {
+                    type: "line"
+                };
+                var dataPoints = [];
+                for (var i = 0; i < limit; i += 1) {
+                    y += (Math.random() * 10 - 5);
+                    dataPoints.push({
+                        x: i,
+                        y: y
+                    });
+                }
+                dataSeries.dataPoints = dataPoints;
+                data.push(dataSeries);
+
+                //Better to construct options first and then pass it as a parameter
+                var options = {
+                    zoomEnabled: true,
+                    animationEnabled: true,
+                    title: {
+                        text: "Try Zooming - Panning"
+                    },
+                    axisX: {
+                        labelAngle: 30
+                    },
+                    axisY: {
+                        includeZero: false
+                    },
+                    data: data // random data
+                };
+
+                $("#chartContainer").CanvasJSChart(options);
+
+            });
+            getVehicles(initializeCallback);
+        },
 
         /**
          * focus() is called whenever the Add-In receives focus.
@@ -133,25 +172,25 @@ geotab.addin.geotabFuelSensor = function(api,state) {
          * @param api The GeotabApi object for making calls to MyGeotab.
          * @param page The page state object allows access to URL, page navigation and global group filter.
          */
-	    focus: function(api, state) {
-			console.log("Focusing");
-	    	initializeEventHandler();
-	    	populateVehicleSelect();
-			console.log("Populated Vehicle");
-		},
-		
-		/**
-		 * blur() is called whenever the user navigates away from the Add-In.
-		 *
-		 * Use this function to save the page state or commit changes to a data store or release memory.
-		 *
+        focus: function(api, state) {
+            console.log("Focusing");
+            initializeEventHandler();
+            populateVehicleSelect();
+            console.log("Populated Vehicle");
+        },
+
+        /**
+         * blur() is called whenever the user navigates away from the Add-In.
+         *
+         * Use this function to save the page state or commit changes to a data store or release memory.
+         *
          * @param api The GeotabApi object for making calls to MyGeotab.
          * @param page The page state object allows access to URL, page navigation and global group filter.
-		 */
-		blur: function(api, state) {
-			
-		}
-	};
+         */
+        blur: function(api, state) {
+
+        }
+    };
 };
 
 /*****************************Start Running***********************************/
