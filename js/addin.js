@@ -79,6 +79,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             type: "line"
         };
         var dataPoints = [];
+        console.log("Begin plotting Data...");
         for (var i = 0; i < rawData.length; i++) {
             holdTime[i] = dataObj[i].dateTime;
             holdVolt[i] = dataObj[i].data;
@@ -87,7 +88,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 y: holdVolt[i]
             });
         }
-        
+
         dataSeries.dataPoints = dataPoints;
         data.push(dataSeries);
 
