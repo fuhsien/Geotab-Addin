@@ -19,8 +19,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         holdTime = [],
         holdVolt = [];
 
-    startDate.setDate(startDate.getDate() - 3);
-    endDate.setDate(endDate.getDate());
+    startDate.setDate(startDate.getDate() - 3).toISOstring();
+    endDate.setDate(endDate.getDate()).toISOstring();
     console.log("Start Date:", startDate);
     console.log("End Date:", endDate);
 
@@ -72,12 +72,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         type: "line"
                     };
                     var dataPoints = [];
-                    console.log("Begin plotting Data...",results);
+                    console.log("Begin plotting Data...");
                     for (var i = 0; i < results.length; i++) {
                         holdTime[i] = results[i].dateTime;
                         holdVolt[i] = results[i].data;
                         dataPoints.push({
-                            x: i,
+                            x: holdTime[i],
                             y: holdVolt[i]
                         });
                     }
