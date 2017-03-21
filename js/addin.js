@@ -1,13 +1,10 @@
 /**
- * Your Add-In code goes inside the addinTemplate function. This is the constructor for your Add-In.
- *
- * This function will automatically get called to construct your Add-In by MyGeotab at the right time.  You need to
- * return a function  that contains three methods: initialize(), focus() and blur(). These will be called at the
- * appropriate times during the life of the Add-In.
- *
- * @param api The GeotabApi object for making calls to MyGeotab.
- * @param state The state object allows access to URL, page navigation and global group filter.
- * @returns {{initialize: Function, focus: Function, blur: Function}}
+21 March 2017
+To do list:
+1) Add time selection
+2) Reset on blur
+3) Convertion to percentage/ litres
+4) Filtering / Averaging data
  */
 geotab.addin.geotabFuelSensor = function(api, state) {
     //"use strict";
@@ -101,39 +98,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 };
 
                 $("#chartContainer").CanvasJSChart(options);
-                //$(function(results) {
-
-                /*for (var i = 0; i < results.length; i++) {
-                    //holdTime[i] = (results[i].dateTime).toISOString();
-                    holdVolt[i] = results[i].data;
-                    dataPoints.push({
-                        x: i,
-                        y: holdVolt[i]
-                    });
-                }
-                console.log("Time variable",holdTime);
-                console.log("Data variable",holdVolt);
-                dataSeries.dataPoints = dataPoints;
-                data.push(dataSeries);
-
-                //Better to construct options first and then pass it as a parameter
-                var options = {
-                    zoomEnabled: true,
-                    animationEnabled: true,
-                    title: {
-                        text: "Try Zooming - Panning"
-                    },
-                    axisX: {
-                        labelAngle: 30
-                    },
-                    axisY: {
-                        includeZero: false
-                    },
-                    data: data // random data
-                };
-
-                $("#chartContainer").CanvasJSChart(options);*/
-                //}) //results is array of Object with Voltage and Time
 
             });
         }, function(e) {
@@ -141,7 +105,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
     };
     /*****************************Additional functions***********************************/
-
+    var reset = function (){
+    	var oldVehicles = document.getElementById("mapreplay-options-vehicle");
+    	oldVehicles.innerHTML = "";
+    }
 
     /*****************************HTML functionality***********************************/
     var populateVehicleSelect = function() {
@@ -225,7 +192,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
          * @param page The page state object allows access to URL, page navigation and global group filter.
          */
         blur: function(api, state) {
-
+        	reset();
         }
     };
 };
