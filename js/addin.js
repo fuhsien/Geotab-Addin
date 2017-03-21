@@ -79,9 +79,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         x: i,
                         y: holdVolt[i]
                     });
-                };
+                }
                 var timeFormat ;
-                console.log("Time variable", typeof(holdTime.[0]));
+                console.log("Time variable", typeof(holdTime[0]));
                 console.log("Data variable", holdVolt);
                 dataSeries.dataPoints = dataPoints;
                 data.push(dataSeries);
