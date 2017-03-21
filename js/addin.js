@@ -80,7 +80,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     	output[i] = null;
                     	averager += holdVolt[i];
                     }
-                    console.log("Avg", averager);
+                    console.log("Avg", typeof(averager));
+                    console.log("hold", typeof(holdVolt[i]));
                     dataPoints.push({
                         x: new Date(holdTime[i]),
                         y: output[i]
