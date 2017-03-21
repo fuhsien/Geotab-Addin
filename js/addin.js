@@ -2,12 +2,11 @@
 21 March 2017
 To do list:
 1) Add time selection
-2) Reset on blur
+2) (DONE)Reset on blur
 3) Convertion to percentage/ litres
 4) Filtering / Averaging data
  */
 geotab.addin.geotabFuelSensor = function(api, state) {
-    //"use strict";
     // Your private functions and variables go here
     var startDate = new Date(),
         endDate = new Date(),
@@ -46,7 +45,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 "name": "Analog aux 1"
             },
         }, function(result) {
-            //console.log("Result:",result);
             var auxID = result[0].id; //Assign specific ID to variable
 
             api.call("Get", {
@@ -68,17 +66,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     type: "line"
                 };
                 var dataPoints = [];
-                console.log("Selected Vehicle Aux:", results.lenth, results);
+                //console.log("Selected Vehicle Aux:", results.lenth, results);
+
                 for (var i = 0; i < results.length; i++) {
                     holdTime[i] = (results[i].dateTime);
                     holdVolt[i] = results[i].data;
                     dataPoints.push({
-                        x: i,
+                        x: holdTime[i],
                         y: holdVolt[i]
                     });
                 }
-                //console.log("Time variable", typeof(holdTime[0]));
-                //console.log("Data variable", holdVolt);
+
                 dataSeries.dataPoints = dataPoints;
                 data.push(dataSeries);
 
@@ -110,7 +108,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     	oldVehicles.innerHTML = "";
     	var oldChart = document.getElementById("chartContainer");
     	oldChart.innerHTML = "";
-    	//oldVehicles.style.display = "none";
     }
 
     /*****************************HTML functionality***********************************/
@@ -164,7 +161,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             // The api object exposes a method we can call to get the current user identity. This is useful for
             // determining user context, such as regional settings, language preference and name. Use the api
             // to retrieve the currently logged on user object.
-            console.log("Initializing page");
+            //console.log("Initializing page");
             getVehicles(initializeCallback);
         },
 
@@ -180,7 +177,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
          * @param page The page state object allows access to URL, page navigation and global group filter.
          */
         focus: function(api, state) {
-            console.log("Focusing");
+            //console.log("Focusing");
             initializeEventHandler();
             populateVehicleSelect();
             console.log("Populated Vehicle");
