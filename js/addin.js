@@ -19,7 +19,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         holdTime = [],
         holdVolt = [];
 
-    startDate.setDate(startDate.getDate() - 3);
+    startDate.setDate(startDate.getDate() - 7);
     endDate.setDate(endDate.getDate());
     console.log("Start Date:", startDate);
     console.log("End Date:", endDate);
