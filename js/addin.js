@@ -13,8 +13,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         vehicles,
         rawData,
         holdTime = [],
-        currentTime = new Date();
-        holdVolt = [];
+        holdVolt = [],
+        avgPoints = 50,
+        averager = [],
+        output = [];
 
     startDate.setDate(startDate.getDate() - 7);
     console.log("Start Date:", startDate);
@@ -71,12 +73,19 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 for (var i = 0; i < results.length; i++) {
                     holdTime[i] = results[i].dateTime;
                     holdVolt[i] = results[i].data;
+                    if (i >= avgPoints){
+                    	averager = averager + holdVolt[i] - holdVolt[i - avgPoints];		//50 points onwards, add new data, delete first data
+                    	output[i] = averager;
+                    } else{
+                    	output[i]=0;
+                    	averager += holdVolt[i];
+                    }
                     dataPoints.push({
                         x: new Date(holdTime[i]),
-                        y: holdVolt[i]
+                        y: output[i]
                     });
                 }
-                //console.log("Time format 1",holdTime);
+                
 
                 dataSeries.dataPoints = dataPoints;
                 data.push(dataSeries);
@@ -85,7 +94,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     zoomEnabled: true,
                     animationEnabled: true,
                     title: {
-                        text: "Fuel Graph (Past 7 Dyas)"
+                        text: "Fuel Graph (Past 7 Days)"
                     },
                     axisX: {
         				intervalType: "day",        
