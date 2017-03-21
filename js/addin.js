@@ -9,14 +9,13 @@ To do list:
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
     var startDate = new Date(),
-        endDate = new Date().toISOString(),
+        endDate = new Date(),
         vehicles,
         rawData,
         holdTime = [],
         holdVolt = [];
 
     startDate.setDate(startDate.getDate() - 7);
-    startDate = startDate.toISOString();
     console.log("Start Date:", startDate);
     console.log("End Date:", endDate);
 
@@ -72,12 +71,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     holdTime[i] = (results[i].dateTime);
                     holdVolt[i] = results[i].data;
                     dataPoints.push({
-                        x: holdTime[i],
+                        x: newDate(
+                        	holdTime[i].getYear(),
+                        	holdTime[i].getMonth(),
+                        	holdTime[i].getDate(),
+                        	holdTime[i].getHours(),
+                        	holdTime[i].getMinutes()
+                        	),
                         y: holdVolt[i]
                     });
                 }
                 console.log("Time format 1",holdTime);
-                console.log("Time format 2",timeDiff);
 
                 dataSeries.dataPoints = dataPoints;
                 data.push(dataSeries);
@@ -86,9 +90,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     zoomEnabled: true,
                     animationEnabled: true,
                     title: {
-                        text: "Try Zooming - Panning"
+                        text: "Fuel Graph (Past 7 Dyas)"
                     },
                     axisX: {
+        				intervalType: "day",        
+        				valueFormatString: "DDDD MMM YYYY HH:mm:ss k", 
                         labelAngle: 30
                     },
                     axisY: {
