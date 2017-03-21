@@ -84,8 +84,21 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //console.log("Data variable", holdVolt);
                 dataSeries.dataPoints = dataPoints;
                 data.push(dataSeries);
-                console.log("Plot data", data);
-
+                
+                var options = {
+                    zoomEnabled: true,
+                    animationEnabled: true,
+                    title: {
+                        text: "Try Zooming - Panning"
+                    },
+                    axisX: {
+                        labelAngle: 30
+                    },
+                    axisY: {
+                        includeZero: false
+                    },
+                    data: data // random data
+                };
                 //$(function(results) {
 
                 /*for (var i = 0; i < results.length; i++) {
