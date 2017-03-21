@@ -13,6 +13,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         vehicles,
         rawData,
         holdTime = [],
+        currentTime = new Date();
         holdVolt = [];
 
     startDate.setDate(startDate.getDate() - 7);
@@ -68,16 +69,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //console.log("Selected Vehicle Aux:", results.lenth, results);
 
                 for (var i = 0; i < results.length; i++) {
-                    holdTime[i] = Date(results[i].dateTime);
+                    holdTime[i] = results[i].dateTime;
+                    console.log("TIme",typeof(holdTime[i]));
                     holdVolt[i] = results[i].data;
                     dataPoints.push({
-                        x: new Date(
-                        	holdTime[i].getYear(),
-                        	holdTime[i].getMonth(),
-                        	holdTime[i].getDate(),
-                        	holdTime[i].getHours(),
-                        	holdTime[i].getMinutes()
-                        	),
+                        x: new Date(holdTime[i]),
                         y: holdVolt[i]
                     });
                 }
