@@ -14,7 +14,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         rawData,
         holdTime = [],
         holdVolt = [],
-        avgPoints = 50,
+        avgPoints = 80,
         averager = 0,
         output = [];
 
