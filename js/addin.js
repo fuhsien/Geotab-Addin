@@ -90,8 +90,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     },
                     axisX: {
         				intervalType: "day",        
-        				valueFormatString: "DDDD MMM YYYY HH:mm:ss k", 
-                        labelAngle: 30
+        				valueFormatString: "DDDD MMM YYYY K", 
+                        labelAngle: -30
                     },
                     axisY: {
                         includeZero: false
