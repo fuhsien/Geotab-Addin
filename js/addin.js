@@ -84,7 +84,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //console.log("Data variable", holdVolt);
                 dataSeries.dataPoints = dataPoints;
                 data.push(dataSeries);
-                
+
                 var options = {
                     zoomEnabled: true,
                     animationEnabled: true,
@@ -99,6 +99,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     },
                     data: data // random data
                 };
+
+                $("#chartContainer").CanvasJSChart(options);
                 //$(function(results) {
 
                 /*for (var i = 0; i < results.length; i++) {
