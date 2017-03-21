@@ -66,16 +66,22 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 },
                 //resultsLimit: 10,
             }, function(results) {
-               
+            	console.log("Selected Vehicle Aux:", results.lenth,results);
+            	for (var i = 0; i < results.length; i++) {
+                        //holdTime[i] = (results[i].dateTime).toISOString();
+                        holdVolt[i] = results[i].data;
+                        dataPoints.push({
+                            x: i,
+                            y: holdVolt[i]
+                });
+                $(function(results) {
                     var data = [];
                     var dataSeries = {
                         type: "line"
                     };
                     var dataPoints = [];
 
-					console.log("Array length", results.length);
-					results.pop();
-					console.log("Aux", results.length,results);
+					console.log("Array length", holdVolt.length);
 					//console.log("Array info 1",results[0 99]);
 					//console.log("Array info 2",results[0 ... 99]);
 
@@ -111,8 +117,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     };
 
                     $("#chartContainer").CanvasJSChart(options);*/
-                 //results is array of Object with Voltage and Time
-                //console.log("Selected Vehicle Aux:", results);
+                }) //results is array of Object with Voltage and Time
+                
             });
         }, function(e) {
             console.error("Failed:", e);
