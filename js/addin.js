@@ -75,9 +75,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     holdVolt[i] = results[i].data;
                     if (i >= avgPoints){
                     	averager = averager + holdVolt[i] - holdVolt[i - avgPoints];		//50 points onwards, add new data, delete first data
-                    	output[i] = averager;
+                    	output[i] = averager/avgPoints;
                     } else{
-                    	output[i]=0;
+                    	output[i] = null;
                     	averager += holdVolt[i];
                     }
                     dataPoints.push({
