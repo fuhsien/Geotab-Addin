@@ -2,9 +2,10 @@
 21 March 2017
 To do list:
 1) Add time selection
-2) (DONE)Reset on blur
 3) Convertion to percentage/ litres
-4) Filtering / Averaging data
+- km/litres 
+-> get distance info for specific time range
+
  */
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
@@ -12,10 +13,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         endDate = new Date(),
         vehicles,
         rawData,
-        holdTime = [],
-        holdVolt = [],
         avgPoints = 80,
         averager = 0,
+        tankSize = 80,
+        holdTime = [],
+        holdVolt = [],
+        holdLitre = [],
         output = [];
 
     startDate.setDate(startDate.getDate() - 7);
@@ -73,12 +76,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 for (var i = 0; i < results.length; i++) {
                     holdTime[i] = results[i].dateTime;
                     holdVolt[i] = results[i].data;
+                    holdLitre[i] = tankSize*holdVolt[i]/5
                     if (i >= avgPoints){
-                    	averager = averager + holdVolt[i] - holdVolt[i - avgPoints];		//50 points onwards, add new data, delete first data
+                    	averager = averager + holdLitre[i] - holdLitre[i - avgPoints];		//50 points onwards, add new data, delete first data
                     	output[i] = averager/avgPoints;
                     } else{
                     	output[i] = null;
-                    	averager += holdVolt[i];
+                    	averager += holdLitre[i];
                     }
                     //console.log("Avg", typeof(averager));
                     //console.log("hold", typeof(holdVolt[i]));
@@ -102,8 +106,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     },
                     axisX: {
         				intervalType: "day",        
-        				valueFormatString: "DD MMM HH:mm",
-                        labelAngle: -20
+        				valueFormatString: "DD MMM HH:mm"
+                        //labelAngle: -20
                     },
                     axisY: {
                         includeZero: false
@@ -124,6 +128,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     	oldVehicles.innerHTML = "";
     	var oldChart = document.getElementById("chartContainer");
     	oldChart.innerHTML = "";
+
+    	averager=0;
     }
 
     /*****************************HTML functionality***********************************/
