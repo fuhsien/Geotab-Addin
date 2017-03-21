@@ -68,7 +68,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     type: "line"
                 };
                 var dataPoints = [];
-                //console.log("Selected Vehicle Aux:", results.lenth, results);
+                console.log("Selected Vehicle Aux:", results);
 
                 for (var i = 0; i < results.length; i++) {
                     holdTime[i] = results[i].dateTime;
