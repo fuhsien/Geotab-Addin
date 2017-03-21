@@ -61,6 +61,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 },
                 //resultsLimit: 10,
             }, function(results) {
+            	var timeDiff=[];
                 var data = [];
                 var dataSeries = {
                     type: "line"
@@ -70,12 +71,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
                 for (var i = 0; i < results.length; i++) {
                     holdTime[i] = (results[i].dateTime);
+                    timeDiff[i] = holdTime[i].toISOString();
                     holdVolt[i] = results[i].data;
                     dataPoints.push({
                         x: holdTime[i],
                         y: holdVolt[i]
                     });
                 }
+                console.log("Time format 1",holdTime);
+                console.log("Time format 2",timeDiff);
 
                 dataSeries.dataPoints = dataPoints;
                 data.push(dataSeries);
