@@ -84,7 +84,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     //console.log("hold", typeof(holdVolt[i]));
                     dataPoints.push({
                         x: new Date(holdTime[i]),
-                        y: output[i]
+                        //y: output[i]
+                        y: holdVolt[i]
                     });
                 }
                 
