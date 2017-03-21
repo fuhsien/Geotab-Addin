@@ -9,14 +9,14 @@ To do list:
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
     var startDate = new Date(),
-        endDate = new Date(),
+        endDate = new Date().toISOString(),
         vehicles,
         rawData,
         holdTime = [],
         holdVolt = [];
 
     startDate.setDate(startDate.getDate() - 7);
-    endDate.setDate(endDate.getDate());
+    startDate = startDate.toISOString();
     console.log("Start Date:", startDate);
     console.log("End Date:", endDate);
 
@@ -61,7 +61,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 },
                 //resultsLimit: 10,
             }, function(results) {
-            	var timeDiff=[];
                 var data = [];
                 var dataSeries = {
                     type: "line"
@@ -71,7 +70,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
                 for (var i = 0; i < results.length; i++) {
                     holdTime[i] = (results[i].dateTime);
-                    timeDiff[i] = holdTime[i].toISOString();
                     holdVolt[i] = results[i].data;
                     dataPoints.push({
                         x: holdTime[i],
