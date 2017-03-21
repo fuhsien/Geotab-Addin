@@ -70,14 +70,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
                 for (var i = 0; i < results.length; i++) {
                     holdTime[i] = results[i].dateTime;
-                    console.log("TIme",typeof(holdTime[i]));
                     holdVolt[i] = results[i].data;
                     dataPoints.push({
                         x: new Date(holdTime[i]),
                         y: holdVolt[i]
                     });
                 }
-                console.log("Time format 1",holdTime);
+                //console.log("Time format 1",holdTime);
 
                 dataSeries.dataPoints = dataPoints;
                 data.push(dataSeries);
@@ -90,13 +89,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     },
                     axisX: {
         				intervalType: "day",        
-        				valueFormatString: "DDDD MMM YYYY K", 
-                        labelAngle: -30
+        				valueFormatString: "DD MMM"
+                        //labelAngle: -30
                     },
                     axisY: {
                         includeZero: false
                     },
-                    data: data // random data
+                    data: data
                 };
 
                 $("#chartContainer").CanvasJSChart(options);
