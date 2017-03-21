@@ -109,8 +109,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     	var oldVehicles = document.getElementById("mapreplay-options-vehicle");
     	oldVehicles.innerHTML = "";
     	var oldChart = document.getElementById("chartContainer");
-    	oldVehicles.innerHTML = "";
-    	oldVehicles.style.display = "none";
+    	oldChart.innerHTML = "";
+    	//oldVehicles.style.display = "none";
     }
 
     /*****************************HTML functionality***********************************/
