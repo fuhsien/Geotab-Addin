@@ -7,13 +7,15 @@ To do list:
 -> get distance info for specific time range
 
  */
+
+ 
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
     var startDate = new Date(),
         endDate = new Date(),
         vehicles,
         rawData,
-        avgPoints = 80,
+        avgPoints = 50,
         averager = 0,
         tankSize = 80,
         holdTime = [],
