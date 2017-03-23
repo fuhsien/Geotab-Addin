@@ -31,7 +31,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     console.log("End Date:", endDate);
 
     /*****************************Get Data from Geotab***********************************/
-    var getVehicles = function(finishedCallback) {
+    var getVehicles = function() {
         api.call("Get", {
             typeName: "Device"
         }, function(results) {
@@ -44,7 +44,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 };
             });
             console.log("Vehicles loaded",vehicles);
-            finishedCallback();
         }, function(errorString) {
             alert(errorString);
         });
@@ -137,7 +136,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     };
     /*****************************Additional functions***********************************/
     //Pull JSON from Google Sheet
-    var initializeJSON = function() {
+    var initializeJSON = function(finishedCallback) {
         var spreadsheetID = "1VBDZZoYqCSWV3ABO7-eBqb21WQjgPLkO3uOBtAQsnr8";
         //var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
         var url = "https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=" + spreadsheetID + "&sheet=Sheet1";
@@ -161,6 +160,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             console.log("Line 1",line,test);
         });*/
         console.log("Loaded Google Sheet");
+        finishedCallback();
     }
 
     var reset = function() {
