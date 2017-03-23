@@ -228,8 +228,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             // determining user context, such as regional settings, language preference and name. Use the api
             // to retrieve the currently logged on user object.
             //console.log("Initializing page");
-            initializeJSON();
-            getVehicles(initializeCallback);
+            getVehicles();
+            initializeJSON(initializeCallback);
         },
 
         /**
