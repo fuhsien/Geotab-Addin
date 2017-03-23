@@ -110,7 +110,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         y: output[i]
                         //y: holdVolt[i]
                     });
-                    dataPoints2.push({}
+                    dataPoints2.push({
                         x: i,
                         y: output[i]
                     })
@@ -226,7 +226,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         //After vehicle selected
         vehicleSelect.addEventListener("change", function(evt) {
             var selectedOpt = this.value;
-            var selectedOpt = $.parseJSON(selectedOpt.replace(/'/g,'"'));
+            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g,'"'));
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
             //console.log("after",typeof(selectedOpt),selectedOpt);
