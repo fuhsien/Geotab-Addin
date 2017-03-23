@@ -38,7 +38,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             vehicles = results.map(function(vehicle) {
                 return {
                     name: vehicle.name,
-                    id: vehicle.serialNumber,
+                    id: vehicle.id,
                     serialNumber: vehicle.serialNumber
                 };
             });
@@ -65,7 +65,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         "id": auxID
                     },
                     deviceSearch: {
-                        "serialNumber": vehicleID
+                        "id": vehicleID
                     },
                     fromDate: startDate,
                     toDate: endDate
@@ -181,7 +181,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         if (vehicles) {
             vehicles.forEach(function(vehicle) {
                 var opt = document.createElement("option");
-                opt.value = vehicle.id;
+                opt.value = [vehicle.id,vehicle.serialNumber];
                 opt.textContent = vehicle.name;
                 vehicleSelect.appendChild(opt);
             });
@@ -193,7 +193,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //After vehicle selected
         vehicleSelect.addEventListener("change", function(evt) {
-            var selectedVehicleId = this.value;
+            var selectedVehicleId = this.value[0];
+            console.log("Selected Value"this.value,selectedVehicleId);
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
                 getAux1(selectedVehicleId); //rawData is results from getAux1
