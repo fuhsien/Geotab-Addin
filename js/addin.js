@@ -146,12 +146,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         text: "Fuel Trend"
                     },
                     axisX: {
-                        labelAngle: -20
+                        labelAngle: 30
                     },
                     axisY: {
                         includeZero: false
                     },
-                    data: data
+                    data: data2
                 };
 
                 $("#chartContainer").CanvasJSChart(options);
