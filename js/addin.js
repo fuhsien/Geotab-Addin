@@ -181,7 +181,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         if (vehicles) {
             vehicles.forEach(function(vehicle) {
                 var opt = document.createElement("option");
-                opt.value = {'id' = vehicle.id,'serialNumber': vehicle.serialNumber};
+                opt.value = {'id':vehicle.id,'serialNumber':vehicle.serialNumber};
                 opt.textContent = vehicle.name;
                 vehicleSelect.appendChild(opt);
             });
