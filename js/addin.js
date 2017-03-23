@@ -135,10 +135,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             var entry = data.feed.entry;
             console.log("Raw", data);
             console.log("Processed", entry);
+            var line = entry[0]['gsx$device']['$t'];
+            var test = entry[0].content;
+            console.log("Line 1",line,test);
         });
         $.getJSON(url2, function(data) {
             // loop to build html output for each row
             console.log("Raw42", data);
+            var line2 = data.Sheet1[0]['Device'];
+            var test2 = data.Sheet1[0].Tank_Size;
+            console.log("Line 2",line2,test2);
         });
 
     }
