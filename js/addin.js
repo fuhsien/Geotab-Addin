@@ -131,10 +131,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     var initializeJSON = function() {
         var spreadsheetID = "1VBDZZoYqCSWV3ABO7-eBqb21WQjgPLkO3uOBtAQsnr8";
         //var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
-        var url = "https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=" + spreadsheetID + "&sheet=Sheet1"
+        var url = "https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=" + spreadsheetID + "&sheet=Sheet1";
         $.getJSON(url, function(data) {
             // loop to build html output for each row
-            (var i = 0; i < data.length; i++) {
+            for(var i = 0; i < data.length; i++) {
                 holdDevice[i] = data.Sheet1[i]['Device'];
                 holdTank[i] = data.Sheet1[i]['Tank_Size'];
             }
