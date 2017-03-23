@@ -80,10 +80,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 },
             }, function(results) {
                 var data = [];
+                var data2 = [];
                 var dataSeries = {
                     type: "line"
                 };
+                var dataSeries2 = {
+                    type: "splineArea"
+                }
                 var dataPoints = [];
+                var dataPoints2= [];
                 console.log("Selected Vehicle Aux:", results);
 
                 for (var i = 0; i < results.length; i++) {
@@ -102,14 +107,20 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     dataPoints.push({
                         x: new Date(holdTime[i]),
                         //x: i,
-                        //y: output[i]
-                        y: holdVolt[i]
+                        y: output[i]
+                        //y: holdVolt[i]
                     });
+                    dataPoints2.push(
+                        x: i,
+                        y: output[i]
+                    )
                 }
 
 
                 dataSeries.dataPoints = dataPoints;
+                dataSeries2.dataPoints = dataPoints2;
                 data.push(dataSeries);
+                data2.push(dataSeries2);
 
                 var options = {
                     zoomEnabled: true,
@@ -128,7 +139,23 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     data: data
                 };
 
+                var options2 = {
+                    zoomEnabled: true,
+                    animationEnabled: true,
+                    title: {
+                        text: "Fuel Trend"
+                    },
+                    axisX: {
+                        labelAngle: -20
+                    },
+                    axisY: {
+                        includeZero: false
+                    },
+                    data: data
+                };
+
                 $("#chartContainer").CanvasJSChart(options);
+                $("#chartContainer2").CanvasJSChart(options2);
 
             });
         }, function(e) {
