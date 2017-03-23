@@ -102,8 +102,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     dataPoints.push({
                         x: new Date(holdTime[i]),
                         //x: i,
-                        y: output[i]
-                            //y: holdVolt[i]
+                        //y: output[i]
+                        y: holdVolt[i]
                     });
                 }
 
