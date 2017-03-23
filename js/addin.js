@@ -50,7 +50,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
     };
 
-    var getAux1 = function(vehicleID) {
+    var getAux1 = function(vehicleID,vehicleSN) {
+        //Get tank size
+        var new_object = fromSheet.filter(function(obj){
+            return obj.serialNumber == vehicleSN;
+        });
+        console.log("CHECK",new_object,new_object[0]);
         api.call("Get", { // Get the correct Diagnostic info for Aux1
             "typeName": "Diagnostic",
             "search": {
@@ -137,7 +142,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $.getJSON(url, function(data) {
             // loop to build html output for each row
             fromSheet = data.Sheet1;
-            console.log("CHECK",fromSheet);
+            console.log("fromSheet",fromSheet);
             for(var i = 0; i < fromSheet.length; i++) {
                 holdDevice[i] = fromSheet[i]['Device'];
                 holdTank[i] = fromSheet[i]['Tank_Size'];                
@@ -194,10 +199,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             var selectedOpt = this.value;
             var selectedOpt = $.parseJSON(selectedOpt.replace(/'/g,'"'));
             var selectedVehicleId = selectedOpt.id;
-            console.log("after",typeof(selectedOpt),selectedOpt);
+            var selectedVehicleSN = selectedOpt.serialNumber;
+            //console.log("after",typeof(selectedOpt),selectedOpt);
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
-                getAux1(selectedVehicleId); //rawData is results from getAux1
+                getAux1(selectedVehicleId,selectedVehicleSN); //rawData is results from getAux1
             }
         }, true);
     };
