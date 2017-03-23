@@ -53,7 +53,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     var getAux1 = function(vehicleID,vehicleSN) {
         //Get tank size
         var new_object = fromSheet.filter(function(obj){
-            return obj.serialNumber == vehicleSN;
+            return obj.Serial_Number == vehicleSN;
         });
         console.log("CHECK",new_object,new_object[0]);
         api.call("Get", { // Get the correct Diagnostic info for Aux1
