@@ -134,14 +134,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var url = "https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=" + spreadsheetID + "&sheet=Sheet1";
         $.getJSON(url, function(data) {
             // loop to build html output for each row
-            console.log("Pure",data,data.length);
-            for(var i = 0; i < data.length; i++) {
-                holdDevice[i] = data.Sheet1[i]['Device'];
-                console.log("raw",data.Sheet1[i]['Device'],holdDevice[i]);
-                holdTank[i] = data.Sheet1[i]['Tank_Size'];
+            var entry = data.Sheet1;
+            console.log("Pure",data);
+            for(var i = 0; i < entry.length; i++) {
+                holdDevice[i] = entry[i]['Device'];
+                //console.log("raw",entry[i]['Device'],holdDevice[i]);
+                holdTank[i] = entry[i]['Tank_Size'];
             }
-            //console.log("raw",test,holdDevice);
-            //console.log("Line",holdTank);
+            console.log("raw",holdDevice);
+            console.log("Line",holdTank);
         });
         /*$.getJSON(url, function(data) {
             // loop to build html output for each row
