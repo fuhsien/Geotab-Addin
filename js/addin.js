@@ -17,7 +17,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         rawData,
         avgPoints = 50,
         averager = 0,
-        tankSize = 80,
+        tankSize,
+        holdDevice = [],
+        holdTank = [],
         holdTime = [],
         holdVolt = [],
         holdLitre = [],
@@ -128,8 +130,19 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     //Pull JSON from Google Sheet
     var initializeJSON = function() {
         var spreadsheetID = "1VBDZZoYqCSWV3ABO7-eBqb21WQjgPLkO3uOBtAQsnr8";
-        var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
-        var url2 = "https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=" + spreadsheetID + "&sheet=Sheet1"
+        var Sheet = "Sheet2";
+        //var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
+        var url = "https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=" + spreadsheetID + "&sheet=" + Sheet
+        $.getJSON(url, function(data) {
+            // loop to build html output for each row
+            /* (var i = 0; i < data.length; i++) {
+                holdDevice = data[Sheet][i]['Device'];
+            }*/
+            var line = data[Sheet]][0]['Device'];
+            //var test = data.Sheet1[0].Tank_Size;
+            console.log("raw",data);
+            console.log("Line",line);
+        });
         /*$.getJSON(url, function(data) {
             // loop to build html output for each row
             var entry = data.feed.entry;
@@ -139,13 +152,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             var test = entry[0].content;
             console.log("Line 1",line,test);
         });*/
-        $.getJSON(url2, function(data) {
-            // loop to build html output for each row
-            console.log("Raw42", data);
-            var line2 = data.Sheet1[0]['Device'];
-            var test2 = data.Sheet1[0].Tank_Size;
-            console.log("Line 2",line2,test2);
-        });
 
     }
 
