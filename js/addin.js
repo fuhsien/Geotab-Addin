@@ -38,7 +38,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             vehicles = results.map(function(vehicle) {
                 return {
                     name: vehicle.name,
-                    id: vehicle.id
+                    id: vehicle.serialNumber,
+                    serialNumber: vehicle.serialNumber
                 };
             });
             console.log("Vehicles loaded",vehicles);
@@ -64,7 +65,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         "id": auxID
                     },
                     deviceSearch: {
-                        "id": vehicleID
+                        "serialNumber": vehicleID
                     },
                     fromDate: startDate,
                     toDate: endDate
