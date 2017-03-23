@@ -52,11 +52,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
     var getAux1 = function(vehicleID,vehicleSN) {
         //Get tank size
-        var new_object = fromSheet.filter(function(obj){
+        var chosen = fromSheet.filter(function(obj){
             return obj.Serial_Number == vehicleSN;
-        });
-        console.log("CHECK",new_object,new_object[0]);
-        api.call("Get", { // Get the correct Diagnostic info for Aux1
+        })[0];
+        tankSize = chosen.Tank_Size;
+        console.log("CHECK", tankSize);
+        // Get the correct Diagnostic info for Aux1
+        api.call("Get", { 
             "typeName": "Diagnostic",
             "search": {
                 "name": "Analog aux 1"
@@ -87,7 +89,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 for (var i = 0; i < results.length; i++) {
                     holdTime[i] = results[i].dateTime;
                     holdVolt[i] = results[i].data;
-                    holdLitre[i] = tankSize * holdVolt[i] / 5
+                    holdLitre[i] = tankSize * holdVolt[i] / 5;
                     if (i >= avgPoints) {
                         averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
                         output[i] = averager / avgPoints;
