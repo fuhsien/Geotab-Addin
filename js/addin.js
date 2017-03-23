@@ -34,13 +34,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         api.call("Get", {
             typeName: "Device"
         }, function(results) {
+            console.log("Device",results);
             vehicles = results.map(function(vehicle) {
                 return {
                     name: vehicle.name,
                     id: vehicle.id
                 };
             });
-            console.log("Vehicles loaded");
+            console.log("Vehicles loaded",vehicles);
             finishedCallback();
         }, function(errorString) {
             alert(errorString);
