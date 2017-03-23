@@ -129,7 +129,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     };
     /*****************************Additional functions***********************************/
     //Pull JSON from Google Sheet
-    var initializeJSON = function(finishedCallback,nextCallback) {
+    var initializeJSON = function() {
         var spreadsheetID = "1VBDZZoYqCSWV3ABO7-eBqb21WQjgPLkO3uOBtAQsnr8";
         //var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
         var url = "https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=" + spreadsheetID + "&sheet=Sheet1";
@@ -153,7 +153,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             console.log("Line 1",line,test);
         });*/
         console.log("Loaded Google Sheet");
-        finishedCallback(Nextcallback);
     }
 
     var reset = function() {
@@ -220,8 +219,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             // determining user context, such as regional settings, language preference and name. Use the api
             // to retrieve the currently logged on user object.
             //console.log("Initializing page");
-            initializeJSON(getVehicles,initializeCallback);
-            //getVehicles(initializeCallback);
+            initializeJSON();
+            getVehicles(initializeCallback);
         },
 
         /**
