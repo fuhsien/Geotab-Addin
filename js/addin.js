@@ -8,7 +8,7 @@ To do list:
 
  */
 
- 
+
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
     var startDate = new Date(),
@@ -78,13 +78,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 for (var i = 0; i < results.length; i++) {
                     holdTime[i] = results[i].dateTime;
                     holdVolt[i] = results[i].data;
-                    holdLitre[i] = tankSize*holdVolt[i]/5
-                    if (i >= avgPoints){
-                    	averager = averager + holdLitre[i] - holdLitre[i - avgPoints];		//50 points onwards, add new data, delete first data
-                    	output[i] = averager/avgPoints;
-                    } else{
-                    	output[i] = null;
-                    	averager += holdLitre[i];
+                    holdLitre[i] = tankSize * holdVolt[i] / 5
+                    if (i >= avgPoints) {
+                        averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
+                        output[i] = averager / avgPoints;
+                    } else {
+                        output[i] = null;
+                        averager += holdLitre[i];
                     }
                     //console.log("Avg", typeof(averager));
                     //console.log("hold", typeof(holdVolt[i]));
@@ -92,10 +92,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         x: new Date(holdTime[i]),
                         //x: i,
                         y: output[i]
-                        //y: holdVolt[i]
+                            //y: holdVolt[i]
                     });
                 }
-                
+
 
                 dataSeries.dataPoints = dataPoints;
                 data.push(dataSeries);
@@ -107,9 +107,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         text: "Fuel Graph (Past 7 Days)"
                     },
                     axisX: {
-        				intervalType: "day",        
-        				valueFormatString: "DD MMM HH:mm"
-                        //labelAngle: -20
+                        intervalType: "day",
+                        valueFormatString: "DD MMM HH:mm"
+                            //labelAngle: -20
                     },
                     axisY: {
                         includeZero: false
@@ -125,13 +125,31 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
     };
     /*****************************Additional functions***********************************/
-    var reset = function (){
-    	var oldVehicles = document.getElementById("mapreplay-options-vehicle");
-    	oldVehicles.innerHTML = "";
-    	var oldChart = document.getElementById("chartContainer");
-    	oldChart.innerHTML = "";
+    //Pull JSON from Google Sheet
+    var initializeJSON = function() {
+        var spreadsheetID = "1VBDZZoYqCSWV3ABO7-eBqb21WQjgPLkO3uOBtAQsnr8";
+        var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
+        var url2 = "https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=" + spreadsheetID + "&sheet=Sheet1"
+        $.getJSON(url, function(data) {
+            // loop to build html output for each row
+            var entry = data.feed.entry;
+            console.log("Raw", data);
+            console.log("Processed", entry);
+        });
+        $.getJSON(url2, function(data) {
+            // loop to build html output for each row
+            console.log("Raw42", data);
+        });
 
-    	averager=0;
+    }
+
+    var reset = function() {
+        var oldVehicles = document.getElementById("mapreplay-options-vehicle");
+        oldVehicles.innerHTML = "";
+        var oldChart = document.getElementById("chartContainer");
+        oldChart.innerHTML = "";
+
+        averager = 0;
     }
 
     /*****************************HTML functionality***********************************/
@@ -186,6 +204,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             // determining user context, such as regional settings, language preference and name. Use the api
             // to retrieve the currently logged on user object.
             //console.log("Initializing page");
+            initializeJSON();
             getVehicles(initializeCallback);
         },
 
@@ -216,7 +235,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
          * @param page The page state object allows access to URL, page navigation and global group filter.
          */
         blur: function(api, state) {
-        	reset();
+            reset();
         }
     };
 };
