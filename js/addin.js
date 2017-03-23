@@ -17,7 +17,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         rawData,
         avgPoints = 50,
         averager = 0,
-        tankSize,
+        tankSize = 80,
         holdDevice = [],
         holdTank = [],
         holdTime = [],
@@ -70,7 +70,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     fromDate: startDate,
                     toDate: endDate
                 },
-                //resultsLimit: 10,
             }, function(results) {
                 var data = [];
                 var dataSeries = {
