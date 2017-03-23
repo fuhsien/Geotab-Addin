@@ -193,11 +193,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //After vehicle selected
         vehicleSelect.addEventListener("change", function(evt) {
-            var stringOption = this.value;
-            var objectOption = $.parseJSON(stringOption.replace(/'/g,'"'));
-            var selectedVehicleId;
-            console.log("before",typeof(stringOption),stringOption);
-            console.log("after",typeof(objectOption),objectOption);
+            var selectedOpt = this.value;
+            var selectedOpt = $.parseJSON(selectedOpt.replace(/'/g,'"'));
+            var selectedVehicleId = selectedOpt.id;
+            console.log("after",typeof(selectedOpt),selectedOpt);
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
                 getAux1(selectedVehicleId); //rawData is results from getAux1
