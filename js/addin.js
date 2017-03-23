@@ -135,7 +135,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $.getJSON(url, function(data) {
             // loop to build html output for each row
             console.log("Pure",data);
-            var test = data.Sheet1[i]['Device'];
+            var test = data.Sheet1[0]['Device'];
             for(var i = 0; i < data.length; i++) {
                 holdDevice[i] = data.Sheet1[i]['Device'];
                 holdTank[i] = data.Sheet1[i]['Tank_Size'];
