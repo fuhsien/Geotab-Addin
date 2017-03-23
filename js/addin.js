@@ -15,6 +15,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         endDate = new Date(),
         vehicles,
         rawData,
+        fromSheet,
         avgPoints = 50,
         averager = 0,
         tankSize = 80,
@@ -135,12 +136,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var url = "https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=" + spreadsheetID + "&sheet=Sheet1";
         $.getJSON(url, function(data) {
             // loop to build html output for each row
-            var entry = data.Sheet1;
-            console.log("Pure",data);
-            for(var i = 0; i < entry.length; i++) {
-                holdDevice[i] = entry[i]['Device'];
+            fromSheet = data.Sheet1;
+            console.log("CHECK"fromSheet);
+            for(var i = 0; i < fromSheet.length; i++) {
+                holdDevice[i] = fromSheet[i]['Device'];
+                holdTank[i] = fromSheet[i]['Tank_Size'];                
                 //console.log("raw",entry[i]['Device'],holdDevice[i]);
-                holdTank[i] = entry[i]['Tank_Size'];
             }
         });
         /*$.getJSON(url, function(data) {
