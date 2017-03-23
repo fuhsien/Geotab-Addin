@@ -138,7 +138,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             /* (var i = 0; i < data.length; i++) {
                 holdDevice = data[Sheet][i]['Device'];
             }*/
-            var line = data[Sheet]][0]['Device'];
+            var line = data[Sheet][0]['Device'];
             //var test = data.Sheet1[0].Tank_Size;
             console.log("raw",data);
             console.log("Line",line);
