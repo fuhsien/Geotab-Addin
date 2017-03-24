@@ -66,106 +66,32 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }, function(result) {
             var auxID = result[0].id; //Assign specific ID to variable
 
-            api.multiCall([["Get", {
-                "typeName": "StatusData",
-                "search": {
-                    diagnosticSearch: {
-                        "id": auxID
-                    },
-                    deviceSearch: {
-                        "id": vehicleID
-                    },
-                    fromDate: startDate,
-                    toDate: endDate
-                }
-            }],["Get", {
-                "typeName": "LogRecord",
-                "search": {
-                    deviceSearch: {
-                        "id": vehicleID
-                    },
-                    fromDate: startDate,
-                    toDate: endDate
-                }
-            }]], function(results) {
-                var data = [];
-                var data2 = [];
-                var dataSeries = {
-                    type: "line"
-                };
-                var dataSeries2 = {
-                    type: "splineArea"
-                }
-                var dataPoints = [];
-                var dataPoints2 = [];
-                console.log("Selected Vehicle Aux:", results); //results return aux values
-
-                for (var i = 0; i < results[0].length; i++) {
-                    holdTime[i] = results[0][i].dateTime;
-                    holdVolt[i] = results[0][i].data;
-                    holdLitre[i] = tankSize * holdVolt[i] / 5;
-                    if (i >= avgPoints) {
-                        averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
-                        output[i] = averager / avgPoints;
-                    } else {
-                        output[i] = null;
-                        averager += holdLitre[i];
+            api.multiCall([
+                ["Get", {
+                    "typeName": "StatusData",
+                    "search": {
+                        diagnosticSearch: {
+                            "id": auxID
+                        },
+                        deviceSearch: {
+                            "id": vehicleID
+                        },
+                        fromDate: startDate,
+                        toDate: endDate
                     }
-                    //console.log("Avg", typeof(averager));
-                    //console.log("hold", typeof(holdVolt[i]));
-                    dataPoints.push({
-                        x: new Date(holdTime[i]),
-                        //x: i,
-                        y: output[i]
-                            //y: holdVolt[i]
-                    });
-                    dataPoints2.push({
-                        x: i,
-                        y: output[i]
-                    })
-                }
-
-
-                dataSeries.dataPoints = dataPoints;
-                dataSeries2.dataPoints = dataPoints2;
-                data.push(dataSeries);
-                data2.push(dataSeries2);
-
-                var options = {
-                    zoomEnabled: true,
-                    animationEnabled: true,
-                    title: {
-                        text: "Fuel Graph (Past 7 Days)"
-                    },
-                    axisX: {
-                        intervalType: "day",
-                        valueFormatString: "DD MMM HH:mm"
-                            //labelAngle: -20
-                    },
-                    axisY: {
-                        includeZero: false
-                    },
-                    data: data
-                };
-
-                var options2 = {
-                    zoomEnabled: true,
-                    animationEnabled: true,
-                    title: {
-                        text: "Fuel Trend"
-                    },
-                    axisX: {
-                        labelAngle: 30
-                    },
-                    axisY: {
-                        includeZero: false
-                    },
-                    data: data2
-                };
-
-                $("#chartContainer").CanvasJSChart(options);
-                $("#chartContainer2").CanvasJSChart(options2);
-
+                }],
+                ["Get", {
+                    "typeName": "LogRecord",
+                    "search": {
+                        deviceSearch: {
+                            "id": vehicleID
+                        },
+                        fromDate: startDate,
+                        toDate: endDate
+                    }
+                }]
+            ], function(results) {
+                return results;
             });
         }, function(e) {
             console.error("Failed:", e);
@@ -208,6 +134,86 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         averager = 0;
     }
 
+    var plotData = function(results) {
+        var data = [];
+        var data2 = [];
+        var dataSeries = {
+            type: "line"
+        };
+        var dataSeries2 = {
+            type: "splineArea"
+        }
+        var dataPoints = [];
+        var dataPoints2 = [];
+        console.log("Selected Vehicle Aux:", results); //results return aux values
+
+        for (var i = 0; i < results[0].length; i++) {
+            holdTime[i] = results[0][i].dateTime;
+            holdVolt[i] = results[0][i].data;
+            holdLitre[i] = tankSize * holdVolt[i] / 5;
+            if (i >= avgPoints) {
+                averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
+                output[i] = averager / avgPoints;
+            } else {
+                output[i] = null;
+                averager += holdLitre[i];
+            }
+            //console.log("Avg", typeof(averager));
+            //console.log("hold", typeof(holdVolt[i]));
+            dataPoints.push({
+                x: new Date(holdTime[i]),
+                //x: i,
+                y: output[i]
+                    //y: holdVolt[i]
+            });
+            dataPoints2.push({
+                x: i,
+                y: output[i]
+            })
+        }
+
+
+        dataSeries.dataPoints = dataPoints;
+        dataSeries2.dataPoints = dataPoints2;
+        data.push(dataSeries);
+        data2.push(dataSeries2);
+
+        var options = {
+            zoomEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Fuel Graph (Past 7 Days)"
+            },
+            axisX: {
+                intervalType: "day",
+                valueFormatString: "DD MMM HH:mm"
+                    //labelAngle: -20
+            },
+            axisY: {
+                includeZero: false
+            },
+            data: data
+        };
+
+        var options2 = {
+            zoomEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Fuel Trend"
+            },
+            axisX: {
+                labelAngle: 30
+            },
+            axisY: {
+                includeZero: false
+            },
+            data: data2
+        };
+
+        $("#chartContainer").CanvasJSChart(options);
+        $("#chartContainer2").CanvasJSChart(options2);
+    }
+
     /*****************************HTML functionality***********************************/
     var populateVehicleSelect = function() {
         var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
@@ -241,7 +247,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             //console.log("after",typeof(selectedOpt),selectedOpt);
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
-                getAux1(selectedVehicleId, selectedVehicleSN); //rawData is results from getAux1
+                var AuxSpeed = getAux1(selectedVehicleId, selectedVehicleSN); //rawData is results from getAux1
+                plotData(AuxSpeed);
             }
         }, true);
     };
