@@ -191,6 +191,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 valueFormatString: "DD MMM HH:mm"
             },
             axisY: [{
+                title: "Litres",
                 includeZero: false,
                 lineColor: "#4F81BC",
                 tickColor: "#4F81BC",
