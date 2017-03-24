@@ -155,7 +155,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     },
                     data: data2
                 };
-                plotData(line, results, options, 1, 1, "#chartContainer");
+                plotData("line", results, options, 1, 1, "#chartContainer");
                 //$("#chartContainer").CanvasJSChart(options);
                 $("#chartContainer2").CanvasJSChart(options2);
 
