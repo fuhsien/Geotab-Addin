@@ -91,6 +91,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
+                console.log("1:", results);
                 return results;
             });
         }, function(e) {
@@ -248,7 +249,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
                 var AuxSpeed = getAux1(selectedVehicleId, selectedVehicleSN); //rawData is results from getAux1
-                plotData(AuxSpeed);
+                console.log("2:",AuxSpeed);
+                //plotData(AuxSpeed);
             }
         }, true);
     };
