@@ -164,20 +164,20 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             })
         }
 
-        for (i = 0; i < results[1].length; i++) {
-            holdTimeSpeed[i] = results[1][i].dateTime;
-            holdSpeed[i] = results[1][i].speed;
+        /*for (var j = 0; j < results[1].length; j++) {
+            holdTimeSpeed[j] = results[1][j].dateTime;
+            holdSpeed[j] = results[1][j].speed;
             dataPointsSpeed.push({
-                x: new Date(holdTimeSpeed[i]),
-                y: holdSpeed[i]
+                x: new Date(holdTimeSpeed[j]),
+                y: holdSpeed[j]
             });
-        }
+        }*/
 
         dataSeries[0].dataPoints = dataPointsAux;
-        dataSeries[1].dataPoints = dataPointsSpeed;
+        //dataSeries[1].dataPoints = dataPointsSpeed;
         dataSeries2.dataPoints = dataPoints2;
         data.push(dataSeries[0]);
-        data.push(dataSeries[1]);
+        //data.push(dataSeries[1]);
         data2.push(dataSeries2);
 
         var options = {
@@ -189,10 +189,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             axisX: {
                 intervalType: "day",
                 valueFormatString: "DD MMM HH:mm"
-                    //labelAngle: -20
             },
             axisY: [{
-                title:"Litres",
                 includeZero: false,
                 lineColor: "#4F81BC",
                 tickColor: "#4F81BC",
