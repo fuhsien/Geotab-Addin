@@ -1,13 +1,6 @@
-/**
-21 March 2017
-To do list:
-1) Add time selection
-3) Convertion to percentage/ litres
-- km/litres 
--> get distance info for specific time range
-
- */
-
+/*
+Refill RM100 = 45.5 Litres, from graph increase by 41 Litres
+*/
 
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
@@ -19,10 +12,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         avgPoints = 20,
         averager = 0,
         tankSize = 80,
-        holdDevice = [],
-        holdTank = [],
         holdTime = [],
         holdVolt = [],
+        holdSpeed = [],
         holdLitre = [],
         output = [];
 
@@ -50,13 +42,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
     };
 
-    var getAux1 = function(vehicleID, vehicleSN,callback) {
+    var getAux1 = function(vehicleID, vehicleSN, callback) {
         //Get tank size
         var chosen = fromSheet.filter(function(obj) {
             return obj.Serial_Number == vehicleSN;
         })[0];
         tankSize = chosen.Tank_Size;
-        console.log("CHECK", tankSize);
         // Get the correct Diagnostic info for Aux1
         api.call("Get", {
             "typeName": "Diagnostic",
@@ -91,7 +82,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
-                console.log("1:", results);
                 callback(results);
             });
         }, function(e) {
@@ -108,20 +98,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             // loop to build html output for each row
             fromSheet = data.Sheet1;
             console.log("fromSheet", fromSheet);
-            for (var i = 0; i < fromSheet.length; i++) {
-                holdDevice[i] = fromSheet[i]['Device'];
-                holdTank[i] = fromSheet[i]['Tank_Size'];
-                //console.log("raw",entry[i]['Device'],holdDevice[i]);
-            }
         });
         /*$.getJSON(url, function(data) {
             // loop to build html output for each row
             var entry = data.feed.entry;
-            console.log("Raw", data);
-            console.log("Processed", entry);
             var line = entry[0]['gsx$device']['$t'];
             var test = entry[0].content;
-            console.log("Line 1",line,test);
         });*/
         console.log("Loaded Google Sheet");
     }
@@ -138,18 +120,26 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     var plotData = function(results) {
         var data = [];
         var data2 = [];
-        var dataSeries = {
-            type: "line"
-        };
+        var dataSeries = [{
+            name: "Aux 1",
+            type: "splineArea",
+            showInLegend: true
+        }, {
+            name: "Speed",
+            type: "line",
+            axisYIndex: 1,
+            showInLegend: true
+        }];
         var dataSeries2 = {
-            type: "splineArea"
+            type: "spline"
         }
-        var dataPoints = [];
+        var dataPointsAux = [];
+        var dataPointsSpeed = [];
         var dataPoints2 = [];
         console.log("Selected Vehicle Aux:", results); //results return aux values
 
         for (var i = 0; i < results[0].length; i++) {
-            holdTime[i] = results[0][i].dateTime;
+            holdTime[0][i] = results[0][i].dateTime;
             holdVolt[i] = results[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / 5;
             if (i >= avgPoints) {
@@ -161,8 +151,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
-            dataPoints.push({
-                x: new Date(holdTime[i]),
+            dataPointsAux.push({
+                x: new Date(holdTime[0][i]),
                 //x: i,
                 y: output[i]
                     //y: holdVolt[i]
@@ -173,10 +163,20 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             })
         }
 
+        for (var i = 0; i < results[1].length; i++) {
+            holdTime[1][i] = results[1][i].dateTime;
+            holdSpeed[i] = results[1][i].speed;
+            dataPointsSpeed.push({
+                x: new Date(holdTime[1][i]),
+                y: holdSpeed[i]
+            });
+        }
 
-        dataSeries.dataPoints = dataPoints;
+        dataSeries[0].dataPoints = dataPointsAux;
+        dataSeries[1].dataPoints = dataPointsSpeed;
         dataSeries2.dataPoints = dataPoints2;
-        data.push(dataSeries);
+        data.push(dataSeries[0]);
+        data.push(dataSeries[1]);
         data2.push(dataSeries2);
 
         var options = {
@@ -190,10 +190,34 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 valueFormatString: "DD MMM HH:mm"
                     //labelAngle: -20
             },
-            axisY: {
+            axisY: [{
+                title:"Litres"
                 includeZero: false
-            },
-            data: data
+                lineColor: "#4F81BC",
+                tickColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                titleFontColor: "#4F81BC",
+                lineThickness: 2,
+            }, {
+                includeZero: true
+                lineColor: "#C0504E",
+                tickColor: "#C0504E",
+                labelFontColor: "#C0504E",
+                titleFontColor: "#C0504E",
+                lineThickness: 2,
+            }],
+            data: data,
+            legend: {
+                cursor: "pointer",
+                itemclick: function (e) {
+                    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                        e.dataSeries.visible = false;
+                    } else {
+                        e.dataSeries.visible = true;
+                }
+                 $("#chartContainer").CanvasJSChart().render();
+                }
+            }
         };
 
         var options2 = {
@@ -249,8 +273,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
-                //console.log("2:",AuxSpeed);
-                //plotData(AuxSpeed);
             }
         }, true);
     };
