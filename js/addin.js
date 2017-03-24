@@ -186,19 +186,25 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             title: {
                 text: "Fuel Graph (Past 7 Days)"
             },
-            axisX: {
+            axisX: [{
                 intervalType: "day",
                 valueFormatString: "DD MMM HH:mm"
-            },
-            axisY: {
-                title: "Litres",
+            }],
+            axisY: [{
                 includeZero: false,
                 lineColor: "#4F81BC",
                 tickColor: "#4F81BC",
                 labelFontColor: "#4F81BC",
                 titleFontColor: "#4F81BC",
                 lineThickness: 2,
-            },
+            }, {
+                includeZero: true,
+                lineColor: "#C0504E",
+                tickColor: "#C0504E",
+                labelFontColor: "#C0504E",
+                titleFontColor: "#C0504E",
+                lineThickness: 2,
+            }],
             data: data,
             legend: {
                 cursor: "pointer",
