@@ -88,7 +88,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
             }]], function(results) {
                 console.log("Multi Call",results);
-                /*var options = {
+                var options = {
                     zoomEnabled: true,
                     animationEnabled: true,
                     title: {
@@ -119,7 +119,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     data: null
                 };
                 plotData("line", results, options, 1, 1, "#chartContainer");
-                plotData("splineArea", results, options2, 2, 1, "#chartContainer2");*/
+                plotData("splineArea", results, options2, 2, 1, "#chartContainer2");
             });
         }, function(e) {
             console.error("Failed:", e);
@@ -172,8 +172,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var aX = [], aY = [];
 
         for (var i = 0; i < input.length; i++) {
-            holdTime[i] = input[i].dateTime;
-            holdVolt[i] = input[i].data;
+            holdTime[i] = input[0][i].dateTime;
+            holdVolt[i] = input[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / 5;
             if (i >= avgPoints) {
                 averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
