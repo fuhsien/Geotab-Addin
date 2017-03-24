@@ -174,7 +174,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("layer",input[0][0]);
         console.log("aux data",input[0][0].dateTime,input[0][0].data);
 
-        for (var i = 0; i < input.length; i++) {
+        for (var i = 0; i < input[0].length; i++) {
             holdTime[i] = input[0][i].dateTime;
             holdVolt[i] = input[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / 5;
