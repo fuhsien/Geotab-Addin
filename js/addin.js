@@ -16,7 +16,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         vehicles,
         rawData,
         fromSheet,
-        avgPoints = 50,
+        avgPoints = 20,
         averager = 0,
         tankSize = 80,
         holdDevice = [],
@@ -35,7 +35,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         api.call("Get", {
             typeName: "Device"
         }, function(results) {
-            console.log("Device",results);
+            console.log("Device", results);
             vehicles = results.map(function(vehicle) {
                 return {
                     name: vehicle.name,
@@ -43,22 +43,22 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     serialNumber: vehicle.serialNumber
                 };
             });
-            console.log("Vehicles loaded",vehicles);
+            console.log("Vehicles loaded", vehicles);
             finishedCallback();
         }, function(errorString) {
             alert(errorString);
         });
     };
 
-    var getAux1 = function(vehicleID,vehicleSN) {
+    var getAux1 = function(vehicleID, vehicleSN) {
         //Get tank size
-        var chosen = fromSheet.filter(function(obj){
+        var chosen = fromSheet.filter(function(obj) {
             return obj.Serial_Number == vehicleSN;
         })[0];
         tankSize = chosen.Tank_Size;
         console.log("CHECK", tankSize);
         // Get the correct Diagnostic info for Aux1
-        api.call("Get", { 
+        api.call("Get", {
             "typeName": "Diagnostic",
             "search": {
                 "name": "Analog aux 1"
@@ -80,6 +80,24 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 },
             }, function(results) {
                 var data = [];
+
+                var options = {
+                    zoomEnabled: true,
+                    animationEnabled: true,
+                    title: {
+                        text: "Fuel Graph (Past 7 Days)"
+                    },
+                    axisX: {
+                        intervalType: "day",
+                        valueFormatString: "DD MMM HH:mm"
+                            //labelAngle: -20
+                    },
+                    axisY: {
+                        includeZero: false
+                    },
+                    data: data
+                };
+                
                 var data2 = [];
                 var dataSeries = {
                     type: "line"
@@ -88,8 +106,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     type: "splineArea"
                 }
                 var dataPoints = [];
-                var dataPoints2= [];
-                console.log("Selected Vehicle Aux:", results);
+                var dataPoints2 = [];
+                console.log("Selected Vehicle Aux:", results); //results return aux values
 
                 for (var i = 0; i < results.length; i++) {
                     holdTime[i] = results[i].dateTime;
@@ -108,7 +126,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         x: new Date(holdTime[i]),
                         //x: i,
                         y: output[i]
-                        //y: holdVolt[i]
+                            //y: holdVolt[i]
                     });
                     dataPoints2.push({
                         x: i,
@@ -122,22 +140,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 data.push(dataSeries);
                 data2.push(dataSeries2);
 
-                var options = {
-                    zoomEnabled: true,
-                    animationEnabled: true,
-                    title: {
-                        text: "Fuel Graph (Past 7 Days)"
-                    },
-                    axisX: {
-                        intervalType: "day",
-                        valueFormatString: "DD MMM HH:mm"
-                            //labelAngle: -20
-                    },
-                    axisY: {
-                        includeZero: false
-                    },
-                    data: data
-                };
+
 
                 var options2 = {
                     zoomEnabled: true,
@@ -171,10 +174,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $.getJSON(url, function(data) {
             // loop to build html output for each row
             fromSheet = data.Sheet1;
-            console.log("fromSheet",fromSheet);
-            for(var i = 0; i < fromSheet.length; i++) {
+            console.log("fromSheet", fromSheet);
+            for (var i = 0; i < fromSheet.length; i++) {
                 holdDevice[i] = fromSheet[i]['Device'];
-                holdTank[i] = fromSheet[i]['Tank_Size'];                
+                holdTank[i] = fromSheet[i]['Tank_Size'];
                 //console.log("raw",entry[i]['Device'],holdDevice[i]);
             }
         });
@@ -199,6 +202,37 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         averager = 0;
     }
 
+    var plotData = function(type, input, option, chartId) { //Eg. type = "line"/"spline" , input = results  option = object , chartID = "#chartContainer"
+        var data = [];
+        var dataSeries = {
+            type: type
+        };
+        var dataPoints = [];
+        for (var i = 0; i < input.length; i++) {
+            holdTime[i] = input[i].dateTime;
+            holdVolt[i] = input[i].data;
+            holdLitre[i] = tankSize * holdVolt[i] / 5;
+            if (i >= avgPoints) {
+                averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
+                output[i] = averager / avgPoints;
+            } else {
+                output[i] = null;
+                averager += holdLitre[i];
+            }
+
+            dataPoints.push({
+                x: new Date(holdTime[i]),
+                //x: i,
+                y: output[i]
+                    //y: holdVolt[i]
+            });
+            dataPoints2.push({
+                x: i,
+                y: output[i]
+            })
+        }
+    }
+
     /*****************************HTML functionality***********************************/
     var populateVehicleSelect = function() {
         var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
@@ -213,7 +247,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         if (vehicles) {
             vehicles.forEach(function(vehicle) {
                 var opt = document.createElement("option");
-                opt.value = "{'id':'" +vehicle.id+ "', 'serialNumber':'" + vehicle.serialNumber + "'}";
+                opt.value = "{'id':'" + vehicle.id + "', 'serialNumber':'" + vehicle.serialNumber + "'}";
                 opt.textContent = vehicle.name;
                 vehicleSelect.appendChild(opt);
             });
@@ -226,13 +260,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         //After vehicle selected
         vehicleSelect.addEventListener("change", function(evt) {
             var selectedOpt = this.value;
-            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g,'"'));
+            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
             //console.log("after",typeof(selectedOpt),selectedOpt);
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
-                getAux1(selectedVehicleId,selectedVehicleSN); //rawData is results from getAux1
+                getAux1(selectedVehicleId, selectedVehicleSN); //rawData is results from getAux1
             }
         }, true);
     };
