@@ -64,8 +64,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             },
         }, function(result) {
             var auxID = result[0].id; //Assign specific ID to variable
-
-            api.call("Get", {
+            console.log("aux id",auxID);
+            api.multicall([["Get", {
                 "typeName": "StatusData",
                 "search": {
                     diagnosticSearch: {
@@ -76,10 +76,19 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     },
                     fromDate: startDate,
                     toDate: endDate
-                },
-            }, function(results) {
-                console.log("Single Call",results);
-                var options = {
+                }
+            }],["Get", {
+                "typeName": "LogRecord",
+                "search": {
+                    deviceSearch: {
+                        "id": vehicleID
+                    },
+                    fromDate: startDate,
+                    toDate: endDate
+                }
+            }]], function(results) {
+                console.log("Multi Call",results);
+                /*var options = {
                     zoomEnabled: true,
                     animationEnabled: true,
                     title: {
@@ -110,7 +119,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     data: null
                 };
                 plotData("line", results, options, 1, 1, "#chartContainer");
-                plotData("splineArea", results, options2, 2, 1, "#chartContainer2");
+                plotData("splineArea", results, options2, 2, 1, "#chartContainer2");*/
             });
         }, function(e) {
             console.error("Failed:", e);
