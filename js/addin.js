@@ -64,7 +64,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             },
         }, function(result) {
             var auxID = result[0].id; //Assign specific ID to variable
-            console.log("aux id",auxID);
             api.multiCall([["Get", {
                 "typeName": "StatusData",
                 "search": {
@@ -170,6 +169,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         };
         var dataPoints = [];
         var aX = [], aY = [];
+
+        console.log("Whole",input[0]);
+        console.log("layer",input[0][0]);
+        console.log("aux data",input[0][0].dateTime,input[0][0].data);
 
         for (var i = 0; i < input.length; i++) {
             holdTime[i] = input[0][i].dateTime;
