@@ -50,7 +50,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
     };
 
-    var getAux1 = function(vehicleID, vehicleSN) {
+    var getAux1 = function(vehicleID, vehicleSN,callback) {
         //Get tank size
         var chosen = fromSheet.filter(function(obj) {
             return obj.Serial_Number == vehicleSN;
@@ -92,7 +92,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }]
             ], function(results) {
                 console.log("1:", results);
-                return results;
+                callback(results);
             });
         }, function(e) {
             console.error("Failed:", e);
@@ -248,8 +248,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             //console.log("after",typeof(selectedOpt),selectedOpt);
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
-                var AuxSpeed = getAux1(selectedVehicleId, selectedVehicleSN); //rawData is results from getAux1
-                console.log("2:",AuxSpeed);
+                getAux1(selectedVehicleId, selectedVehicleSN,plotData()); //rawData is results from getAux1
+                //console.log("2:",AuxSpeed);
                 //plotData(AuxSpeed);
             }
         }, true);
