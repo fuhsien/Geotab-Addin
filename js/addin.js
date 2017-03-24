@@ -163,7 +163,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             })
         }
 
-        for (var i = 0; i < results[1].length; i++) {
+        for (i = 0; i < results[1].length; i++) {
             holdTime[1][i] = results[1][i].dateTime;
             holdSpeed[i] = results[1][i].speed;
             dataPointsSpeed.push({
@@ -191,15 +191,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     //labelAngle: -20
             },
             axisY: [{
-                title:"Litres"
-                includeZero: false
+                title:"Litres",
+                includeZero: false,
                 lineColor: "#4F81BC",
                 tickColor: "#4F81BC",
                 labelFontColor: "#4F81BC",
                 titleFontColor: "#4F81BC",
                 lineThickness: 2,
             }, {
-                includeZero: true
+                includeZero: true,
                 lineColor: "#C0504E",
                 tickColor: "#C0504E",
                 labelFontColor: "#C0504E",
