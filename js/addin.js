@@ -12,7 +12,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         avgPoints = 20,
         averager = 0,
         tankSize = 80,
-        holdTime = [],
+        holdTimeAux = [],
+        holdTimeSpeed = [],
         holdVolt = [],
         holdSpeed = [],
         holdLitre = [],
@@ -139,7 +140,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Selected Vehicle Aux:", results); //results return aux values
 
         for (var i = 0; i < results[0].length; i++) {
-            holdTime[0][i] = results[0][i].dateTime;
+            holdTimeAux[i] = results[0][i].dateTime;
             holdVolt[i] = results[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / 5;
             if (i >= avgPoints) {
@@ -152,7 +153,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
             dataPointsAux.push({
-                x: new Date(holdTime[0][i]),
+                x: new Date(holdTimeAux[i]),
                 //x: i,
                 y: output[i]
                     //y: holdVolt[i]
@@ -164,10 +165,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }
 
         for (i = 0; i < results[1].length; i++) {
-            holdTime[1][i] = results[1][i].dateTime;
+            holdTimeSpeed[i] = results[1][i].dateTime;
             holdSpeed[i] = results[1][i].speed;
             dataPointsSpeed.push({
-                x: new Date(holdTime[1][i]),
+                x: new Date(holdTimeSpeed[i]),
                 y: holdSpeed[i]
             });
         }
