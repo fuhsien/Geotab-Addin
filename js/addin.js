@@ -56,7 +56,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             return obj.Serial_Number == vehicleSN;
         })[0];
         tankSize = chosen.Tank_Size;
-        console.log("CHECK", tankSize);
         // Get the correct Diagnostic info for Aux1
         api.call("Get", {
             "typeName": "Diagnostic",
@@ -79,6 +78,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     toDate: endDate
                 },
             }, function(results) {
+                console.log("Single Call",results);
                 var options = {
                     zoomEnabled: true,
                     animationEnabled: true,
@@ -88,7 +88,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     axisX: {
                         intervalType: "day",
                         valueFormatString: "DD MMM HH:mm"
-                            //labelAngle: -20
                     },
                     axisY: {
                         includeZero: false
