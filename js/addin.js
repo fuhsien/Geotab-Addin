@@ -248,7 +248,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             //console.log("after",typeof(selectedOpt),selectedOpt);
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
-                getAux1(selectedVehicleId, selectedVehicleSN,plotData()); //rawData is results from getAux1
+                getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
                 //console.log("2:",AuxSpeed);
                 //plotData(AuxSpeed);
             }
