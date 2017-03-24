@@ -138,7 +138,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     axisY: {
                         includeZero: false
                     },
-                    data: data
+                    data: null
                 };
 
                 var options2 = {
@@ -231,6 +231,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 y: aY[yA-1]
             });
         }
+        dataSeries.dataPoints = dataPoints;
+        data.push(dataSeries);
+
+        option.data = data;
 
         $(chartId).CanvasJSChart(option);
     };
