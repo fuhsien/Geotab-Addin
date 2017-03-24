@@ -65,7 +65,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }, function(result) {
             var auxID = result[0].id; //Assign specific ID to variable
             console.log("aux id",auxID);
-            api.multicall([["Get", {
+            api.multiCall([["Get", {
                 "typeName": "StatusData",
                 "search": {
                     diagnosticSearch: {
