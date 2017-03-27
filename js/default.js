@@ -4,6 +4,6 @@ var calendar = flatpickr("#from", {
 
 $(function(){
     $("#from").change(function(){
-        console.log(getElementById("from"));
+        console.log(document.getElementById("from"));
     })
 })
