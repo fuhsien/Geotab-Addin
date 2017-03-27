@@ -157,12 +157,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataSeries = [{
             name: "Aux 1",
             type: "line",
-            //showInLegend: true
+            showInLegend: true
         },{
             name: "Speed",
             type: "line",
-            /*axisYIndex: 1,
-            showInLegend: true*/
+            axisYIndex: 1,
+            showInLegend: true
         }];
         var dataSeries2 = {
             type: "spline"
@@ -237,7 +237,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 lineThickness: 2,
             }],
             data: data,
-            /*legend: {
+            legend: {
                 cursor: "pointer",
                 itemclick: function (e) {
                     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -247,7 +247,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
                  $("#chartContainer").CanvasJSChart().render();
                 }
-            }*/
+            }
         };
 
         var options2 = {
