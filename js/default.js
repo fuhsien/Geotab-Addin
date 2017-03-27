@@ -1,4 +1,4 @@
-var calendar = flatpickr("from", {
+var calendar = flatpickr("input", {
     inline: false
 });
 
