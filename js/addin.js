@@ -157,7 +157,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataSeries = [{
             name: "Aux 1",
             type: "line",
-            showInLegend: true
+            //showInLegend: true
         },{
             name: "Speed",
             type: "line",
