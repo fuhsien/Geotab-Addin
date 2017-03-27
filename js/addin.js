@@ -1,7 +1,40 @@
 /*
 Refill RM100 = 45.5 Litres, from graph increase by 41 Litres
 */
+/********************************************************************************
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+CHECK OUT DIFFERENCE BETWEEN 
+https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js
+https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js
+
+TRY EXPERIMENTING WITH CANVAS DEMO CODE
+
+
+
+
+
+
+
+
+
+
+
+
+
+*********************************************************************************/
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
     var startDate = new Date(),
@@ -153,8 +186,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
             dataPointsAux.push({
-                //x: new Date(holdTimeAux[i]),
-                x: i,
+                x: new Date(holdTimeAux[i]),
+                //x: i,
                 y: output[i]
                     //y: holdVolt[i]
             });
@@ -186,10 +219,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             title: {
                 text: "Fuel Graph (Past 7 Days)"
             },
-            /*axisX: [{
+            axisX: [{
                 intervalType: "day",
                 valueFormatString: "DD MMM HH:mm"
-            }],*/
+            }],
             axisY: [{
                 lineColor: "#4F81BC",
                 tickColor: "#4F81BC",
