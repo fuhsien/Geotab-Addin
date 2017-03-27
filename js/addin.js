@@ -170,7 +170,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             showInLegend: true
         }];
         var dataSeries2 = {
-            type: "spline"
+            type: "splineArea"
         }
         var dataPointsAux = [];
         var dataPointsSpeed = [];
@@ -198,7 +198,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });
             dataPoints2.push({
                 x: i,
-                y: holdVolt[i]
+                y: output[i]
             })
         }
 
@@ -229,12 +229,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 valueFormatString: "DD MMM HH:mm"
             },
             axisY: [{
+                title: "Litres",
                 lineColor: "#A00C23",
                 tickColor: "#A00C23",
                 labelFontColor: "#A00C23",
                 titleFontColor: "#A00C23",
                 lineThickness: 2,
             }, {
+                title: "km/h",
                 lineColor: "#6495ED",
                 tickColor: "#6495ED",
                 labelFontColor: "#6495ED",
