@@ -1,5 +1,9 @@
-var calendar = flatpickr("input", {
+var calendar = flatpickr("from", {
     inline: false
 });
 
-console.log("Testing time", calendar);
+$(function(){
+    $("#from").change(function(){
+        console.log(calender);
+    })
+})
