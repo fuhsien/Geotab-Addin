@@ -197,20 +197,20 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             })
         }
 
-        /*for (var j = 0; j < results[1].length; j++) {
+        for (var j = 0; j < results[1].length; j++) {
             holdTimeSpeed[j] = results[1][j].dateTime;
             holdSpeed[j] = results[1][j].speed;
             dataPointsSpeed.push({
                 x: new Date(holdTimeSpeed[j]),
                 y: holdSpeed[j]
             });
-        }*/
+        }
 
         dataSeries[0].dataPoints = dataPointsAux;
-        //dataSeries[1].dataPoints = dataPointsSpeed;
+        dataSeries[1].dataPoints = dataPointsSpeed;
         dataSeries2.dataPoints = dataPoints2;
         data.push(dataSeries[0]);
-        //data.push(dataSeries[1]);
+        data.push(dataSeries[1]);
         data2.push(dataSeries2);
 
         var options = {
@@ -237,7 +237,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 lineThickness: 2,
             }],
             data: data,
-            /*legend: {
+            legend: {
                 cursor: "pointer",
                 itemclick: function (e) {
                     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -247,7 +247,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
                  $("#chartContainer").CanvasJSChart().render();
                 }
-            }*/
+            }
         };
 
         var options2 = {
