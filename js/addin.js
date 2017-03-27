@@ -3,7 +3,8 @@ Refill RM100 = 45.5 Litres, from graph increase by 41 Litres
 */
 /********************************************************************************
 
-
+Blue: 9EB9D4
+Red: A00C23
 
 
 
@@ -155,12 +156,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var data = [];
         var data2 = [];
         var dataSeries = [{
-            name: "Aux 1",
+            name: "Fuel Level",
             type: "line",
+            lineThickness :2,
+            color: "#A00C23",       //red
             showInLegend: true
         },{
             name: "Speed",
             type: "line",
+            lineThickness :0.5,
+            color: "#9EB9D4",       //blue
             axisYIndex: 1,
             showInLegend: true
         }];
@@ -224,16 +229,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 valueFormatString: "DD MMM HH:mm"
             },
             axisY: [{
-                lineColor: "#4F81BC",
-                tickColor: "#4F81BC",
-                labelFontColor: "#4F81BC",
-                titleFontColor: "#4F81BC",
+                lineColor: "#A00C23",
+                tickColor: "#A00C23",
+                labelFontColor: "#A00C23",
+                titleFontColor: "#A00C23",
                 lineThickness: 2,
             }, {
-                lineColor: "#C0504E",
-                tickColor: "#C0504E",
-                labelFontColor: "#C0504E",
-                titleFontColor: "#C0504E",
+                lineColor: "#9EB9D4",
+                tickColor: "#9EB9D4",
+                labelFontColor: "#9EB9D4",
+                titleFontColor: "#9EB9D4",
                 lineThickness: 2,
             }],
             data: data,
