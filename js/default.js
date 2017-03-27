@@ -2,8 +2,8 @@ var calendar = flatpickr("from", {
     inline: false
 });
 
-$(function(){
+/*$(function(){
     $("#from").change(function(){
         console.log(calender);
     })
-})
+})*/
