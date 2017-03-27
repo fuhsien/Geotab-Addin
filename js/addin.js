@@ -219,10 +219,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             title: {
                 text: "Fuel Graph (Past 7 Days)"
             },
-            axisX: [{
+            axisX: {
                 intervalType: "day",
                 valueFormatString: "DD MMM HH:mm"
-            }],
+            },
             axisY: [{
                 lineColor: "#4F81BC",
                 tickColor: "#4F81BC",
@@ -237,7 +237,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 lineThickness: 2,
             }],
             data: data,
-            legend: {
+            /*legend: {
                 cursor: "pointer",
                 itemclick: function (e) {
                     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -247,7 +247,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
                  $("#chartContainer").CanvasJSChart().render();
                 }
-            }
+            }*/
         };
 
         var options2 = {
