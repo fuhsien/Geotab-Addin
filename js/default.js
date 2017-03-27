@@ -1,2 +1,9 @@
-var calendar = flatpickr("#flatpickr", { 
+var calendar = flatpickr("input", {
+    inline: false
 });
+
+function openCalendar(){
+    setTimeout(function(){
+        calendar.open();
+    }, 0);
+}
