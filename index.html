@@ -5,14 +5,23 @@
 <title>CanvasJS Chart jQuery Plugin</title>
 <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
 <script src="https://unpkg.com/flatpickr"></script>
-<script type="text/javascript" src="js/default.js"></script>
 
 </head>
 <body>
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
-<div style="background:white; height: 100vh; padding: 1em">
-<input  type="text"  id="flatpickr">
-</div>
+<a id='opener' onclick="openCalendar()">Open</a>
+<input type="text" id=input>
+<script type="text/javascript">
+    var calendar = flatpickr("input", {
+        inline: false
+    });
+
+    function openCalendar(){
+        setTimeout(function(){
+            calendar.open();
+        }, 0);
+        
+    }
+</script>
 
 </body>
 
