@@ -1,0 +1,2 @@
+var calendar = flatpickr("#flatpickr", { 
+});
