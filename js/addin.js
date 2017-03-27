@@ -237,7 +237,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 lineThickness: 2,
             }],
             data: data,
-            legend: {
+            /*legend: {
                 cursor: "pointer",
                 itemclick: function (e) {
                     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -247,7 +247,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
                  $("#chartContainer").CanvasJSChart().render();
                 }
-            }
+            }*/
         };
 
         var options2 = {
