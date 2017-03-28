@@ -278,9 +278,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         oldChart.innerHTML = "";        
         oldChart = document.getElementById("chartContainer2");
         oldChart.innerHTML = "";
-        document.getElementById("render").disabled = true;
 
-        selectedOpt = null;
         averager = 0;        
         holdTimeAux = [];
         holdTimeSpeed = [];
@@ -316,11 +314,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var button = document.getElementById("render");
         vehicleSelect.addEventListener("change", function(evt) {
             selectedOpt = this.value;
-            if(selectedOpt){
+            /*if(selectedOpt){
                 button.disabled = false;
             }else{
                 button.disabled = true;
-            }
+            }*/
         })
 
         //After vehicle selected
