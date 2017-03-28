@@ -318,6 +318,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             selectedOpt = this.value;
             if(selectedOpt){
                 button.disabled = false;
+            }else{
+                button.disabled = true;
             }
         })
 
