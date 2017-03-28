@@ -45,6 +45,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         avgPoints = 20,
         averager = 0,
         tankSize = 80,
+        selectedOpt,
         holdTimeAux = [],
         holdTimeSpeed = [],
         holdVolt = [],
@@ -310,10 +311,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
     var initializeEventHandler = function() {
         var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
+        var button = document.getElementById("render");
+        vehicleSelect.addEventListener("change", function(evt) {
+            selectedOpt = this.value;
+        }
 
         //After vehicle selected
-        vehicleSelect.addEventListener("change", function(evt) {
-            var selectedOpt = this.value;
+        button.addEventListener("click", function(evt) {
             selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
