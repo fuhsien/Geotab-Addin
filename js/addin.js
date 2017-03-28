@@ -314,6 +314,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var button = document.getElementById("render");
         vehicleSelect.addEventListener("change", function(evt) {
             selectedOpt = this.value;
+            if(selectedOpt){
+                button.disabled = false;
+            }
         })
 
         //After vehicle selected
