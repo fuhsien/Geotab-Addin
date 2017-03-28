@@ -41,7 +41,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     var startDate = new Date(),
         endDate = new Date(),
         vehicles,
-        rawData,
         fromSheet,
         avgPoints = 20,
         averager = 0,
@@ -151,7 +150,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         oldChart = document.getElementById("chartContainer2");
         oldChart.innerHTML = "";
 
-        averager = 0;
+        averager = 0;        
+        holdTimeAux = [];
+        holdTimeSpeed = [];
+        holdVolt = [];
+        holdSpeed = [];
+        holdLitre = [];
+        output = [];
     }
 
     var plotData = function(results) {
