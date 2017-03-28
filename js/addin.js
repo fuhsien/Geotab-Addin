@@ -278,6 +278,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         oldChart.innerHTML = "";        
         oldChart = document.getElementById("chartContainer2");
         oldChart.innerHTML = "";
+        document.getElementById("render").disabled = true;
 
         selectedOpt = null,
         averager = 0;
@@ -319,16 +320,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var button = document.getElementById("render");
         $("#mapreplay-options-vehicle").change(function(){
             selectedOpt = this.value;
-            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
-            /*if(selectedOpt){
+            if(selectedOpt){
                 button.disabled = false;
             }else{
                 button.disabled = true;
-            }*/
+            }
         });
 
         //After vehicle selected
         $('#render').click(function(){
+            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
             console.log("after",typeof(selectedOpt),selectedOpt);
