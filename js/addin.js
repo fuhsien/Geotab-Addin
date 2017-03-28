@@ -324,8 +324,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         },true);
 
         //After vehicle selected
-        button.addEventListener("click", function(evt) {
-            evt.stopPropagation();
+        button.addEventListener("click", function() {
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
             console.log("after",typeof(selectedOpt),selectedOpt);
@@ -333,7 +332,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //Get Aux Data for this vehicle
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
             }*/
-        },true);
+        });
     };
 
     /**************************************Start the code***********************************/
