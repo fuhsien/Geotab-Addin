@@ -313,6 +313,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     var initializeEventHandler = function() {
         var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
         var button = document.getElementById("render");
+        console.log("Button",button);
         vehicleSelect.addEventListener("change", function(evt) {
             selectedOpt = this.value;
             selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
