@@ -314,6 +314,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var button = document.getElementById("render");
         vehicleSelect.addEventListener("change", function(evt) {
             selectedOpt = this.value;
+            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
             /*if(selectedOpt){
                 button.disabled = false;
             }else{
@@ -323,7 +324,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //After vehicle selected
         button.addEventListener("click", function(evt) {
-            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
             console.log("after",typeof(selectedOpt),selectedOpt);
