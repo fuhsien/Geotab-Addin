@@ -315,38 +315,35 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     var initializeEventHandler = function() {
         var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
         var button = document.getElementById("render");
-        console.log("Button",button);
         $("#mapreplay-options-vehicle").change(function(){
             selectedOpt = this.value;
             selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
-            console.log("Printing");
             /*if(selectedOpt){
                 button.disabled = false;
             }else{
                 button.disabled = true;
             }*/
         });
-        /*vehicleSelect.addEventListener("change", function() {
-            selectedOpt = this.value;
-            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
-            console.log("Printing");
-            if(selectedOpt){
-                button.disabled = false;
-            }else{
-                button.disabled = true;
-            }
-        },true);*/
 
         //After vehicle selected
-        button.addEventListener("click", function() {
+        $('#render').click(function(){
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
             console.log("after",typeof(selectedOpt),selectedOpt);
-            /*if (selectedVehicleId) {
+            if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
-            }*/
-        });
+            }
+        })
+        /*button.addEventListener("click", function() {
+            var selectedVehicleId = selectedOpt.id;
+            var selectedVehicleSN = selectedOpt.serialNumber;
+            console.log("after",typeof(selectedOpt),selectedOpt);
+            if (selectedVehicleId) {
+                //Get Aux Data for this vehicle
+                getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
+            }
+        });*/
     };
 
     /**************************************Start the code***********************************/
