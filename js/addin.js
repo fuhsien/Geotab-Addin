@@ -287,6 +287,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         holdSpeed = [];
         holdLitre = [];
         output = [];
+
+        document.getElementById("mapreplay-options-vehicle").removeEventListener("change", myFunction);
     }
 
     /*****************************HTML functionality***********************************/
@@ -314,8 +316,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
         var button = document.getElementById("render");
         console.log("Button",button);
-        vehicleSelect.addEventListener("change", function(evt) {
-            selectedOpt = this.value;
+        $("#mapreplay-options-vehicle").click(function(){
+                        selectedOpt = this.value;
             selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
             console.log("Printing");
             /*if(selectedOpt){
@@ -323,7 +325,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }else{
                 button.disabled = true;
             }*/
-        },true);
+        });
+        /*vehicleSelect.addEventListener("change", function() {
+            selectedOpt = this.value;
+            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
+            console.log("Printing");
+            if(selectedOpt){
+                button.disabled = false;
+            }else{
+                button.disabled = true;
+            }
+        },true);*/
 
         //After vehicle selected
         button.addEventListener("click", function() {
