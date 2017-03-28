@@ -143,24 +143,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Loaded Google Sheet");
     }
 
-    var reset = function() {
-        var oldVehicles = document.getElementById("mapreplay-options-vehicle");
-        oldVehicles.innerHTML = "";
-        var oldChart = document.getElementById("chartContainer");
-        oldChart.innerHTML = "";        
-        oldChart = document.getElementById("chartContainer2");
-        oldChart.innerHTML = "";
-        document.getElementById("render").disabled = true;
-
-        averager = 0;        
-        holdTimeAux = [];
-        holdTimeSpeed = [];
-        holdVolt = [];
-        holdSpeed = [];
-        holdLitre = [];
-        output = [];
-    }
-
     var plotData = function(results) {
         var data = [];
         var data2 = [];
@@ -287,6 +269,25 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
+    }
+
+    var reset = function() {
+        var oldVehicles = document.getElementById("mapreplay-options-vehicle");
+        oldVehicles.innerHTML = "";
+        var oldChart = document.getElementById("chartContainer");
+        oldChart.innerHTML = "";        
+        oldChart = document.getElementById("chartContainer2");
+        oldChart.innerHTML = "";
+        document.getElementById("render").disabled = true;
+
+        selectedOpt = null;
+        averager = 0;        
+        holdTimeAux = [];
+        holdTimeSpeed = [];
+        holdVolt = [];
+        holdSpeed = [];
+        holdLitre = [];
+        output = [];
     }
 
     /*****************************HTML functionality***********************************/
