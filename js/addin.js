@@ -322,7 +322,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             selectedOpt = this.value;
             console.log("print",selectedOpt,button)
 
-            $("render").prop('disabled',false);
+            button.disabled = false;
             /*if(selectedOpt){
             }else{
                 button.disabled = true;
