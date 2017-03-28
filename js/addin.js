@@ -320,13 +320,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var button = document.getElementById("render");
         $("#mapreplay-options-vehicle").change(function(){
             selectedOpt = this.value;
-            console.log("print",selectedOpt,button)
-
-            button.disabled = false;
-            /*if(selectedOpt){
+            if(selectedOpt){
+                button.disabled = false;
             }else{
                 button.disabled = true;
-            }*/
+            }
         });
 
         //After vehicle selected
