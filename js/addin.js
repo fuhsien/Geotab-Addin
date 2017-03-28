@@ -279,7 +279,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         oldChart = document.getElementById("chartContainer2");
         oldChart.innerHTML = "";
 
-        averager = 0;        
+        averager = 0;
         holdTimeAux = [];
         holdTimeSpeed = [];
         holdVolt = [];
@@ -332,7 +332,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //Get Aux Data for this vehicle
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
             }
-        }, true);
+        });
     };
 
     /**************************************Start the code***********************************/
