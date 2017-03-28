@@ -288,10 +288,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         holdLitre = [];
         output = [];
 
-        function(){
-            $('#mapreplay-options-vehicle').unbind();
-            $('#render').unbind();            
-        }
+        $('#mapreplay-options-vehicle').unbind();
+        $('#render').unbind();            
+        
     }
 
     /*****************************HTML functionality***********************************/
