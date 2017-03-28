@@ -319,10 +319,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }else{
                 button.disabled = true;
             }*/
-        })
+        },true);
 
         //After vehicle selected
         button.addEventListener("click", function(evt) {
+            evt.stopPropagation();
             selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
