@@ -288,7 +288,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         holdLitre = [];
         output = [];
 
-        document.getElementById("mapreplay-options-vehicle").removeEventListener("change", myFunction);
+        function(){
+            $('#mapreplay-options-vehicle').unbind();
+            $('#render').unbind();            
+        }
     }
 
     /*****************************HTML functionality***********************************/
@@ -335,15 +338,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
             }
         })
-        /*button.addEventListener("click", function() {
-            var selectedVehicleId = selectedOpt.id;
-            var selectedVehicleSN = selectedOpt.serialNumber;
-            console.log("after",typeof(selectedOpt),selectedOpt);
-            if (selectedVehicleId) {
-                //Get Aux Data for this vehicle
-                getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
-            }
-        });*/
     };
 
     /**************************************Start the code***********************************/
