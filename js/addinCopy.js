@@ -334,8 +334,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         startPicker = $inputStart.pickadate('picker');
         endPicker = $inputEnd.pickadate('picker');
 
-        //document.getElementById("startDate").readOnly = false;          //to force the css to look the same
-        //document.getElementById("endDate").readOnly = false;
+        document.getElementById("startDate").readOnly = false;          //to force the css to look the same
+        document.getElementById("endDate").readOnly = false;
 
         $("#mapreplay-options-vehicle").change(function(){
             selectedOpt = this.value;
