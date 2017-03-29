@@ -38,7 +38,7 @@ TRY EXPERIMENTING WITH CANVAS DEMO CODE
 *********************************************************************************/
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
-    var startDate = new Date(),
+    var startDate,
         endDate = new Date(),
         vehicles,
         fromSheet,
@@ -55,8 +55,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         holdLitre = [],
         output = [];
 
-    startDate.setDate(startDate.getDate() - 7);
-    console.log("Start Date:", startDate);
+    /*startDate.setDate(startDate.getDate() - 7);
+    console.log("Start Date:", startDate);*/
     console.log("End Date:", endDate);
 
     /*****************************Get Data from Geotab***********************************/
@@ -367,10 +367,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //Event handler for Date picker
         $('#startDate').change(function(){
-            console.log("startPicker", startPicker.get('select').pick);
+            startDate = new Date(startPicker.get('select').pick)
             endPicker.set({
-                min: new Date(startPicker.get('select').pick)
+                min: startDate
             })
+            console.log("StartDate: "startDate);
         })
     };
 
