@@ -39,7 +39,7 @@ TRY EXPERIMENTING WITH CANVAS DEMO CODE
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
     var startDate,
-        endDate = new Date(),
+        endDate,
         vehicles,
         fromSheet,
         avgPoints = 20,
@@ -382,7 +382,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 })
                 e.disabled = true;
             }
-        })
+        });
+
+        $('#endDate').change(function(){
+            console.log("END",endPicker.get('select'));
+            if (endPicker.get('select')){
+                endDate = new Date(endPicker.get('select').pick);
+                console.log("Start Date:", startDate);
+                console.log("End Date:", endDate);
+            }
+        });
     };
 
     /**************************************Start the code***********************************/
