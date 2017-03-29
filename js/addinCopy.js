@@ -297,7 +297,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         oldChart.innerHTML = "";
         document.getElementById("render").disabled = true;
 
-        selectedOpt = null,
+        selectedOpt = null;
         if (startPicker||endPicker){
             startPicker.clear();
             endPicker.clear();
