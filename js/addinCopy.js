@@ -369,7 +369,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $('#startDate').change(function(){
             console.log("startPicker", startPicker.get('select').pick);
             endPicker.set({
-                min: startPicker.get('select').pick
+                min: new Date(startPicker.get('select').pick)
             })
         })
     };
