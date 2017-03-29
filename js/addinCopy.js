@@ -325,16 +325,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var $inputStart = $("#startDate").pickadate({
             closeOnClear: false,
             min: new Date(2017,0,1),
-            onSet: function(context){
-                console.log("Setting:",context);
-            }
         })
         var $inputEnd = $("#endDate").pickadate({
             closeOnClear: false,
             min: new Date(2017,0,1),
-            onSet: function(context){
-                console.log("Setting:",context);
-            }
         })
 
         startPicker = $inputStart.pickadate('picker');
@@ -368,6 +362,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         //Event handler for Date picker
         $('#startDate').change(function(){
             console.log("startPicker", startPicker.get('select').pick);
+            startDate = new Date(startPicker.get('select').pick);
             endPicker.set({
                 min: new Date(startPicker.get('select').pick)
             })
