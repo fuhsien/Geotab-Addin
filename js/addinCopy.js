@@ -224,7 +224,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             },
             axisX: {
                 intervalType: "day",
-                valueFormatString: "DD MMM"
+                valueFormatString: "MMM DD, HH"
             },
             axisY: [{
                 title: "Litres",
@@ -415,6 +415,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 })
                 eFlag = true;
             }else{
+                startPicker.set({
+                    max: new Date()
+                })
                 eFlag = false;
             }
             if (vFlag && sFlag && eFlag){
