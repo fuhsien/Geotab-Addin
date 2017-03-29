@@ -238,7 +238,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 labelFontColor: "#6495ED",
                 titleFontColor: "#6495ED",
                 lineThickness: 2,
-                includeZero: true,
+                includeZero: false,
             }],
             data: data,
             legend: {
@@ -323,10 +323,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
         var button = document.getElementById("render");
         var $inputStart = $("#startDate").pickadate({
+            closeOnSelect: true,
             closeOnClear: false,
             min: new Date(2017,0,1),
         })
         var $inputEnd = $("#endDate").pickadate({
+            closeOnSelect: true,
             closeOnClear: false,
             min: new Date(2017,0,1),
         })
