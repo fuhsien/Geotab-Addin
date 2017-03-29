@@ -363,6 +363,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             if(selectedOpt){
                 selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
                 vFlag = true;
+                console.log("CHECKPOINT");
                 //button.disabled = false;
             }else{
                 vFlat = false;
