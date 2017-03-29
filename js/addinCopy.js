@@ -49,7 +49,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         tankSize = 80,
         selectedOpt,
         startPicker,
-        endPicker;
+        endPicker,
+        averager = 0,
+        holdTimeAux = [],
+        holdTimeSpeed = [],
+        holdVolt = [],
+        holdSpeed = [],
+        holdLitre = [],
+        output = [];
 
     /*startDate.setDate(startDate.getDate() - 7);
     console.log("Start Date:", startDate);*/
@@ -142,16 +149,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     }
 
     var plotData = function(results) {
-        /*************************************************************************************************************************/
-        //reset data before plotting
-        averager = 0,
-        holdTimeAux = [],
-        holdTimeSpeed = [],
-        holdVolt = [],
-        holdSpeed = [],
-        holdLitre = [],
-        output = [];
-        /*************************************************************************************************************************/
         var data = [];
         var data2 = [];
         var dataSeries = [{
