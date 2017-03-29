@@ -149,6 +149,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     }
 
     var plotData = function(results) {
+    /*======================================================================================*/
+    //Reset points before plotting to prevent accumulation
+        averager = 0;
+        holdTimeAux = [];
+        holdTimeSpeed = [];
+        holdVolt = [];
+        holdSpeed = [];
+        holdLitre = [];
+        output = [];
+    /*======================================================================================*/
+
         var data = [];
         var data2 = [];
         var dataSeries = [{
@@ -287,7 +298,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         document.getElementById("render").disabled = true;
 
         selectedOpt = null,
-        averager = 0;
         if (startPicker||endPicker){
             startPicker.clear();
             endPicker.clear();
@@ -296,12 +306,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         vFlag = false;
         sFlag = false;
         eFlag = false;
-        holdTimeAux = [];
-        holdTimeSpeed = [];
-        holdVolt = [];
-        holdSpeed = [];
-        holdLitre = [];
-        output = [];
 
         $('#mapreplay-options-vehicle').unbind();
         $('#render').unbind();            
@@ -355,8 +359,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#mapreplay-options-vehicle").change(function(){
             selectedOpt = this.value;
-            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
             if(selectedOpt){
+                selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
                 vFlag = true;
                 //button.disabled = false;
             }else{
