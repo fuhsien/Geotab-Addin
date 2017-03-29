@@ -46,6 +46,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         averager = 0,
         tankSize = 80,
         selectedOpt,
+        startPicker,
+        endPicker,
         holdTimeAux = [],
         holdTimeSpeed = [],
         holdVolt = [],
@@ -282,6 +284,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         selectedOpt = null,
         averager = 0;
+        startPicker = null;
+        endPicker = null;
         holdTimeAux = [];
         holdTimeSpeed = [];
         holdVolt = [];
@@ -332,6 +336,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 console.log("Setting:",context);
             }
         })
+
+        startPicker = $inputStart.pickadate('picker');
+        endPicker = $inputEnd.pickadate('picker');
+
         document.getElementById("startDate").readOnly = false;          //to force the css to look the same
         document.getElementById("endDate").readOnly = false;
 
@@ -355,6 +363,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
                 button.disabled = true;
             }
+        });
+
+        //Event handler for Date picker
+        $('#startDate').change(function(){
+            console.log("startPicker", startPicker.get('select').pick);
+            endPicker.set({
+                min: startPicker.get('select').pick
+            })
         })
     };
 
