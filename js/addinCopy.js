@@ -359,6 +359,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#mapreplay-options-vehicle").change(function(){
             selectedOpt = this.value;
+            console.log("CHECK VALUE",selectedOpt);
             if(selectedOpt){
                 selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
                 vFlag = true;
@@ -367,6 +368,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 vFlat = false;
                 //button.disabled = true;
             }
+            console.log("CHECK FLAGS V-S-E",vFlag,sFlag,eFlag);
             if (vFlag && sFlag && eFlag){
                 button.disabled = false;
             }else{
