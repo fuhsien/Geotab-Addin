@@ -341,6 +341,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 button.disabled = true;
             }
         });
+        document.getElementById("startDate").readonly = false;
 
         //After vehicle selected
         $('#render').click(function(){
