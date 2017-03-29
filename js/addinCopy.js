@@ -323,14 +323,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
         var button = document.getElementById("render");
         var $inputStart = $("#startDate").pickadate({
-            closeOnSelect: true,
-            closeOnClear: false,
             min: new Date(2017,0,1),
+            max: new Date()
         })
         var $inputEnd = $("#endDate").pickadate({
-            closeOnSelect: true,
-            closeOnClear: false,
             min: new Date(2017,0,1),
+            max: new Date()
         })
 
         startPicker = $inputStart.pickadate('picker');
