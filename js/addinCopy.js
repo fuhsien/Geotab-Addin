@@ -281,13 +281,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         oldChart = document.getElementById("chartContainer2");
         oldChart.innerHTML = "";
         document.getElementById("render").disabled = true;
-        document.getElementById("startDate").value = "";
-        document.getElementById("endDate").value = "";
+
 
         selectedOpt = null,
         averager = 0;
-        startPicker = null;
-        endPicker = null;
+        if (startPicker||endPicker){
+            startPicker.clear();
+            endPicker.clear();
+        }
+
         holdTimeAux = [];
         holdTimeSpeed = [];
         holdVolt = [];
