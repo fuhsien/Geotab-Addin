@@ -388,10 +388,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             console.log("END",endPicker.get('select'));
             if (endPicker.get('select')){
                 endDate = new Date(endPicker.get('select').pick);
-                endDate.setHour(23);
+                /*endDate.setHour(23);
                 endDate.setMinutes(59)
                 console.log("Start Date:", startDate);
-                console.log("End Date:", endDate);
+                console.log("End Date:", endDate);*/
             }
         });
     };
