@@ -281,6 +281,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         oldChart = document.getElementById("chartContainer2");
         oldChart.innerHTML = "";
         document.getElementById("render").disabled = true;
+        document.getElementById("startDate").reset();
+        document.getElementById("endDate").reset();
 
         selectedOpt = null,
         averager = 0;
