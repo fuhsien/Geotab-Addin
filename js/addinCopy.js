@@ -332,6 +332,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 console.log("Setting:",context);
             }
         })
+        document.getElementById("startDate").readOnly = false;          //to force the css to look the same
+        document.getElementById("endDate").readOnly = false;
 
         $("#mapreplay-options-vehicle").change(function(){
             selectedOpt = this.value;
@@ -341,7 +343,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 button.disabled = true;
             }
         });
-        document.getElementById("startDate").readOnly = false;
 
         //After vehicle selected
         $('#render').click(function(){
