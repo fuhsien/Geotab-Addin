@@ -38,14 +38,19 @@ TRY EXPERIMENTING WITH CANVAS DEMO CODE
 *********************************************************************************/
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
-    var startDate = new Date(),
-        endDate = new Date(),
+    var startDate,
+        endDate,
         vehicles,
         fromSheet,
+        vFlag = 0,              //Check if vehicle selected
+        sFlag = 0,              //check if start date selected
+        eFlag = 0,              //check if end date selected
         avgPoints = 20,
-        averager = 0,
         tankSize = 80,
         selectedOpt,
+        startPicker,
+        endPicker,
+        averager = 0,
         holdTimeAux = [],
         holdTimeSpeed = [],
         holdVolt = [],
@@ -53,8 +58,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         holdLitre = [],
         output = [];
 
-    startDate.setDate(startDate.getDate() - 7);
-    console.log("Start Date:", startDate);
+    /*startDate.setDate(startDate.getDate() - 7);
+    console.log("Start Date:", startDate);*/
     console.log("End Date:", endDate);
 
     /*****************************Get Data from Geotab***********************************/
@@ -144,6 +149,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     }
 
     var plotData = function(results) {
+    /*======================================================================================*/
+    //Reset points before plotting to prevent accumulation
+        averager = 0;
+        holdTimeAux = [];
+        holdTimeSpeed = [];
+        holdVolt = [];
+        holdSpeed = [];
+        holdLitre = [];
+        output = [];
+    /*======================================================================================*/
+
         var data = [];
         var data2 = [];
         var dataSeries = [{
@@ -219,7 +235,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             },
             axisX: {
                 intervalType: "day",
-                valueFormatString: "DD MMM"
+                valueFormatString: "MMM DD| h TT",
+                //labelAngle: -20
             },
             axisY: [{
                 title: "Litres",
@@ -236,7 +253,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 labelFontColor: "#6495ED",
                 titleFontColor: "#6495ED",
                 lineThickness: 2,
-                includeZero: true,
+                includeZero: false,
             }],
             data: data,
             legend: {
@@ -280,14 +297,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         oldChart.innerHTML = "";
         document.getElementById("render").disabled = true;
 
-        selectedOpt = null,
-        averager = 0;
-        holdTimeAux = [];
-        holdTimeSpeed = [];
-        holdVolt = [];
-        holdSpeed = [];
-        holdLitre = [];
-        output = [];
+        selectedOpt = null;
+        if (startPicker||endPicker){
+            startPicker.clear();
+            endPicker.clear();
+        }
+
+        vFlag = false;
+        sFlag = false;
+        eFlag = false;
 
         $('#mapreplay-options-vehicle').unbind();
         $('#render').unbind();            
@@ -318,9 +336,36 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     var initializeEventHandler = function() {
         var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
         var button = document.getElementById("render");
+        var $inputStart = $("#startDate").pickadate({
+            closeOnSelect: false,
+            closeOnClear: true,
+            min: new Date(2017,0,1),
+            max: new Date()
+        })
+        var $inputEnd = $("#endDate").pickadate({
+            closeOnSelect: true,
+            closeOnClear: false,
+            min: new Date(2017,0,1),
+            max: new Date()
+        })
+
+        startPicker = $inputStart.pickadate('picker');
+        endPicker = $inputEnd.pickadate('picker');
+
+        var s =document.getElementById("startDate");          //to force the css to look the same
+        var e =document.getElementById("endDate");
+        s.readOnly = false;
+        e.readOnly = false;
+
         $("#mapreplay-options-vehicle").change(function(){
             selectedOpt = this.value;
             if(selectedOpt){
+                selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
+                vFlag = true;
+            }else{
+                vFlag = false;
+            }
+            if (vFlag && sFlag && eFlag){
                 button.disabled = false;
             }else{
                 button.disabled = true;
@@ -329,7 +374,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //After vehicle selected
         $('#render').click(function(){
-            selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
             console.log("after",typeof(selectedOpt),selectedOpt);
@@ -338,7 +382,53 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
                 button.disabled = true;
             }
-        })
+        });
+
+        //Event handler for Date picker
+        $('#startDate').change(function(){
+            if (startPicker.get('select')){
+                startDate = new Date(startPicker.get('select').pick);
+                //console.log("startPicker", startPicker.get('select').pick);
+                endPicker.set({
+                    min: startDate
+                })
+                e.disabled = false;
+                sFlag = true;
+            }else{
+                endPicker.clear()
+                e.disabled = true;
+                sFlag = false;
+            }
+            if (vFlag && sFlag && eFlag){
+                button.disabled = false;
+            }else{
+                button.disabled = true;
+            }
+        });
+
+        $('#endDate').change(function(){
+            if (endPicker.get('select')){
+                endDate = new Date(endPicker.get('select').pick);
+                endDate.setHours(23);
+                endDate.setMinutes(59)
+                console.log("Start Date:", startDate);
+                console.log("End Date:", endDate);
+                startPicker.set({
+                    max: endDate
+                })
+                eFlag = true;
+            }else{
+                startPicker.set({
+                    max: new Date()
+                })
+                eFlag = false;
+            }
+            if (vFlag && sFlag && eFlag){
+                button.disabled = false;
+            }else{
+                button.disabled = true;
+            }
+        });
     };
 
     /**************************************Start the code***********************************/
