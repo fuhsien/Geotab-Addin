@@ -365,12 +365,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //Event handler for Date picker
         $('#startDate').change(function(){
-            console.log("START",startPicker);
+            console.log("START",startPicker.get('select'));
             if (startPicker.get('select').pick){
                 startDate = new Date(startPicker.get('select').pick);
             
                 console.log("startPicker", startPicker.get('select').pick);
                 endPicker.set({
+
+                closeOnSelect: true,
+                closeOnClear: false,
                     min: startDate
                 })
             }
