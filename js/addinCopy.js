@@ -42,6 +42,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         endDate,
         vehicles,
         fromSheet,
+        vFlag = 0,              //Check if vehicle selected
+        sFlag = 0,              //check if start date selected
+        eFlag = 0,              //check if end date selected
         avgPoints = 20,
         averager = 0,
         tankSize = 80,
@@ -282,7 +285,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         oldChart.innerHTML = "";
         document.getElementById("render").disabled = true;
 
-
         selectedOpt = null,
         averager = 0;
         if (startPicker||endPicker){
@@ -290,6 +292,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             endPicker.clear();
         }
 
+        vFlag = false;
+        sFlag = false;
+        eFlag = false;
         holdTimeAux = [];
         holdTimeSpeed = [];
         holdVolt = [];
@@ -350,9 +355,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $("#mapreplay-options-vehicle").change(function(){
             selectedOpt = this.value;
             if(selectedOpt){
-                button.disabled = false;
+                vFlag = true;
+                //button.disabled = false;
             }else{
-                button.disabled = true;
+                vFlat = false;
+                //button.disabled = true;
+            }
+            if (vFlag && sFlag && eFlag){
+                button.disabled = false;
             }
         });
 
@@ -371,7 +381,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //Event handler for Date picker
         $('#startDate').change(function(){
-            console.log("START",startPicker.get('select'));
             if (startPicker.get('select')){
                 startDate = new Date(startPicker.get('select').pick);
             
@@ -380,22 +389,32 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     min: startDate
                 })
                 e.disabled = false;
+                sFlag = true;
             }else{
                 endPicker.set({
                     min: new Date(2017,0,1)
                 })
                 e.disabled = true;
+                sFlag = false;
+            }
+            if (vFlag && sFlag && eFlag){
+                button.disabled = false;
             }
         });
 
         $('#endDate').change(function(){
-            console.log("END",endPicker.get('select'));
             if (endPicker.get('select')){
                 endDate = new Date(endPicker.get('select').pick);
                 endDate.setHours(23);
                 endDate.setMinutes(59)
                 console.log("Start Date:", startDate);
                 console.log("End Date:", endDate);
+                eFlag = true;
+            }else{
+                eFlag = false;
+            }
+            if (vFlag && sFlag && eFlag){
+                button.disabled = false;
             }
         });
     };
