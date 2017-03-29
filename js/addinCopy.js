@@ -322,14 +322,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             closeOnClear: false,
             min: new Date(2017,0,1),
             onSet: function(context){
-                console.log("Setting:",context)''
+                console.log("Setting:",context);
             }
         })
         var $inputEnd = $("#endDate").pickadate({
             closeOnClear: false,
             min: new Date(2017,0,1),
             onSet: function(context){
-                console.log("Setting:",context)''
+                console.log("Setting:",context);
             }
         })
 
