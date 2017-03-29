@@ -363,6 +363,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
             if (vFlag && sFlag && eFlag){
                 button.disabled = false;
+            }else{
+                button.disabled = true;
             }
         });
 
@@ -399,6 +401,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
             if (vFlag && sFlag && eFlag){
                 button.disabled = false;
+            }else{
+                button.disabled = true;
             }
         });
 
@@ -415,6 +419,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
             if (vFlag && sFlag && eFlag){
                 button.disabled = false;
+            }else{
+                button.disabled = true;
             }
         });
     };
