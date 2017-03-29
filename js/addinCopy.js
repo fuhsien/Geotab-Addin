@@ -393,9 +393,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 e.disabled = false;
                 sFlag = true;
             }else{
-                endPicker.set({
-                    min: new Date(2017,0,1)
-                })
+                endPicker.clear()
                 e.disabled = true;
                 sFlag = false;
             }
