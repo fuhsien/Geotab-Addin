@@ -323,10 +323,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
         var button = document.getElementById("render");
         var $inputStart = $("#startDate").pickadate({
+            closeOnSelect: true,
+            closeOnClear: false,
             min: new Date(2017,0,1),
             max: new Date()
         })
         var $inputEnd = $("#endDate").pickadate({
+            closeOnSelect: true,
+            closeOnClear: false,
             min: new Date(2017,0,1),
             max: new Date()
         })
@@ -361,11 +365,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //Event handler for Date picker
         $('#startDate').change(function(){
-            console.log("startPicker", startPicker.get('select').pick);
             startDate = new Date(startPicker.get('select').pick);
-            endPicker.set({
-                min: startDate
-            })
+            if (startDate){
+                console.log("startPicker", startPicker.get('select').pick);
+                endPicker.set({
+                    min: startDate
+                })
+            }
         })
     };
 
