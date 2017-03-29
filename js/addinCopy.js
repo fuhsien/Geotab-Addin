@@ -224,7 +224,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             },
             axisX: {
                 intervalType: "day",
-                valueFormatString: "MMM DD, HH"
+                valueFormatString: "MMM DD hh TT",
+                labelAngle: -20
             },
             axisY: [{
                 title: "Litres",
