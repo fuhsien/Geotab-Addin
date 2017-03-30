@@ -128,6 +128,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 th = document.createElement('th');
                 th.innerHTML = "Column 1";
                 Hrow.appendChild(th);
+                body.appendChild(table);
             });
         }, function(e) {
             console.error("Failed:", e);
