@@ -309,8 +309,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var th = document.createElement('th');
         th.innerHTML = "Date";
         Hrow.appendChild(th);
+
         th = document.createElement('th');
         th.innerHTML = "Fuel Level";
+        Hrow.appendChild(th);
+
+        th = document.createElement('th');
+        th.innerHTML = "Location";
         Hrow.appendChild(th);
 
         //body
