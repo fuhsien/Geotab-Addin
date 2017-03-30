@@ -317,12 +317,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         //body
         for (var i=0; i<10; i++){
             tr = table.insertRow();
-            td = tr.insert(0);
+            td = tr.insertCell(0);
             td.innerHTML = results[0][i].dateTime;
-            td = tr.insert(1);
+            td = tr.insertCell(1);
             td.innerHTML = results[0][i].data;
 
         }
+        /*var Hcell = Hrow.insertCell(0);
+        Hcell.innerHTML = "<b>Column 1</b>";
+        Hcell = Hrow.insertCell(1);
+        Hcell.innerHTML = "<b>Column 2</b>";*/
 
         body.appendChild(table);
     }
