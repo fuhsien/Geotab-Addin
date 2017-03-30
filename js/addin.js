@@ -37,9 +37,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         endDate,
         vehicles,
         fromSheet,
-        vFlag = 0,              //Check if vehicle selected
-        sFlag = 0,              //check if start date selected
-        eFlag = 0,              //check if end date selected
+        vFlag = 0, //Check if vehicle selected
+        sFlag = 0, //check if start date selected
+        eFlag = 0, //check if end date selected
         avgPoints = 20,
         tankSize = 80,
         selectedOpt,
@@ -121,13 +121,29 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
                 //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
                 var body = document.body,
-                table = document.createElement('table');
+                    table = document.createElement('table');
                 table.className = "table is-striped";
                 var header = table.createTHead(),
-                Hrow = header.insertRow(0),
-                th = document.createElement('th');
-                th.innerHTML = "Column 1";
-                Hrow.appendChild(th);
+                    Hrow = header.insertRow(0),
+                    Hcell = Hrow.insertCell(0);
+                Hcell.innerHTML = "<b>Column 1</b>";
+                Hcell = Hrow.insertCell(1);
+                Hcell.innerHTML = "<b>Column 2</b>";
+                for (var i = 0; i < 3; i++) {
+                    var tr = tbl.insertRow();
+                    for (var j = 0; j < 2; j++) {
+                        if (i == 2 && j == 1) {
+                            break;
+                        } else {
+                            var td = tr.insertCell();
+                            td.appendChild(document.createTextNode('Cell'));
+                            td.style.border = '1px solid black';
+                            if (i == 1 && j == 1) {
+                                td.setAttribute('rowSpan', '2');
+                            }
+                        }
+                    }
+                }
                 body.appendChild(table);
             });
         }, function(e) {
@@ -172,15 +188,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             name: "Fuel Level",
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
-            lineThickness :3,
-            color: "#A00C23",       //red
+            lineThickness: 3,
+            color: "#A00C23", //red
             showInLegend: true
-        },{
+        }, {
             name: "Speed",
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
-            lineThickness :1,
-            color: "#6495ED",       //blue
+            lineThickness: 1,
+            color: "#6495ED", //blue
             axisYIndex: 1,
             showInLegend: true
         }];
@@ -264,13 +280,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             data: data,
             legend: {
                 cursor: "pointer",
-                itemclick: function (e) {
+                itemclick: function(e) {
                     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
                         e.dataSeries.visible = false;
                     } else {
                         e.dataSeries.visible = true;
-                }
-                 $("#chartContainer").CanvasJSChart().render();
+                    }
+                    $("#chartContainer").CanvasJSChart().render();
                 }
             }
         };
@@ -298,13 +314,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var oldVehicles = document.getElementById("mapreplay-options-vehicle");
         oldVehicles.innerHTML = "";
         var oldChart = document.getElementById("chartContainer");
-        oldChart.innerHTML = "";        
+        oldChart.innerHTML = "";
         oldChart = document.getElementById("chartContainer2");
         oldChart.innerHTML = "";
         document.getElementById("render").disabled = true;
 
         selectedOpt = null;
-        if (startPicker||endPicker){
+        if (startPicker || endPicker) {
             startPicker.clear();
             endPicker.clear();
         }
@@ -314,8 +330,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         eFlag = false;
 
         $('#mapreplay-options-vehicle').unbind();
-        $('#render').unbind();            
-        
+        $('#render').unbind();
+
     }
 
     /*****************************HTML functionality***********************************/
@@ -345,44 +361,44 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var $inputStart = $("#startDate").pickadate({
             closeOnSelect: false,
             closeOnClear: true,
-            min: new Date(2017,0,1),
+            min: new Date(2017, 0, 1),
             max: new Date()
         })
         var $inputEnd = $("#endDate").pickadate({
             closeOnSelect: true,
             closeOnClear: false,
-            min: new Date(2017,0,1),
+            min: new Date(2017, 0, 1),
             max: new Date()
         })
 
         startPicker = $inputStart.pickadate('picker');
         endPicker = $inputEnd.pickadate('picker');
 
-        var s =document.getElementById("startDate");          //to force the css to look the same
-        var e =document.getElementById("endDate");
+        var s = document.getElementById("startDate"); //to force the css to look the same
+        var e = document.getElementById("endDate");
         s.readOnly = false;
         e.readOnly = false;
 
-        $("#mapreplay-options-vehicle").change(function(){
+        $("#mapreplay-options-vehicle").change(function() {
             selectedOpt = this.value;
-            if(selectedOpt){
+            if (selectedOpt) {
                 selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
                 vFlag = true;
-            }else{
+            } else {
                 vFlag = false;
             }
-            if (vFlag && sFlag && eFlag){
+            if (vFlag && sFlag && eFlag) {
                 button.disabled = false;
-            }else{
+            } else {
                 button.disabled = true;
             }
         });
 
         //After vehicle selected
-        $('#render').click(function(){
+        $('#render').click(function() {
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
-            console.log("after",typeof(selectedOpt),selectedOpt);
+            console.log("after", typeof(selectedOpt), selectedOpt);
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData); //rawData is results from getAux1
@@ -391,8 +407,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
 
         //Event handler for Date picker
-        $('#startDate').change(function(){
-            if (startPicker.get('select')){
+        $('#startDate').change(function() {
+            if (startPicker.get('select')) {
                 startDate = new Date(startPicker.get('select').pick);
                 //console.log("startPicker", startPicker.get('select').pick);
                 endPicker.set({
@@ -400,20 +416,20 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 })
                 e.disabled = false;
                 sFlag = true;
-            }else{
+            } else {
                 endPicker.clear()
                 e.disabled = true;
                 sFlag = false;
             }
-            if (vFlag && sFlag && eFlag){
+            if (vFlag && sFlag && eFlag) {
                 button.disabled = false;
-            }else{
+            } else {
                 button.disabled = true;
             }
         });
 
-        $('#endDate').change(function(){
-            if (endPicker.get('select')){
+        $('#endDate').change(function() {
+            if (endPicker.get('select')) {
                 endDate = new Date(endPicker.get('select').pick);
                 endDate.setHours(23);
                 endDate.setMinutes(59)
@@ -423,15 +439,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     max: endDate
                 })
                 eFlag = true;
-            }else{
+            } else {
                 startPicker.set({
                     max: new Date()
                 })
                 eFlag = false;
             }
-            if (vFlag && sFlag && eFlag){
+            if (vFlag && sFlag && eFlag) {
                 button.disabled = false;
-            }else{
+            } else {
                 button.disabled = true;
             }
         });
