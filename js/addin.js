@@ -282,6 +282,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
+        console.log("PASSING ON" holdTimeAux,output);
         callback(holdTimeAux,output);
     }
 
