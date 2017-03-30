@@ -301,7 +301,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
         var fuelChange;
-        for (var i = 2*avgPoints,var j=0; i < fuel.length; i++) {
+        for (var i = 2*avgPoints,j = 0; i < fuel.length; i++) {
             fuelChange = fuel[i]-fuel[i - avgPoints];
             if (Math.abs(fuelChange)>fuelThreshold){
                 theftActivity[j++] = [time[i - avgPoints],fuel[i - avgPoints],fuelChange];
