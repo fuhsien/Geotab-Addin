@@ -304,7 +304,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         for (var i = 2*avgPoints,j = 0; i < fuel.length; i++) {
             fuelChange = fuel[i]-fuel[i - avgPoints];
             if (Math.abs(fuelChange)>fuelThreshold){
-                theftActivity[j++] = [time[i - avgPoints],fuel[i - avgPoints],fuelChange];
+                theftActivity[j++] = [new Date(time[i - avgPoints]),fuel[i - avgPoints],fuelChange];
             }
         }
         console.log("Refill/Theft",theftActivity);
@@ -335,7 +335,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         for (var i=avgPoints; i<avgPoints+10; i++){
             tr = table.insertRow();
             td = tr.insertCell(0);
-            td.innerHTML = time[i];
+            td.innerHTML = new Date(time[i]);
             td = tr.insertCell(1);
             td.innerHTML = fuel[i];
 
