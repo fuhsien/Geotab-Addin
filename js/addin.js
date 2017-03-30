@@ -288,8 +288,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     }
 
     var createTable = function(results) {
+        /*****************************************************************************/
+        //Removing previous table before plotting
+        if(getElementById("theft-table")){
+            $("#theft-table").remove();
+        }
+        /*****************************************************************************/
         var body = document.getElementById("for-table");
         var table = document.createElement('table');
+        table.id = "theft-table";
         table.className = "table is-striped";
         var header = table.createTHead();
         var Hrow = header.insertRow(0);
