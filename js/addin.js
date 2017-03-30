@@ -282,10 +282,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
-        callback(results);
+        callback(holdTimeAux,output);
     }
 
-    var createTable = function(results) {
+    var createTable = function(time,fuel) {
         //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
         //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
 
@@ -304,23 +304,21 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         //header
         var header = table.createTHead();
         var Hrow = header.insertRow(0);
+
         var th = document.createElement('th');
         th.innerHTML = "Date";
         Hrow.appendChild(th);
-
         th = document.createElement('th');
         th.innerHTML = "Fuel Level";
         Hrow.appendChild(th);
-
-        console.log("Header Row",Hrow, Hrow.cells.length);
 
         //body
         for (var i=0; i<10; i++){
             tr = table.insertRow();
             td = tr.insertCell(0);
-            td.innerHTML = results[0][i].dateTime;
+            td.innerHTML = time[i];
             td = tr.insertCell(1);
-            td.innerHTML = results[0][i].data;
+            td.innerHTML = fuel[i];
 
         }
         /*var Hcell = Hrow.insertCell(0);
