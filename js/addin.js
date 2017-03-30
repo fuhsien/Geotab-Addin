@@ -10,6 +10,7 @@ Red: A00C23
 THINGS TO DO:
 1) location info: log return latitude and longitude
 2) Algorithm for detection
+    Note: Beginning of the raise corresponds to the correct time.
 3) Create Table, append row when fuel theft detected
 
 
@@ -41,11 +42,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
         avgPoints = 20,
+        fuelThreshold = 10;
         tankSize = 80,
         selectedOpt,
         startPicker,
         endPicker,
         averager = 0,
+        theftActivity = [],
         holdTimeAux = [],
         holdTimeSpeed = [],
         holdVolt = [],
@@ -296,6 +299,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             $("#theft-table").remove();
         }
         /*****************************************************************************/
+        // Algorithm for Fuel theft/refill detection
+        var fuelChange;
+        for (var i = 2*avgPoints; i < fuel.length; i++) {
+            fuelChange = fuel[i]-fuel[i - avgPoints];
+            if (Math.abs(fuelChange)>fuelThreshold){
+                theftActivity[i - 2*avgPoints][0] = time[i - avgPoints];
+                theftActivity[i - 2*avgPoints][1] = fuel[i - avgPoints];
+            }
+        }
+        console.log("Refill/Theft",theftActivity);
+        /*****************************************************************************/
         var body = document.getElementById("for-table");
         var table = document.createElement('table');
         var tr,td;
@@ -343,11 +357,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         oldChart = document.getElementById("chartContainer2");
         oldChart.innerHTML = "";
         document.getElementById("render").disabled = true;
-
         selectedOpt = null;
+
         if (startPicker || endPicker) {
             startPicker.clear();
             endPicker.clear();
+        }
+        if(document.getElementById("theft-table")){
+            $("#theft-table").remove();
         }
 
         vFlag = false;
