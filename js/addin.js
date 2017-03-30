@@ -332,7 +332,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         Hrow.appendChild(th);
 
         //body
-        for (var i=50; i<60; i++){
+        for (var i=avgPoints; i<avgPoints+10; i++){
             tr = table.insertRow();
             td = tr.insertCell(0);
             td.innerHTML = time[i];
