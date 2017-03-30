@@ -7,21 +7,16 @@ Blue: 6495ED
 Red: A00C23
 
 
+THINGS TO DO:
+1) location info: log return latitude and longitude
+2) Algorithm for detection
+3) Create Table, append row when fuel theft detected
 
 
 
 
 
 
-
-
-
-
-CHECK OUT DIFFERENCE BETWEEN 
-https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js
-https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js
-
-TRY EXPERIMENTING WITH CANVAS DEMO CODE
 
 
 
@@ -123,6 +118,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }]
             ], function(results) {
                 callback(results);
+                //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
+                //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
+                var body = document.body,
+                table = document.createElement('table');
+                table.className = "table is-striped";
+                var header = table.createTHead(),
+                Hrow = header.insertRow(0),
+                th = document.createElement('th');
+                th.innerHTML = "Column 1";
+                Hrow.appendChild(th);
             });
         }, function(e) {
             console.error("Failed:", e);
@@ -149,8 +154,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     }
 
     var plotData = function(results) {
-    /*======================================================================================*/
-    //Reset points before plotting to prevent accumulation
+        /*======================================================================================*/
+        //Reset points before plotting to prevent accumulation
         averager = 0;
         holdTimeAux = [];
         holdTimeSpeed = [];
@@ -158,7 +163,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         holdSpeed = [];
         holdLitre = [];
         output = [];
-    /*======================================================================================*/
+        /*======================================================================================*/
 
         var data = [];
         var data2 = [];
