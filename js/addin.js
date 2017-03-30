@@ -282,7 +282,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
-        console.log("PASSING ON",holdTimeAux,output);
+        console.log("PASSING ON",holdTimeAux.length ,output.length);
         callback(holdTimeAux,output);
     }
 
@@ -314,7 +314,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         Hrow.appendChild(th);
 
         //body
-        for (var i=0; i<10; i++){
+        for (var i=50; i<60; i++){
             tr = table.insertRow();
             td = tr.insertCell(0);
             td.innerHTML = time[i];
