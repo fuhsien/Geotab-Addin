@@ -311,7 +311,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         th.innerHTML = "Column 2";
         Hrow.appendChild(th);
 
-        console.log("Header Row",Hrow, Hrow.length, typeof Hrow);
+        console.log("Header Row",Hrow, Hrow.cells.length);
 
         //body
         /*for (var i=0; i<10; i++){
