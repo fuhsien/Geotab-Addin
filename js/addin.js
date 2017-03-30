@@ -119,8 +119,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             ], function(results) {
                 callback1(results);     //plotData
                 callback2(results);     //createTable
-                //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
-                //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
 
             });
         }, function(e) {
@@ -288,6 +286,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     }
 
     var createTable = function(results) {
+        //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
+        //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
+
         /*****************************************************************************/
         //Removing previous table before plotting
         if(document.getElementById("theft-table")){
@@ -298,6 +299,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var table = document.createElement('table');
         table.id = "theft-table";
         table.className = "table is-striped";
+
+        //header
         var header = table.createTHead();
         var Hrow = header.insertRow(0);
         var th = document.createElement('th');
@@ -308,6 +311,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         th.innerHTML = "Column 2";
         Hrow.appendChild(th);
 
+        console.log("Header Row",Hrow, Hrow.length, typeof Hrow);
+
+        //body
+        /*for (var i=0; i<10; i++){
+
+        }*/
         /*var Hcell = Hrow.insertCell(0);
         Hcell.innerHTML = "<b>Column 1</b>";
         Hcell = Hrow.insertCell(1);
