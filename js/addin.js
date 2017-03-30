@@ -290,7 +290,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     var createTable = function(results) {
         /*****************************************************************************/
         //Removing previous table before plotting
-        if(getElementById("theft-table")){
+        if(document.getElementById("theft-table")){
             $("#theft-table").remove();
         }
         /*****************************************************************************/
