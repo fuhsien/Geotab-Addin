@@ -120,7 +120,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 callback(results);
                 //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
                 //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
-                var body = document.body;
+                var body = document.getElementById("result-display");
                 var table = document.createElement('table');
                 table.className = "table is-striped";
                 var header = table.createTHead();
