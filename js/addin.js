@@ -125,10 +125,18 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 table.className = "table is-striped";
                 var header = table.createTHead();
                 var Hrow = header.insertRow(0);
-                var Hcell = Hrow.insertCell(0);
+                var th = document.createElement('th');
+                th.innerHTML = "Column 1";
+                Hrow.appendChild(th);
+
+                th = document.createElement('th');
+                th.innerHTML = "Column 2";
+                Hrow.appendChild(th);
+                
+                /*var Hcell = Hrow.insertCell(0);
                 Hcell.innerHTML = "<b>Column 1</b>";
                 Hcell = Hrow.insertCell(1);
-                Hcell.innerHTML = "<b>Column 2</b>";
+                Hcell.innerHTML = "<b>Column 2</b>";*/
 
                 body.appendChild(table);
             });
