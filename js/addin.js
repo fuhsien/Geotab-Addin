@@ -130,7 +130,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 Hcell = Hrow.insertCell(1);
                 Hcell.innerHTML = "<b>Column 2</b>";
                 for (var i = 0; i < 3; i++) {
-                    var tr = tbl.insertRow();
+                    var tr = table.insertRow();
                     for (var j = 0; j < 2; j++) {
                         if (i == 2 && j == 1) {
                             break;
