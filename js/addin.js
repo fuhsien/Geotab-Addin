@@ -117,8 +117,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
-                callback1(results);     //plotData
-                callback2(results);     //createTable
+                callback1(results,callback2);     //plotData,callback2:createtable
 
             });
         }, function(e) {
@@ -145,7 +144,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Loaded Google Sheet");
     }
 
-    var plotData = function(results) {
+    var plotData = function(results,callback) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
@@ -283,6 +282,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
+        callback(results);
     }
 
     var createTable = function(results) {
