@@ -77,7 +77,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
     };
 
-    var getAux1 = function(vehicleID, vehicleSN, callback) {
+    var getAux1 = function(vehicleID, vehicleSN, callback1, callback2) {
         //Get tank size
         var chosen = fromSheet.filter(function(obj) {
             return obj.Serial_Number == vehicleSN;
@@ -117,28 +117,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
-                callback(results);
+                callback1(results);     //plotData
+                callback2(results);     //createTable
                 //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
                 //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
-                var body = document.getElementById("for-table");
-                var table = document.createElement('table');
-                table.className = "table is-striped";
-                var header = table.createTHead();
-                var Hrow = header.insertRow(0);
-                var th = document.createElement('th');
-                th.innerHTML = "Column 1";
-                Hrow.appendChild(th);
 
-                th = document.createElement('th');
-                th.innerHTML = "Column 2";
-                Hrow.appendChild(th);
-                
-                /*var Hcell = Hrow.insertCell(0);
-                Hcell.innerHTML = "<b>Column 1</b>";
-                Hcell = Hrow.insertCell(1);
-                Hcell.innerHTML = "<b>Column 2</b>";*/
-
-                body.appendChild(table);
             });
         }, function(e) {
             console.error("Failed:", e);
@@ -302,6 +285,28 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
+    }
+
+    var createTable = function(results) {
+        var body = document.getElementById("for-table");
+        var table = document.createElement('table');
+        table.className = "table is-striped";
+        var header = table.createTHead();
+        var Hrow = header.insertRow(0);
+        var th = document.createElement('th');
+        th.innerHTML = "Column 1";
+        Hrow.appendChild(th);
+
+        th = document.createElement('th');
+        th.innerHTML = "Column 2";
+        Hrow.appendChild(th);
+
+        /*var Hcell = Hrow.insertCell(0);
+        Hcell.innerHTML = "<b>Column 1</b>";
+        Hcell = Hrow.insertCell(1);
+        Hcell.innerHTML = "<b>Column 2</b>";*/
+
+        body.appendChild(table);
     }
 
     var reset = function() {
