@@ -297,6 +297,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         /*****************************************************************************/
         var body = document.getElementById("for-table");
         var table = document.createElement('table');
+        var tr,td;
         table.id = "theft-table";
         table.className = "table is-striped";
 
@@ -304,23 +305,24 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var header = table.createTHead();
         var Hrow = header.insertRow(0);
         var th = document.createElement('th');
-        th.innerHTML = "Column 1";
+        th.innerHTML = "Date";
         Hrow.appendChild(th);
 
         th = document.createElement('th');
-        th.innerHTML = "Column 2";
+        th.innerHTML = "Fuel Level";
         Hrow.appendChild(th);
 
         console.log("Header Row",Hrow, Hrow.cells.length);
 
         //body
-        /*for (var i=0; i<10; i++){
+        for (var i=0; i<10; i++){
+            tr = table.insertRow();
+            td = tr.insert(0);
+            td.innerHTML = results[0][i].dateTime;
+            td = tr.insert(1);
+            td.innerHTML = results[0][i].data;
 
-        }*/
-        /*var Hcell = Hrow.insertCell(0);
-        Hcell.innerHTML = "<b>Column 1</b>";
-        Hcell = Hrow.insertCell(1);
-        Hcell.innerHTML = "<b>Column 2</b>";*/
+        }
 
         body.appendChild(table);
     }
