@@ -120,7 +120,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 callback(results);
                 //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
                 //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
-                var body = document.getElementById("result-display");
+                var body = document.getElementById("for-table");
                 var table = document.createElement('table');
                 table.className = "table is-striped";
                 var header = table.createTHead();
@@ -239,7 +239,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             zoomEnabled: true,
             animationEnabled: true,
             title: {
-                text: "Fuel Graph (Past 7 Days)"
+                text: "Fuel Graph"
             },
             axisX: {
                 intervalType: "day",
