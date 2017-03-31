@@ -329,12 +329,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
             else{
                 //indicates next point is the new activity
-                //index += Math.ceil(counter/2);
+                index += Math.floor(counter/2);
+                console.log("REFILL FOUND @: ",time[index]);
+                console.log("Amount filled: ",theftCount[index+avgPoints][3]);
                 newflag = 1;
                 counter = 0;
             }
         }
-        console.log("CHECK IF COUNTER IS 50 OR 51",counter);
+        //console.log("CHECK IF COUNTER IS 50 OR 51",counter);
 
 
         /*****************************************************************************/
