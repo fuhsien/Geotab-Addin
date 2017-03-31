@@ -339,7 +339,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }
         index += Math.floor(counter/2);
         console.log("REFILL FOUND @: ",new Date(time[index]));
-        console.log("Amount filled: ",theftCount[Math.ceil(i-counter/2)]][3]);
+        console.log("Amount filled: ",theftCount[Math.ceil(i-counter/2)][3]);
 
 
         /*****************************************************************************/
