@@ -120,7 +120,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
-                callback1(results,callback2);     //plotData,callback2:createtable
+                for (var j = 0; j < results[1].length; j++) {
+                    if (results[1][j].speed == 0){
+                        results[1][j].speed=null;
+                    }
+                }
+                callback1(results, callback2); //plotData,callback2:createtable
 
             });
         }, function(e) {
@@ -147,7 +152,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Loaded Google Sheet");
     }
 
-    var plotData = function(results,callback) {
+    var plotData = function(results, callback) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
@@ -185,7 +190,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataPoints2 = [];
         console.log("Selected Vehicle Aux:", results); //results return aux values
 
-        for (var i = 0; i < results[0].length -1; i++) {
+        for (var i = 0; i < results[0].length - 1; i++) {
             holdTimeAux[i] = results[0][i].dateTime;
             holdVolt[i] = results[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / 5;
@@ -210,7 +215,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             })
         }
 
-        for (var j = 0; j < results[1].length-1; j++) {
+        for (var j = 0; j < results[1].length - 1; j++) {
             holdTimeSpeed[j] = results[1][j].dateTime;
             holdSpeed[j] = results[1][j].speed;
             dataPointsSpeed.push({
@@ -285,33 +290,33 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
-        console.log("PASSING ON",holdTimeAux.length ,output.length);
-        callback(holdTimeAux,output);
+        console.log("PASSING ON", holdTimeAux.length, output.length);
+        callback(holdTimeAux, output);
     }
 
-    var createTable = function(time,fuel) {
+    var createTable = function(time, fuel) {
         //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
         //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
 
         /*****************************************************************************/
         //Removing previous table before plotting
-        if(document.getElementById("theft-table")){
+        if (document.getElementById("theft-table")) {
             $("#theft-table").remove();
         }
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
         var fuelChange;
-        for (var i = 2*avgPoints,j = 0; i < fuel.length; i++) {
-            fuelChange = fuel[i]-fuel[i - avgPoints];
-            if (Math.abs(fuelChange)>fuelThreshold){
-                theftActivity[j++] = [i,new Date(time[i]),fuel[i],fuelChange];
+        for (var i = 2 * avgPoints, j = 0; i < fuel.length; i++) {
+            fuelChange = fuel[i] - fuel[i - avgPoints];
+            if (Math.abs(fuelChange) > fuelThreshold) {
+                theftActivity[j++] = [i, new Date(time[i]), fuel[i], fuelChange];
             }
         }
-        console.log("Refill/Theft",theftActivity);
+        console.log("Refill/Theft", theftActivity);
         /*****************************************************************************/
         var body = document.getElementById("for-table");
         var table = document.createElement('table');
-        var tr,td;
+        var tr, td;
         table.id = "theft-table";
         table.className = "table is-striped";
 
@@ -332,7 +337,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         Hrow.appendChild(th);
 
         //body
-        for (var i=avgPoints; i<avgPoints+10; i++){
+        for (var i = avgPoints; i < avgPoints + 10; i++) {
             tr = table.insertRow();
             td = tr.insertCell(0);
             td.innerHTML = new Date(time[i]);
@@ -362,7 +367,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             startPicker.clear();
             endPicker.clear();
         }
-        if(document.getElementById("theft-table")){
+        if (document.getElementById("theft-table")) {
             $("#theft-table").remove();
         }
 
