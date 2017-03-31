@@ -303,6 +303,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         if (document.getElementById("theft-table")) {
             $("#theft-table").remove();
         }
+        theftActivity = [];
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
         var fuelChange;
