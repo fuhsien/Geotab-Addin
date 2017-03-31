@@ -374,13 +374,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     td.innerHTML = "Refill";
                 }
                 td = tr.insertCell(2);
-                td.innerHTML = theftCount[Math.ceil(i-counter/2)][3];
+                td.innerHTML = (theftCount[Math.ceil(i-counter/2)][3]).toFixed(4);
 
                 td = tr.insertCell(3);
-                td.innerHTML = fuel[index];
+                td.innerHTML = fuel[index].toFixed(4);
 
                 td = tr.insertCell(4);
-                td.innerHTML = fuel[index+avgPoints];
+                td.innerHTML = fuel[index+avgPoints].toFixed(4);
 
                 newflag = 1;
                 counter = 0;
@@ -397,7 +397,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             td.innerHTML = "Refill";
         }
         td = tr.insertCell(2);
-        td.innerHTML = theftCount[Math.ceil(i-counter/2)][3];
+        td.innerHTML = theftCount[Math.ceil(i-counter/2)][3].toFixed(4);
+        
+        td = tr.insertCell(3);
+        td.innerHTML = fuel[index].toFixed(4);
+
+        td = tr.insertCell(4);
+        td.innerHTML = fuel[index+avgPoints].toFixed(4);
 
         body.appendChild(table);
     }
