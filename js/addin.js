@@ -332,14 +332,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //indicates next point is the new activity
                 index += Math.floor(counter/2);
                 console.log("REFILL FOUND @: ",new Date(time[index]));
-                console.log("Amount filled: ",Math.ceil(i-counter/2),theftCount[Math.ceil(i-counter/2)][3]);
+                console.log("Amount filled: ",theftCount[Math.ceil(i-counter/2)][3]);
                 newflag = 1;
                 counter = 0;
             }
         }
         index += Math.floor(counter/2);
-        console.log("REFILL FOUND @: ",i,index,new Date(time[index]));
-        //console.log("Amount filled: ",theftCount[i+avgPoints][3]);
+        console.log("REFILL FOUND @: ",new Date(time[index]));
+        console.log("Amount filled: ",theftCount[Math.ceil(i-counter/2)]][3]);
 
 
         /*****************************************************************************/
