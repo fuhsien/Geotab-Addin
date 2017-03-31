@@ -331,7 +331,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //indicates next point is the new activity
                 index += Math.floor(counter/2);
                 console.log("REFILL FOUND @: ",time[index]);
-                console.log("Amount filled: ",theftCount[index+avgPoints][3]);
+                console.log("Amount filled: ",theftCount[index+avgPoints]);
                 newflag = 1;
                 counter = 0;
             }
