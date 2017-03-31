@@ -210,7 +210,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             })
         }
 
-        for (var j = 0; j < results[1].length; j++) {
+        for (var j = 0; j < results[1].length-1; j++) {
             holdTimeSpeed[j] = results[1][j].dateTime;
             holdSpeed[j] = results[1][j].speed;
             dataPointsSpeed.push({
