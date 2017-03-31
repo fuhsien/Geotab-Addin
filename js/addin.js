@@ -306,6 +306,29 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }
         theftCount = [];
         theftActivity = [];
+
+        /*****************************************************************************/
+        var body = document.getElementById("for-table");
+        var table = document.createElement('table');
+        var tr, td;
+        table.id = "theft-table";
+        table.className = "table is-striped";
+
+        //header
+        var header = table.createTHead();
+        var Hrow = header.insertRow(0);
+
+        var th = document.createElement('th');
+        th.innerHTML = "Date";
+        Hrow.appendChild(th);
+
+        th = document.createElement('th');
+        th.innerHTML = "Type of activity";
+        Hrow.appendChild(th);
+
+        th = document.createElement('th');
+        th.innerHTML = "Fuel Ammount";
+        Hrow.appendChild(th);
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
         var fuelChange;
@@ -330,50 +353,49 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
             else{
                 //indicates next point is the new activity
+
                 index += Math.floor(counter/2);
-                console.log("REFILL FOUND @: ",new Date(time[index]));
-                console.log("Amount filled: ",theftCount[Math.ceil(i-counter/2)][3]);
+                //console.log("REFILL FOUND @: ",new Date(time[index]));
+                //console.log("Amount filled: ",theftCount[Math.ceil(i-counter/2)][3]);
+                tr = table.insertRow();
+                td = tr.insertCell(0);
+                td.innerHTML = new Date(time[index]);
+                td = tr.insertCell(1);
+                if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
+                    td.innerHTML = "Possible Fuel Theft";
+                }else {
+                    td.innerHTML = "Refill";
+                }
+                td = tr.insertCell(2);
+                td.innerHTML = theftCount[Math.ceil(i-counter/2)][3];
                 newflag = 1;
                 counter = 0;
             }
         }
         index += Math.floor(counter/2);
-        console.log("REFILL FOUND @: ",new Date(time[index]));
-        console.log("Amount filled: ",theftCount[Math.ceil(i-counter/2)][3]);
-
-
-        /*****************************************************************************/
-        var body = document.getElementById("for-table");
-        var table = document.createElement('table');
-        var tr, td;
-        table.id = "theft-table";
-        table.className = "table is-striped";
-
-        //header
-        var header = table.createTHead();
-        var Hrow = header.insertRow(0);
-
-        var th = document.createElement('th');
-        th.innerHTML = "Date";
-        Hrow.appendChild(th);
-
-        th = document.createElement('th');
-        th.innerHTML = "Fuel Level";
-        Hrow.appendChild(th);
-
-        th = document.createElement('th');
-        th.innerHTML = "Location";
-        Hrow.appendChild(th);
+        tr = table.insertRow();
+        td = tr.insertCell(0);
+        td.innerHTML = new Date(time[index]);
+        td = tr.insertCell(1);
+        if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
+            td.innerHTML = "Possible Fuel Theft";
+        }else {
+            td.innerHTML = "Refill";
+        }
+        td = tr.insertCell(2);
+        td.innerHTML = theftCount[Math.ceil(i-counter/2)][3];
+        /*console.log("REFILL FOUND @: ",new Date(time[index]));
+        console.log("Amount filled: ",theftCount[Math.ceil(i-counter/2)][3]);*/
 
         //body
-        for (var i = avgPoints; i < avgPoints + 10; i++) {
+        /*for (var i = avgPoints; i < avgPoints + 10; i++) {
             tr = table.insertRow();
             td = tr.insertCell(0);
             td.innerHTML = new Date(time[i]);
             td = tr.insertCell(1);
             td.innerHTML = fuel[i];
 
-        }
+        }*/
         /*var Hcell = Hrow.insertCell(0);
         Hcell.innerHTML = "<b>Column 1</b>";
         Hcell = Hrow.insertCell(1);
