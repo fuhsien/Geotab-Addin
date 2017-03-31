@@ -373,9 +373,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         index += Math.floor(counter/2);
         tr = table.insertRow();
         td = tr.insertCell(0);
-        td.innerHTML = new Date(time[index]);
-        console.log("TIME unformatted",time[index]);
-        console.log("TIME formatted",new Date(time[index]));
+        td.innerHTML =moment(time[index]).format('ddd MMM DD h:mm a');
         td = tr.insertCell(1);
         if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
             td.innerHTML = "Possible Fuel Theft";
