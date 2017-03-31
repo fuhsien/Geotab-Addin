@@ -48,6 +48,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         startPicker,
         endPicker,
         averager = 0,
+        theftCount = [],
         theftActivity = [],
         holdTimeAux = [],
         holdTimeSpeed = [],
@@ -303,6 +304,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         if (document.getElementById("theft-table")) {
             $("#theft-table").remove();
         }
+        theftCount = [];
         theftActivity = [];
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
@@ -310,10 +312,31 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         for (var i = 2 * avgPoints, j = 0; i < fuel.length; i++) {
             fuelChange = fuel[i] - fuel[i - avgPoints];
             if (Math.abs(fuelChange) > fuelThreshold) {
-                theftActivity[j++] = [i, new Date(time[i]), fuel[i], fuelChange];
+                theftCount[j++] = [i, new Date(time[i]), fuel[i], fuelChange];
             }
         }
-        console.log("Refill/Theft", theftActivity);
+        console.log("Refill/Theft", theftCount);
+        // Sort theftCount into theftActivity
+        //get number of elements(counter). counter/2, first element - 30 + counter/2
+        //check flag
+        for(var i=0,newflag=1,counter=0,index=0 ;i<theftCount.length-1;i++){
+            if (theftCount[i+1][0]-theftCount[i][0] == 1){
+                if (newflag == 1){
+                    index = theftCount[i][0]-avgPoints;     // minus avgPoints to remove time delayed by averaging
+                    newflag = 0;
+                }       //no new activity found
+                counter++;
+            }
+            else{
+                //indicates next point is the new activity
+                //index += Math.ceil(counter/2);
+                newflag = 1;
+                counter = 0;
+            }
+        }
+        console.log("CHECK IF COUNTER IS 50 OR 51",counter);
+
+
         /*****************************************************************************/
         var body = document.getElementById("for-table");
         var table = document.createElement('table');
