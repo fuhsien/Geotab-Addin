@@ -58,7 +58,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
     /*startDate.setDate(startDate.getDate() - 7);
     console.log("Start Date:", startDate);*/
-    console.log("End Date:", endDate);
+    //console.log("End Date:", endDate);
 
     /*****************************Get Data from Geotab***********************************/
     var getVehicles = function(finishedCallback) {
@@ -185,7 +185,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataPoints2 = [];
         console.log("Selected Vehicle Aux:", results); //results return aux values
 
-        for (var i = 0; i < results[0].length; i++) {
+        for (var i = 0; i < results[0].length -1; i++) {
             holdTimeAux[i] = results[0][i].dateTime;
             holdVolt[i] = results[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / 5;
