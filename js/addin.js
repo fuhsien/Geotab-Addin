@@ -355,8 +355,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //indicates next point is the new activity
 
                 index += Math.floor(counter/2);
-                //console.log("REFILL FOUND @: ",new Date(time[index]));
-                //console.log("Amount filled: ",theftCount[Math.ceil(i-counter/2)][3]);
                 tr = table.insertRow();
                 td = tr.insertCell(0);
                 td.innerHTML = new Date(time[index]);
@@ -376,6 +374,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         tr = table.insertRow();
         td = tr.insertCell(0);
         td.innerHTML = new Date(time[index]);
+        console.log("TIME unformatted",time[index]);
+        console.log("TIME formatted",new Date(time[index]));
         td = tr.insertCell(1);
         if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
             td.innerHTML = "Possible Fuel Theft";
@@ -384,22 +384,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }
         td = tr.insertCell(2);
         td.innerHTML = theftCount[Math.ceil(i-counter/2)][3];
-        /*console.log("REFILL FOUND @: ",new Date(time[index]));
-        console.log("Amount filled: ",theftCount[Math.ceil(i-counter/2)][3]);*/
-
-        //body
-        /*for (var i = avgPoints; i < avgPoints + 10; i++) {
-            tr = table.insertRow();
-            td = tr.insertCell(0);
-            td.innerHTML = new Date(time[i]);
-            td = tr.insertCell(1);
-            td.innerHTML = fuel[i];
-
-        }*/
-        /*var Hcell = Hrow.insertCell(0);
-        Hcell.innerHTML = "<b>Column 1</b>";
-        Hcell = Hrow.insertCell(1);
-        Hcell.innerHTML = "<b>Column 2</b>";*/
 
         body.appendChild(table);
     }
