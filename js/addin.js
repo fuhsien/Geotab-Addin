@@ -327,8 +327,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         Hrow.appendChild(th);
 
         th = document.createElement('th');
-        th.innerHTML = "Fuel Ammount";
+        th.innerHTML = "Fuel Ammount (Litres)";
+        Hrow.appendChild(th);        
+
+        th = document.createElement('th');
+        th.innerHTML = "Before (Litres)";
         Hrow.appendChild(th);
+
+        th = document.createElement('th');
+        th.innerHTML = "After (Litres)";
+        Hrow.appendChild(th);
+
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
         var fuelChange;
@@ -366,6 +375,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
                 td = tr.insertCell(2);
                 td.innerHTML = theftCount[Math.ceil(i-counter/2)][3];
+
+                td = tr.insertCell(3);
+                td.innerHTML = fuel[index];
+
+                td = tr.insertCell(4);
+                td.innerHTML = fuel[index+avgPoints];
+
                 newflag = 1;
                 counter = 0;
             }
