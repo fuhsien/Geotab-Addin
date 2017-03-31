@@ -41,7 +41,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         vFlag = 0, //Check if vehicle selected
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
-        avgPoints = 20,
+        avgPoints = 30,
         fuelThreshold = 10,
         tankSize = 80,
         selectedOpt,
@@ -304,7 +304,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         for (var i = 2*avgPoints,j = 0; i < fuel.length; i++) {
             fuelChange = fuel[i]-fuel[i - avgPoints];
             if (Math.abs(fuelChange)>fuelThreshold){
-                theftActivity[j++] = [new Date(time[i - avgPoints]),fuel[i - avgPoints],fuelChange];
+                theftActivity[j++] = [i,new Date(time[i]),fuel[i],fuelChange];
             }
         }
         console.log("Refill/Theft",theftActivity);
