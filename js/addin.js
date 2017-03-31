@@ -324,7 +324,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 if (newflag == 1){
                     //indicates new activity
                     index = theftCount[i][0]-avgPoints;     // minus avgPoints to remove time delayed by averaging
-                    console.log("Amount filled: ",i+avgPoints,theftCount[i+avgPoints]);
                     newflag = 0;
                 }       //no new activity found
                 counter++;
@@ -333,6 +332,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //indicates next point is the new activity
                 index += Math.floor(counter/2);
                 console.log("REFILL FOUND @: ",index,new Date(time[index]));
+                console.log("Amount filled: ",i-avgPoints,theftCount[i-avgPoints][3]);
                 newflag = 1;
                 counter = 0;
             }
