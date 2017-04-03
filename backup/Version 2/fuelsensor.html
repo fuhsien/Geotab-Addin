@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Fuel Data</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="css/classic.css">
+        <link rel="stylesheet" href="css/classic.date.css">
+
+    </head>
+
+    <body>
+        <div id="mapreplay-options">
+            <form class="pure-form pure-form-stacked">
+                <fieldset>
+                    <label for="mapreplay-options-vehicle">Vehicle to inspect:</label>
+                        <div class="pure-g">
+                            <select id="mapreplay-options-vehicle" class="pure-u-1-1"></select>
+                        </div>
+                </fieldset>
+            </form>
+            <form class="pure-form">
+                <fieldset>
+                    <label for="startDate">
+                        From:
+                        <input type="text" placeholder="Start Date" id="startDate">
+                    </label>
+                    <label for="endDate">
+                        To:
+                        <input type="text" placeholder="End Date" id="endDate" disabled>
+                    </label>
+                    </t>
+                    <button id="render" class="pure-button pure-button-primary" disabled>Run!</button>
+                </fieldset>
+            </form>
+            <!--<div>
+                <select id="theft-threshold" class="pure-u-1-1">
+                    <option value="5">5 Litres</option>
+                    <option value="10">10 Litres</option>
+                </select>
+            </div>-->
+
+        </div>
+
+        <div id="chartContainer" style="height: 35%; width: 100%;"></div>
+        <br>
+        <div id="chartContainer2" style="height: 25%; width: 100%;"></div><br><br>
+        <div id="for-table"></div>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.js"></script>
+        <script type="text/javascript" src="assets/jquery.canvasjs.min.js"></script>
+        <script src="js/picker.js"></script> 
+        <script src="js/picker.date.js"></script> 
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> 
+        <script type="text/javascript" src="js/addin.js"></script>
+    </body>
+</html>
