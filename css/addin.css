@@ -4,24 +4,13 @@
 	padding: 1em;
 }
 
+}
 div.charts-container{
 	height: auto;
 	width:70%;
 	border-style: solid;
 	border-color: #2978C8;
 	border-radius: 5px;
-}
-
-#chartContainer{
-	height:50%;
-	float:top;
-	position: relative;
-}
-
-#chartContainer2{
-	height: 50%;
-	float:bottom;
-	position: relative;
 }
 
 #for-table{
