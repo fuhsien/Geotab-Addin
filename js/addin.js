@@ -349,64 +349,65 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
         }
         console.log("Refill/Theft", theftCount);
-        // Sort theftCount into theftActivity
-        //get number of elements(counter). counter/2, first element - 30 + counter/2
-        //check flag
-        for(var i=0,newflag=1,counter=0,index=0 ;i<theftCount.length-1;i++){
-            if (theftCount[i+1][0]-theftCount[i][0] == 1){
-                if (newflag == 1){
-                    //indicates new activity
-                    index = theftCount[i][0]-avgPoints;     // minus avgPoints to remove time delayed by averaging
-                    newflag = 0;
-                }       //no new activity found
-                counter++;
-            }
-            else{
-                //indicates next point is the new activity
 
-                index += Math.floor(counter/2);
-                tr = table.insertRow();
-                td = tr.insertCell(0);
-                td.innerHTML =moment(time[index]).format('dddd, MMM DD, h:mm a');
-                td = tr.insertCell(1);
-                if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
-                    td.innerHTML = "Possible Fuel Theft";
-                }else {
-                    td.innerHTML = "Refill";
+        //sorting theftCount into activities
+        if (theftCount){
+            for(var i=0,newflag=1,counter=0,index=0 ;i<theftCount.length-1;i++){
+                if (theftCount[i+1][0]-theftCount[i][0] == 1){
+                    if (newflag == 1){
+                        //indicates new activity
+                        index = theftCount[i][0]-avgPoints;     // minus avgPoints to remove time delayed by averaging
+                        newflag = 0;
+                    }       //no new activity found
+                    counter++;
                 }
-                td = tr.insertCell(2);
-                td.innerHTML = (theftCount[Math.ceil(i-counter/2)][3]).toFixed(4);
+                else{
+                    //indicates next point is the new activity
 
-                td = tr.insertCell(3);
-                td.innerHTML = fuel[index].toFixed(4);
+                    index += Math.floor(counter/2);
+                    tr = table.insertRow();
+                    td = tr.insertCell(0);
+                    td.innerHTML =moment(time[index]).format('dddd, MMM DD, h:mm a');
+                    td = tr.insertCell(1);
+                    if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
+                        td.innerHTML = "Possible Fuel Theft";
+                    }else {
+                        td.innerHTML = "Refill";
+                    }
+                    td = tr.insertCell(2);
+                    td.innerHTML = (theftCount[Math.ceil(i-counter/2)][3]).toFixed(4);
 
-                td = tr.insertCell(4);
-                td.innerHTML = fuel[index+avgPoints].toFixed(4);
+                    td = tr.insertCell(3);
+                    td.innerHTML = fuel[index].toFixed(4);
 
-                newflag = 1;
-                counter = 0;
+                    td = tr.insertCell(4);
+                    td.innerHTML = fuel[index+avgPoints].toFixed(4);
+
+                    newflag = 1;
+                    counter = 0;
+                }
             }
+            index += Math.floor(counter/2);
+            tr = table.insertRow();
+            td = tr.insertCell(0);
+            td.innerHTML =moment(time[index]).format('dddd, MMM DD, h:mm a');
+            td = tr.insertCell(1);
+            if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
+                td.innerHTML = "Possible Fuel Theft";
+            }else {
+                td.innerHTML = "Refill";
+            }
+            td = tr.insertCell(2);
+            td.innerHTML = theftCount[Math.ceil(i-counter/2)][3].toFixed(4);
+
+            td = tr.insertCell(3);
+            td.innerHTML = fuel[index].toFixed(4);
+
+            td = tr.insertCell(4);
+            td.innerHTML = fuel[index+avgPoints].toFixed(4);
+
+            body.appendChild(table);
         }
-        index += Math.floor(counter/2);
-        tr = table.insertRow();
-        td = tr.insertCell(0);
-        td.innerHTML =moment(time[index]).format('dddd, MMM DD, h:mm a');
-        td = tr.insertCell(1);
-        if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
-            td.innerHTML = "Possible Fuel Theft";
-        }else {
-            td.innerHTML = "Refill";
-        }
-        td = tr.insertCell(2);
-        td.innerHTML = theftCount[Math.ceil(i-counter/2)][3].toFixed(4);
-
-        td = tr.insertCell(3);
-        td.innerHTML = fuel[index].toFixed(4);
-
-        td = tr.insertCell(4);
-        td.innerHTML = fuel[index+avgPoints].toFixed(4);
-
-        body.appendChild(table);
     }
 
     var reset = function() {
