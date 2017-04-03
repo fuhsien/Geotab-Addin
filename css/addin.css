@@ -11,26 +11,6 @@ div.charts-container{
 	border-color: #2978C8;
 	border-radius: 5px;
 }
-div.fuelsensor-container{
-	margin-top: 10px;
-	margin-left: 10px;
-	border-style: solid;
-	border-color: #2978C8;
-	border-radius: 5px;
-	width: 70%;
-}
-
-div.fuelsensor-fakeheader{
-	color: white;
-    background-color: #2978C8;
-}
-
-header{
-    padding: 0.01em;
-    color: white;
-    background-color: #2978C8;
-    text-align: left;
-}
 
 #chartContainer{
 	height:50%;
@@ -42,4 +22,8 @@ header{
 	height: 50%;
 	float:bottom;
 	position: relative;
+}
+
+#for-table{
+	float:left;
 }
