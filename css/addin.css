@@ -4,7 +4,7 @@
 	padding: 1em;
 }
 
-div.chards-container{
+div.charts-container{
 	width:70%;
 	border-style: solid;
 	border-color: #2978C8;
@@ -29,4 +29,12 @@ header{
     color: white;
     background-color: #2978C8;
     text-align: left;
+}
+
+#chartContainer{
+	float:top;
+}
+
+#chartContainer2{
+	float:bottom;
 }
