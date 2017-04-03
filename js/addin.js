@@ -351,7 +351,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Refill/Theft", theftCount);
 
         //sorting theftCount into activities
-        if (theftCount){
+        if (theftCount.length>0){
             for(var i=0,newflag=1,counter=0,index=0 ;i<theftCount.length-1;i++){
                 if (theftCount[i+1][0]-theftCount[i][0] == 1){
                     if (newflag == 1){
