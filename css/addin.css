@@ -33,11 +33,13 @@ header{
 }
 
 #chartContainer{
+	height:50%;
 	float:top;
 	position: relative;
 }
 
 #chartContainer2{
+	height: 50%;
 	float:bottom;
 	position: relative;
 }
