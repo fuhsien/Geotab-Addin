@@ -4,12 +4,12 @@
 	padding: 1em;
 }
 
-div{
+div.chards-container{
+	width:70%;
 	border-style: solid;
 	border-color: #2978C8;
 	border-radius: 5px;
 }
-
 div.fuelsensor-container{
 	margin-top: 10px;
 	margin-left: 10px;

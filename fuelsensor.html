@@ -22,20 +22,20 @@
                         </div>
                 </fieldset>
             </form>
-            <form class="pure-form">
-                <fieldset>
-                    <label for="startDate">
-                        From:
-                        <input type="text" placeholder="Start Date" id="startDate">
-                    </label>
-                    <label for="endDate">
-                        To:
-                        <input type="text" placeholder="End Date" id="endDate" disabled>
-                    </label>
-                    </t>
-                    <button id="render" class="pure-button pure-button-primary" disabled>Run!</button>
-                </fieldset>
-            </form>
+                <form class="pure-form">
+                    <fieldset>
+                        <label for="startDate">
+                            From:
+                            <input type="text" placeholder="Start Date" id="startDate">
+                        </label>
+                        <label for="endDate">
+                            To:
+                            <input type="text" placeholder="End Date" id="endDate" disabled>
+                        </label>
+                        </t>
+                        <button id="render" class="pure-button pure-button-primary" disabled>Run!</button>
+                    </fieldset>
+                </form>
             <!--<div>
                 <select id="theft-threshold" class="pure-u-1-1">
                     <option value="5">5 Litres</option>
@@ -45,9 +45,11 @@
 
         </div>
 
-        <div id="chartContainer" style="height: 35%; width: 100%;"></div>
-        <br>
-        <div id="chartContainer2" style="height: 25%; width: 100%;"></div><br><br>
+        <div class="charts-container">
+            <div id="chartContainer" style="height: 35%; width: 100%;"></div>
+            <br>
+            <div id="chartContainer2" style="height: 25%; width: 100%;"></div><br>
+        </div>
         <div id="for-table"></div>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.js"></script>
         <script type="text/javascript" src="assets/jquery.canvasjs.min.js"></script>
