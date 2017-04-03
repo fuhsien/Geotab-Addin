@@ -17,7 +17,8 @@ THINGS TO DO:
 
 
 
-
+FUll tank ~ 3.6V (if 5V max, 1.4V drop)    60L
+3rd April: 2.45V before filter, 1.9V after filter 40V
 
 
 

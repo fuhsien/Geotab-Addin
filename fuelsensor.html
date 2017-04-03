@@ -3,8 +3,10 @@
 
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Fuel Data</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
         <link rel="stylesheet" href="css/classic.css">
@@ -46,9 +48,23 @@
             </div>-->
 
         </div>
-
-        <div id="chartContainer" style="height: 35%; width: 100%;"></div>
-        <div id="chartContainer2" style="height: 25%; width: 100%;"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div id="chartContainer" style="height: 35%; width: 100%;"></div>
+                    </div>
+                    <div class="row">
+                        <div id="chartContainer2" style="height: 25%; width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="col-md-4" id="Location" style="border-style: solid;">
+                    <p>This is for location</p>
+                </div>    
+            </div>
+        </div>
+            <div id="chartContainer" style="height: 35%; width: 100%;"></div>
+            <div id="chartContainer2" style="height: 25%; width: 100%;"></div>
         <br>
         <div id="for-table"></div>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.js"></script>
