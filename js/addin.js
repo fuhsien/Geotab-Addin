@@ -372,7 +372,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     //indicates next point is the new activity
 
                     index += Math.floor(counter/2);
-                    tr = table.insertRow();
+                    tr = tbody.insertRow();
                     td = tr.insertCell(0);
                     td.innerHTML =moment(time[index]).format('dddd, MMM DD, h:mm a');
 
