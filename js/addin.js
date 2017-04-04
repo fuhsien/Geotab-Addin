@@ -399,6 +399,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     var theftStart = new Date(time[index]);
                     var theftEnd = new Date(time[index]);
                     theftStart.setMinutes(theftStart.getMinutes()-2);
+                    console.log("Time1",theftStart);
+                    console.log("Time2",theftEnd);
                     api.call("Get", {
                         typeName: "LogRecord",
                         search: {
