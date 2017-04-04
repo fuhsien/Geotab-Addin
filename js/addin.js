@@ -305,6 +305,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         //Removing previous table before plotting
         if (document.getElementById("theft-table")) {
             $("#theft-table").remove();
+            $("deviceLocation").src=null;
         }
         
 
@@ -406,7 +407,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                             var status = statuses[statuses.length-1];
                             theftLocation[activityCounter++] = status.latitude + "," + status.longitude;
                         } else {
-                            theftLocation[activityCounter++]="Device location can't be found!"
+                            theftLocation[activityCounter++]=null;
                         }
 
                     });
@@ -450,7 +451,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     var status = statuses[statuses.length-1];
                     theftLocation[activityCounter++] = status.latitude + "," + status.longitude;
                 } else {
-                    console.log("Device location can't be found!");
+                    theftLocation[activityCounter++] = null;
                 }
             });
 
@@ -461,8 +462,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             $("tbody tr").click(function(){
                 $('.selected').removeClass('selected');
                 $(this).addClass('selected');
-                console.log("YAY!",this.className);
                 console.log("Row index is ",this.rowIndex);
+                var coords = theftLocation[rowIndex-1],
+                    locationUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords + "&zoom=15&scale=false&size=300x300&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7C" + coords;
+                document.getElementById("deviceLocation").setAttribute("src", locationUrl);
             });
         }
     }
