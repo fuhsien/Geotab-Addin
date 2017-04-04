@@ -307,7 +307,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             $("#theft-table").remove();
             $('#deviceLocation').attr('src', '');
         }
-        if
+        
         //document.getElementById("deviceLocation").setAttribute("src", locationUrl);
         
 
