@@ -247,7 +247,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 lineColor: "#A00C23",
                 tickColor: "#A00C23",
                 gridThickness: 2,
-                interlacedColor: "#ECF0F1",
+                interlacedColor: "#F7F9F9",
                 labelFontColor: "#A00C23",
                 titleFontColor: "#A00C23",
                 lineThickness: 2,
