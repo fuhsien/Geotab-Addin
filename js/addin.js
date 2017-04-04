@@ -341,10 +341,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         th.innerHTML = "After (Litres)";
         Hrow.appendChild(th);
 
-         th = document.createElement('th');
-        th.innerHTML = "Location";
-        Hrow.appendChild(th);       
-
 
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
