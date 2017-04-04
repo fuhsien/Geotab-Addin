@@ -13,3 +13,9 @@ div.charts-container{
 	border-radius: 5px;
 }
 
+table.formatHTML5 tr.selected {
+    background-color: #e92929 !important;
+    color:#fff;
+    vertical-align: middle;
+    padding: 1.5em;
+}
