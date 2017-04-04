@@ -247,6 +247,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 lineColor: "#A00C23",
                 tickColor: "#A00C23",
                 gridThickness: 0,
+                interlacedColor: "#ECF0F1",
                 labelFontColor: "#A00C23",
                 titleFontColor: "#A00C23",
                 lineThickness: 2,
@@ -467,8 +468,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 console.log("Row index is ",this.rowIndex);
                 var coords = theftLocation[this.rowIndex-1],
                     locationUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords + "&zoom=15&scale=false&size=300x300&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7C" + coords;
-                console.log("address",locationUrl);
-                document.getElementById("deviceLocation").setAttribute("src", locationUrl);
+                $('#deviceLocation').attr('src', locationUrl);
             });
         }
     }
@@ -489,6 +489,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }
         if (document.getElementById("theft-table")) {
             $("#theft-table").remove();
+            $('#deviceLocation').attr('src', '');
         }
 
         vFlag = false;
