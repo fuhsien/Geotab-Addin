@@ -463,10 +463,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 $('.selected').removeClass('selected');
                 $(this).addClass('selected');
                 console.log("Row index is ",this.rowIndex);
-                var coords = theftLocation[rowIndex-1],
+                var coords = theftLocation[this.rowIndex-1],
                     locationUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords + "&zoom=15&scale=false&size=300x300&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7C" + coords;
                 console.log("address",locationUrl);
-                //document.getElementById("deviceLocation").setAttribute("src", locationUrl);
+                document.getElementById("deviceLocation").setAttribute("src", locationUrl);
             });
         }
     }
