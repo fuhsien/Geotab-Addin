@@ -49,8 +49,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         startPicker,
         endPicker,
         averager = 0,
-        theftCount = [],
-        theftLocation =[],
         holdTimeAux = [],
         holdTimeSpeed = [],
         holdVolt = [],
@@ -305,12 +303,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         if (document.getElementById("theft-table")) {
             $("#theft-table").remove();
         }
-        theftCount = [];
+        
 
         /*****************************************************************************/
         var body = document.getElementById("for-table");
         var table = document.createElement('table');
         var tr, td;
+        var activityCounter=0;
+        var theftCount = [];
+        var theftLocation = [];
+
         table.id = "theft-table";
         table.className = "table is-striped";
 
@@ -372,27 +374,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     td = tr.insertCell(0);
                     td.innerHTML =moment(time[index]).format('dddd, MMM DD, h:mm a');
 
-                    //get location here
-                    var theftStart = new Date(time[index]);
-                    var theftEnd = new Date(time[index]);
-                    theftStart.setMinutes(theftStart.getMinutes()-2);
-                    api.call("Get", {
-                        typeName: "LogRecord",
-                        search: {
-                            deviceSearch: { id: vehicleID },
-                            fromDate:theftStart,
-                            toDate: theftEnd,
-                        }
-                    }, function(statuses) {
-                        console.log("Status:",statuses);
-                        if (statuses[0]) {
-                        } else {
-                            console.log("Device location can't be found!");
-                        }
-
-                    });
-
-
                     td = tr.insertCell(1);
                     if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
                         td.innerHTML = "Possible Fuel Theft";
@@ -407,6 +388,27 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
                     td = tr.insertCell(4);
                     td.innerHTML = fuel[index+avgPoints].toFixed(4);
+
+                    //get location here
+                    var theftStart = new Date(time[index]);
+                    var theftEnd = new Date(time[index]);
+                    theftStart.setMinutes(theftStart.getMinutes()-2);
+                    api.call("Get", {
+                        typeName: "LogRecord",
+                        search: {
+                            deviceSearch: { id: vehicleID },
+                            fromDate:theftStart,
+                            toDate: theftEnd,
+                        }
+                    }, function(statuses) {
+                        if (statuses[0]) {
+                            var status = statuses[statuses.length-1];
+                            theftLocation[activityCounter++] = status.latitude + "," + status.longitude;
+                        } else {
+                            console.log("Device location can't be found!");
+                        }
+
+                    });
 
                     newflag = 1;
                     counter = 0;
@@ -431,6 +433,27 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             td = tr.insertCell(4);
             td.innerHTML = fuel[index+avgPoints].toFixed(4);
 
+            //get location here
+            var theftStart = new Date(time[index]);
+            var theftEnd = new Date(time[index]);
+            theftStart.setMinutes(theftStart.getMinutes()-2);
+            api.call("Get", {
+                typeName: "LogRecord",
+                search: {
+                    deviceSearch: { id: vehicleID },
+                    fromDate:theftStart,
+                    toDate: theftEnd,
+                }
+            }, function(statuses) {
+                if (statuses[0]) {
+                    var status = statuses[statuses.length-1];
+                    theftLocation[activityCounter++] = status.latitude + "," + status.longitude;
+                } else {
+                    console.log("Device location can't be found!");
+                }
+            });
+
+            console.log("WHERE IT HAPPEN",theftLocation);
             body.appendChild(table);
         }
     }
