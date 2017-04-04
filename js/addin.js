@@ -405,7 +405,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                             var status = statuses[statuses.length-1];
                             theftLocation[activityCounter++] = status.latitude + "," + status.longitude;
                         } else {
-                            console.log("Device location can't be found!");
+                            theftLocation[activityCounter++]="Device location can't be found!"
                         }
 
                     });
