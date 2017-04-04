@@ -305,8 +305,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         //Removing previous table before plotting
         if (document.getElementById("theft-table")) {
             $("#theft-table").remove();
-            $("deviceLocation").src=null;
+            $('#deviceLocation').attr('src', '');
         }
+        if
+        //document.getElementById("deviceLocation").setAttribute("src", locationUrl);
         
 
         /*****************************************************************************/
