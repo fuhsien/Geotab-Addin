@@ -22,7 +22,8 @@ FUll tank ~ 3.6V (if 5V max, 1.4V drop)    60L
 
 
 
-
+https://www.google.com/maps/place/3.18730235,101.676445
+"3.18730235,101.676445"
 
 
 
@@ -358,7 +359,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 theftCount[j++] = [i, new Date(time[i]), fuel[i], fuelChange];
             }
         }
-        console.log("Refill/Theft", theftCount);
+        //console.log("Refill/Theft", theftCount);
 
         //sorting theftCount into activities
         if (theftCount.length>0){
@@ -408,9 +409,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }, function(statuses) {
                         if (statuses[0]) {
                             var status = statuses[statuses.length-1];
-                            theftLocation[activityCounter++] = status.latitude + "," + status.longitude;
+                            console.log("Iteration",i);
+                            theftLocation.push(status.latitude + "," + status.longitude);
                         } else {
-                            theftLocation[activityCounter++]=null;
+                            console.log("ALERT");
+                            theftLocation.push=null;
                         }
 
                     });
@@ -452,9 +455,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }, function(statuses) {
                 if (statuses[0]) {
                     var status = statuses[statuses.length-1];
-                    theftLocation[activityCounter++] = status.latitude + "," + status.longitude;
+                    theftLocation.push(status.latitude + "," + status.longitude);
                 } else {
-                    theftLocation[activityCounter++] = null;
+                    theftLocation.push(null);
                 }
             });
 
