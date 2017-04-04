@@ -315,7 +315,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var theftLocation = [];
 
         table.id = "theft-table";
-        table.className = "table is-striped";
+        table.className = "table";
 
         //header
         var header = table.createTHead();
