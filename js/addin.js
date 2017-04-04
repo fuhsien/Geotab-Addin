@@ -308,6 +308,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         /*****************************************************************************/
         var body = document.getElementById("for-table");
         var table = document.createElement('table');
+        var tbody = document.createElement('tbody');
         var tr, td;
         var activityCounter=0;
         var theftCount = [];
@@ -343,6 +344,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
          th = document.createElement('th');
         th.innerHTML = "Location";
         Hrow.appendChild(th);       
+
 
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
@@ -415,7 +417,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
             }
             index += Math.floor(counter/2);
-            tr = table.insertRow();
+            tr = tbody.insertRow();
             td = tr.insertCell(0);
             td.innerHTML =moment(time[index]).format('dddd, MMM DD, h:mm a');
             td = tr.insertCell(1);
@@ -454,6 +456,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });
 
             console.log("WHERE IT HAPPEN",theftLocation);
+            table.appendChild(tbody);
             body.appendChild(table);
         }
     }
