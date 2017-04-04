@@ -50,7 +50,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         endPicker,
         averager = 0,
         theftCount = [],
-        theftActivity = [],
+        theftLocation =[],
         holdTimeAux = [],
         holdTimeSpeed = [],
         holdVolt = [],
@@ -127,7 +127,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         results[1][j].speed=null;
                     }
                 }
-                callback1(results, callback2); //plotData,callback2:createtable
+                callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
         }, function(e) {
@@ -154,7 +154,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Loaded Google Sheet");
     }
 
-    var plotData = function(results, callback) {
+    var plotData = function(results, callback, vehicleID) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
@@ -293,10 +293,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
         console.log("PASSING ON", holdTimeAux.length, output.length);
-        callback(holdTimeAux, output);
+        callback(holdTimeAux, output, vehicleID);
     }
 
-    var createTable = function(time, fuel) {
+    var createTable = function(time, fuel, vehicleID) {
         //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
         //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
 
@@ -306,7 +306,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             $("#theft-table").remove();
         }
         theftCount = [];
-        theftActivity = [];
 
         /*****************************************************************************/
         var body = document.getElementById("for-table");
@@ -339,6 +338,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         th.innerHTML = "After (Litres)";
         Hrow.appendChild(th);
 
+         th = document.createElement('th');
+        th.innerHTML = "Location";
+        Hrow.appendChild(th);       
+
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
         var fuelChange;
@@ -368,6 +371,28 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     tr = table.insertRow();
                     td = tr.insertCell(0);
                     td.innerHTML =moment(time[index]).format('dddd, MMM DD, h:mm a');
+
+                    //get location here
+                    var theftStart = new Date(time[index]);
+                    var theftEnd = new Date(time[index]);
+                    theftStart.setMinutes(theftStart.getMinutes()-2);
+                    api.call("Get", {
+                        typeName: "LogRecord",
+                        search: {
+                            deviceSearch: { id: vehicleID },
+                            fromDate:theftStart,
+                            toDate: theftEnd,
+                        }
+                    }, function(statuses) {
+                        console.log("Status:",statuses);
+                        if (statuses[0]) {
+                        } else {
+                            console.log("Device location can't be found!");
+                        }
+
+                    });
+
+
                     td = tr.insertCell(1);
                     if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
                         td.innerHTML = "Possible Fuel Theft";
