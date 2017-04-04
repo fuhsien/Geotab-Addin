@@ -454,8 +454,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             console.log("WHERE IT HAPPEN",theftLocation);
             table.appendChild(tbody);
             body.appendChild(table);
-            
-            $("tr").click(function(){
+
+            $("tbody tr").click(function(){
                 $('.selected').removeClass('selected');
                 $(this).addClass('selected');
                 console.log("YAY!");
