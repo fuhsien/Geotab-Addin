@@ -150,7 +150,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             var test = entry[0].content;
         });*/
         console.log("Loaded Google Sheet");
-    }
+    };
 
     var plotData = function(results, callback, vehicleID) {
         /*======================================================================================*/
@@ -184,7 +184,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }];
         var dataSeries2 = {
             type: "splineArea"
-        }
+        };
         var dataPointsAux = [];
         var dataPointsSpeed = [];
         var dataPoints2 = [];
@@ -212,7 +212,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             dataPoints2.push({
                 x: i,
                 y: output[i]
-            })
+            });
         }
 
         for (var j = 0; j < results[1].length - 1; j++) {
@@ -296,7 +296,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $("#chartContainer2").CanvasJSChart(options2);
         console.log("PASSING ON", holdTimeAux.length, output.length);
         callback(holdTimeAux, output, vehicleID);
-    }
+    };
 
     var createTable = function(time, fuel, vehicleID) {
         //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
@@ -469,9 +469,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 var coords = theftLocation[this.rowIndex-1],
                     locationUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords + "&zoom=15&scale=false&size=300x300&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7C" + coords;
                 $('#deviceLocation').attr('src', locationUrl);
+                $('#activity-maps').attr('href',"http://www.google.com/maps/place/" + coords);
             });
         }
-    }
+    };
 
     var reset = function() {
         var oldVehicles = document.getElementById("mapreplay-options-vehicle");
@@ -499,7 +500,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $('#mapreplay-options-vehicle').unbind();
         $('#render').unbind();
 
-    }
+    };
 
     /*****************************HTML functionality***********************************/
     var populateVehicleSelect = function() {
@@ -530,13 +531,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             closeOnClear: true,
             min: new Date(2017, 0, 1),
             max: new Date()
-        })
+        });
         var $inputEnd = $("#endDate").pickadate({
             closeOnSelect: true,
             closeOnClear: false,
             min: new Date(2017, 0, 1),
             max: new Date()
-        })
+        });
 
         startPicker = $inputStart.pickadate('picker');
         endPicker = $inputEnd.pickadate('picker');
@@ -580,11 +581,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //console.log("startPicker", startPicker.get('select').pick);
                 endPicker.set({
                     min: startDate
-                })
+                });
                 e.disabled = false;
                 sFlag = true;
             } else {
-                endPicker.clear()
+                endPicker.clear();
                 e.disabled = true;
                 sFlag = false;
             }
@@ -599,17 +600,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             if (endPicker.get('select')) {
                 endDate = new Date(endPicker.get('select').pick);
                 endDate.setHours(23);
-                endDate.setMinutes(59)
+                endDate.setMinutes(59);
                 console.log("Start Date:", startDate);
                 console.log("End Date:", endDate);
                 startPicker.set({
                     max: endDate
-                })
+                });
                 eFlag = true;
             } else {
                 startPicker.set({
                     max: new Date()
-                })
+                });
                 eFlag = false;
             }
             if (vFlag && sFlag && eFlag) {
