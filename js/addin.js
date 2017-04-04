@@ -399,6 +399,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     var theftStart = new Date(time[index]);
                     var theftEnd = new Date(time[index]);
                     theftStart.setMinutes(theftStart.getMinutes()-2);
+                    console.log("Iteration outter",i);
                     console.log("Time1",theftStart);
                     console.log("Time2",theftEnd);
                     api.call("Get", {
@@ -457,6 +458,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }, function(statuses) {
                 if (statuses[0]) {
                     var status = statuses[statuses.length-1];
+                    console.log("Iteration",i);
                     theftLocation.push(status.latitude + "," + status.longitude);
                 } else {
                     theftLocation.push(null);
