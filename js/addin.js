@@ -246,6 +246,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 title: "Litres",
                 lineColor: "#A00C23",
                 tickColor: "#A00C23",
+                gridThickness: 0,
                 labelFontColor: "#A00C23",
                 titleFontColor: "#A00C23",
                 lineThickness: 2,
@@ -254,6 +255,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 title: "km/h",
                 lineColor: "#6495ED",
                 tickColor: "#6495ED",
+                gridThickness: 0,
                 labelFontColor: "#6495ED",
                 titleFontColor: "#6495ED",
                 lineThickness: 2,
@@ -283,6 +285,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 labelAngle: 30
             },
             axisY: {
+                gridThickness: 0,
                 includeZero: false
             },
             data: data2
