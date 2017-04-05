@@ -476,8 +476,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }]
             )
 
-            console.log("WHERE IT HAPPEN",theftLocation);
             console.log("AMAZING ARRAY, NO JOKE",multiCallArray);
+            api.multiCall(multiCallArray, function(results) {
+                console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
+            });
+            
             table.appendChild(tbody);
             body.appendChild(table);
 
