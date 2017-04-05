@@ -395,7 +395,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     td.innerHTML = fuel[index+avgPoints].toFixed(4);
 
                     //get location here
-                    var theftStart = time[index];
+                    var theftStart = new Date(time[index]);
                     var theftEnd = new Date(time[index]);
                     theftStart.setMinutes(theftStart.getMinutes()-2);
                     console.log("Iteration outter",i);
