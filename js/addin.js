@@ -295,7 +295,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
-        console.log("PASSING ON", holdTimeAux.length, output.length);
         callback(holdTimeAux, output, vehicleID);
     };
 
@@ -359,7 +358,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 theftCount[j++] = [i, new Date(time[i]), fuel[i], fuelChange];
             }
         }
-        //console.log("Refill/Theft", theftCount);
+        console.log("Refill/Theft", theftCount);
 
         //sorting theftCount into activities
         if (theftCount.length>0){
