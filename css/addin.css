@@ -13,7 +13,7 @@ div.charts-container{
 	border-radius: 5px;
 }
 
-table.table tr.selected {
+table.is-striped tr.selected {
     background-color: #e92929 !important;
     color:#fff;
     vertical-align: middle;
