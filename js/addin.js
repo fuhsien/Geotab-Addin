@@ -43,7 +43,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         vFlag = 0, //Check if vehicle selected
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
-        avgPoints = 35,
+        avgPoints = 20,
         fuelThreshold = 10,
         tankSize = 80,
         selectedOpt,
@@ -194,7 +194,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         for (var i = 0; i < results[0].length - 1; i++) {
             holdTimeAux[i] = results[0][i].dateTime;
             holdVolt[i] = results[0][i].data;
-            holdLitre[i] = tankSize * holdVolt[i] / 5;
+            holdLitre[i] = tankSize * holdVolt[i] / (4-0.05);
             if (i >= avgPoints) {
                 averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
                 output[i] = averager / avgPoints;
@@ -396,7 +396,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     td.innerHTML = fuel[index+avgPoints].toFixed(4);
 
                     //get location here
-                    var theftStart = new Date(time[index]);
+                    var theftStart = time[index];
                     var theftEnd = new Date(time[index]);
                     theftStart.setMinutes(theftStart.getMinutes()-2);
                     console.log("Iteration outter",i);
@@ -425,6 +425,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     counter = 0;
                 }
             }
+            
             index += Math.floor(counter/2);
             tr = tbody.insertRow();
             td = tr.insertCell(0);
