@@ -44,7 +44,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         vFlag = 0, //Check if vehicle selected
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
-        avgPoints = 20,
+        avgPoints = 28,
         fuelThreshold = 10,
         tankSize = 80,
         selectedOpt,
@@ -482,10 +482,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
                 for (i=0;i<results.length;i++){
                     var status = results[i];
-                    console.log("AIN'T MY FINAL FORM",status);
                     if (status[0]){
                         status = status[status.length-1];
-                        console.log("NOW, THIS IS MA FINAL FORM,AAA!",status);
                         theftLocation.push(status.latitude + "," + status.longitude);
                     }else{
                         theftLocation.push(null);
