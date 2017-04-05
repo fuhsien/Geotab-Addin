@@ -308,6 +308,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         if (document.getElementById("theft-table")) {
             $("#theft-table").remove();
             $('#deviceLocation').attr('src', '');
+            status = null;
         }
         
         //document.getElementById("deviceLocation").setAttribute("src", locationUrl);
@@ -479,8 +480,21 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             console.log("AMAZING ARRAY, NO JOKE",multiCallArray);
             api.multiCall(multiCallArray, function(results) {
                 console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
+                for (i=0;i<results.length;i++){
+                    var status = results[i];
+                    console.log("AIN'T MY FINAL FORM",status);
+                    if (status[0]){
+                        status = status[status.length-1];
+                        console.log("NOW, THIS IS MA FINAL FORM,AAA!",status);
+                        theftLocation.push(status.latitude + "," + status.longitude);
+                    }else{
+                        theftLocation.push(null);
+                    }
+
+                }
             });
-            
+            console.log("TIME FOR OVERVIEW",theftLocation);
+
             table.appendChild(tbody);
             body.appendChild(table);
 
