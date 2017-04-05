@@ -321,6 +321,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var activityCounter=0;
         var theftCount = [];
         var theftLocation = [];
+        var multiCallArray = [];
 
         table.id = "theft-table";
         table.className = "table is-striped";
@@ -399,10 +400,22 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     var theftStart = new Date(time[index]);
                     var theftEnd = new Date(time[index]);
                     theftStart.setMinutes(theftStart.getMinutes()-2);
-                    console.log("Iteration outter",i);
-                    console.log("Time1",theftStart);
-                    console.log("Time2",theftEnd);
-                    api.call("Get", {
+
+                    //put info into multiCallArray
+                    multiCallArray.push(
+                        ["Get", {
+                            "typeName": "LogRecord",
+                            "search": {
+                                deviceSearch: {
+                                    "id": vehicleID
+                                },
+                                fromDate: theftStart,
+                                toDate: theftEnd
+                            }
+                        }]
+                    )
+
+                    /*api.call("Get", {
                         typeName: "LogRecord",
                         search: {
                             deviceSearch: { id: vehicleID },
@@ -419,7 +432,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                             theftLocation.push=null;
                         }
 
-                    });
+                    });*/
 
                     newflag = 1;
                     counter = 0;
@@ -449,24 +462,22 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             var theftStart = new Date(time[index]);
             var theftEnd = new Date(time[index]);
             theftStart.setMinutes(theftStart.getMinutes()-2);
-            api.call("Get", {
-                typeName: "LogRecord",
-                search: {
-                    deviceSearch: { id: vehicleID },
-                    fromDate:theftStart,
-                    toDate: theftEnd,
-                }
-            }, function(statuses) {
-                if (statuses[0]) {
-                    var status = statuses[statuses.length-1];
-                    console.log("Iteration",i);
-                    theftLocation.push(status.latitude + "," + status.longitude);
-                } else {
-                    theftLocation.push(null);
-                }
-            });
+
+            multiCallArray.push(
+                ["Get", {
+                    "typeName": "LogRecord",
+                    "search": {
+                        deviceSearch: {
+                            "id": vehicleID
+                        },
+                        fromDate: theftStart,
+                        toDate: theftEnd
+                    }
+                }]
+            )
 
             console.log("WHERE IT HAPPEN",theftLocation);
+            console.log("AMAZING ARRAY, NO JOKE",multiCallArray);
             table.appendChild(tbody);
             body.appendChild(table);
 
