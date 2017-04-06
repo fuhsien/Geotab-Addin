@@ -493,7 +493,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });
             console.log("TIME FOR OVERVIEW",theftLocation);
 
-            document.getElementById("disclaimer"),innerHTML = "**Disclaimer: The following table is only meant to be a pointer. Please further investigate before making conclusion.";
+            document.getElementById("disclaimer").innerHTML = "**Disclaimer: The following table is only meant to be a pointer. Please further investigate before making conclusion.";
             table.appendChild(tbody);
             body.appendChild(table);
 
