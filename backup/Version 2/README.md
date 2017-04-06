@@ -1,4 +1,4 @@
-# ProICE Geotab-Addin v1
+# ProICE Geotab-Addin v2
 ## 3 April 2017: 
 ## Functions:
   - Select vehicle
