@@ -8,7 +8,9 @@
   - Able to indentify fuel refill and suspicious activity
   - List activities in a table
   	Table format:
-  	| Date | Type of activity | Fuel Amount  | Before | After |
-	| --- | --- | --- | --- | ---|
-	| example  | example | example  | example | example |
+  	
+| Command | Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
 	
