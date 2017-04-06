@@ -366,7 +366,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         //sorting theftCount into activities
         if (theftCount.length>0){
             for(var i=0,newflag=1,counter=0,index=0 ;i<theftCount.length-1;i++){
-                if (theftCount[i+1][0]-theftCount[i][0] == 5){          //5 instead of 1 to introduce short deadtime
+                if (theftCount[i+1][0]-theftCount[i][0] <= 5){
                     if (newflag == 1){
                         //indicates new activity
                         index = theftCount[i][0]-avgPoints;     // minus avgPoints to remove time delayed by averaging
