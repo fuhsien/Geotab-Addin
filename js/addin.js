@@ -149,6 +149,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
+                console.log("RAWR", results);
                 if (results[1]){
                     var rawSpeed = results[1];
                     var firstRecord = null;
