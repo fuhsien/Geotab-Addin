@@ -248,9 +248,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });
         }
 
-        for (var j = 0; j < results[1].length - 1; j++) {
-            holdTimeSpeed[j] = results[1][j].dateTime;
-            holdSpeed[j] = results[1][j].speed;
+        for (var j = 0; j < filtered.length - 1; j++) {
+            holdTimeSpeed[j] = filtered[j].dateTime;
+            holdSpeed[j] = filtered[j].speed;
             dataPointsSpeed.push({
                 x: new Date(holdTimeSpeed[j]),
                 y: holdSpeed[j]
@@ -630,7 +630,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $('#render').click(function() {
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
-            console.log("after", typeof(selectedOpt), selectedOpt);
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData, createTable); //rawData is results from getAux1
