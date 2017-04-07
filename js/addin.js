@@ -149,22 +149,29 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }]
             ], function(results) {
                 var rawSpeed = results[1];
-                var firstRecord =0;
-                var lastRecord = 0;
+                var firstRecord;
+                var lastRecord;
                 var timeCurrent, timeOld;
+                var sessionThreshold = 10; //in minutes
+                var drivingSessions = [];
                 for (var i = 0; i < rawSpeed.length; i++) {
                     if(rawSpeed[i].speed > 5){
-                        if(firstRecord == 0){
+                        if(firstRecord == null){
                             firstRecord = rawSpeed[i];
                             lastRecord = rawSpeed[i];
                         }
                         timeCurrent = new Date(rawSpeed[i].dateTime).getTime();
                         timeOld = new Date(lastRecord.dateTime).getTime();
-
+                        if ( (timeCurrent - timeOld)/(1000*60) >= sessionThreshold){
+                            //current point is a new session already!
+                            drivingSessions.push([firstRecord,lastRecord]);
+                            firstRecord = rawSpeed[i];
+                        }
                         lastRecord = rawSpeed[i];
                     }
                 }
-                console.log("Time difference",timeCurrent-timeOld);
+                drivingSessions.push([firstRecord,lastRecord]);
+                console.log("All sessions",drivingSessions);
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
