@@ -148,7 +148,23 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
+                var rawSpeed = results[1];
+                var firstRecord =0;
+                var lastRecord = 0;
+                var timeCurrent, timeOld;
+                for (var i = 0; i < rawSpeed.length; i++) {
+                    if(rawSpeed[i].speed > 5){
+                        if(firstRecord == 0){
+                            firstRecord = rawSpeed[i];
+                            lastRecord = rawSpeed[i];
+                        }
+                        timeCurrent = new Date(rawSpeed[i].dateTime).getTime();
+                        timeOld = new Date(lastRecord.dateTime).getTime();
 
+                        lastRecord = rawSpeed[i];
+                    }
+                }
+                console.log("Time difference",timeCurrent-timeOld);
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
