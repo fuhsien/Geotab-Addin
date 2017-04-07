@@ -164,13 +164,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         timeOld = new Date(lastRecord.dateTime).getTime();
                         if ( (timeCurrent - timeOld)/(1000*60) >= sessionThreshold){
                             //current point is a new session already!
-                            drivingSessions.push([firstRecord,lastRecord]);
+                            drivingSessions.push([new Date(firstRecord.dateTime),new Date(lastRecord.dateTime)]);
                             firstRecord = rawSpeed[i];
                         }
                         lastRecord = rawSpeed[i];
                     }
                 }
-                drivingSessions.push([firstRecord,lastRecord]);
+                drivingSessions.push([new Date(firstRecord.dateTime),new Date(lastRecord.dateTime)]);
                 console.log("All sessions",drivingSessions);
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
