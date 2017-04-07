@@ -72,6 +72,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         eFlag = 0, //check if end date selected
         avgPoints = 25,
         fuelThreshold = 5,
+        sessionThreshold = 10; //in minutes
         tankSize = 80,
         selectedOpt,
         startPicker,
@@ -152,8 +153,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 var firstRecord;
                 var lastRecord;
                 var timeCurrent, timeOld;
-                var sessionThreshold = 10; //in minutes
                 var drivingSessions = [];
+                var temp
+
                 for (var i = 0; i < rawSpeed.length; i++) {
                     if(rawSpeed[i].speed > 5){
                         if(firstRecord == null){
@@ -164,13 +166,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         timeOld = new Date(lastRecord.dateTime).getTime();
                         if ( (timeCurrent - timeOld)/(1000*60) >= sessionThreshold){
                             //current point is a new session already!
-                            drivingSessions.push([new Date(firstRecord.dateTime),new Date(lastRecord.dateTime)]);
+                            temp = new Date(firstRecord.dateTime);
+                            temp.setMinutes(temp.getMinutes()-2);
+                            drivingSessions.push([temp,new Date(lastRecord.dateTime)]);
                             firstRecord = rawSpeed[i];
                         }
                         lastRecord = rawSpeed[i];
                     }
                 }
-                drivingSessions.push([new Date(firstRecord.dateTime),new Date(lastRecord.dateTime)]);
+                temp = new Date(firstRecord.dateTime);
+                temp.setMinutes(temp.getMinutes()-2);
+                drivingSessions.push([temp, new Date(lastRecord.dateTime)]);
                 console.log("All sessions",drivingSessions);
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
@@ -469,25 +475,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                             }
                         }]
                     )
-
-                    /*api.call("Get", {
-                        typeName: "LogRecord",
-                        search: {
-                            deviceSearch: { id: vehicleID },
-                            fromDate:theftStart,
-                            toDate: theftEnd,
-                        }
-                    }, function(statuses) {
-                        if (statuses[0]) {
-                            var status = statuses[statuses.length-1];
-                            console.log("Iteration",i);
-                            theftLocation.push(status.latitude + "," + status.longitude);
-                        } else {
-                            console.log("ALERT");
-                            theftLocation.push=null;
-                        }
-
-                    });*/
 
                     newflag = 1;
                     counter = 0;
