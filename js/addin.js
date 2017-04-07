@@ -72,7 +72,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         eFlag = 0, //check if end date selected
         avgPoints = 25,
         fuelThreshold = 5,
-        sessionThreshold = 10; //in minutes
+        sessionThreshold = 10, //in minutes
         tankSize = 80,
         selectedOpt,
         startPicker,
