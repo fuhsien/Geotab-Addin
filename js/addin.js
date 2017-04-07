@@ -154,7 +154,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 var lastRecord;
                 var timeCurrent, timeOld;
                 var drivingSessions = [];
-                var temp
+                var temp;
 
                 for (var i = 0; i < rawSpeed.length; i++) {
                     if(rawSpeed[i].speed > 5){
