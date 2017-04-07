@@ -17,15 +17,33 @@ Isolating part where the vehicle is not driving
 1) Need to get the var timerange where speed is not detected (speed < 5 to 10)
 But how ??
 Loop through the speed array holdSpeed,
- - check if current point is more than threshold (10), 
-    if yes {
-        do a loop to get the previous point where speed is more than 10
-            Found previous point: check time
-            use current time minus previous time, how long is this
+ - check if current point is more than threshold (5), 
+    if yes { 
+        is firstRecord = 0, if yes { firstRecord = currentpoint index = lastRecord}
+        current record time - lastRecord time >10 minutes?
+        if yes{
+            drivingSessions.push([firstRecord,lastRecord]);
+            firstRecord = current index
+        }
+        record most recent index, lastRecord = index
     }
+Finish Looping: one more pushing 
+---> get different driving session
+---> loop hold Volt, only remain those session falls outside of driving session (indicate vehicle not moving)
+---> check remaining data, for constant dropping
+
+*************************
+Driving Time range:
+if previous point (speed > 5) is more than 10 minutes ago (check using lastRecord),
+using the lastRecord, record ending time for previous session
+var drivingSessions.push()
+mark current point +2minutes ago gray time as beginning of session
+
+Ending:
+when finish looping speed array, 
 
 
-
+*************************
 
 
 
@@ -130,11 +148,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
-                /*for (var j = 0; j < results[1].length; j++) {
-                    if (results[1][j].speed == 0){
-                        results[1][j].speed=null;
-                    }
-                }*/
+
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
@@ -199,6 +213,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataPointsSpeed = [];
         var dataPoints2 = [];
         console.log("Selected Vehicle Aux:", results); //results return aux values
+        
+        var rawSpeed = results[1];
+        var filtered = [];
+        for (var i = 0; i < rawSpeed.length; i++) {
+            if(rawSpeed[i].speed > 5){
+                filtered.push(rawSpeed[i]);
+            }
+        }
 
         for (var i = 0; i < results[0].length - 1; i++) {
             holdTimeAux[i] = results[0][i].dateTime;
@@ -225,9 +247,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });
         }
 
-        for (var j = 0; j < results[1].length - 1; j++) {
+        /*for (var j = 0; j < results[1].length - 1; j++) {
             holdTimeSpeed[j] = results[1][j].dateTime;
             holdSpeed[j] = results[1][j].speed;
+            dataPointsSpeed.push({
+                x: new Date(holdTimeSpeed[j]),
+                y: holdSpeed[j]
+            });
+        }*/
+        for (var j = 0; j < filtered; j++) {
+            holdTimeSpeed[j] = filtered[j].dateTime;
+            holdSpeed[j] = filtered[j].speed;
             dataPointsSpeed.push({
                 x: new Date(holdTimeSpeed[j]),
                 y: holdSpeed[j]
