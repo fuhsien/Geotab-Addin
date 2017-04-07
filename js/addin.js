@@ -214,14 +214,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataPoints2 = [];
         console.log("Selected Vehicle Aux:", results); //results return aux values
         
-        var rawSpeed = results[1];
-        var filtered = [];
-        for (var i = 0; i < rawSpeed.length; i++) {
-            if(rawSpeed[i].speed > 5){
-                filtered.push(rawSpeed[i]);
-            }
-        }
-        console.log("Filthered speed",filtered);
 
         for (var i = 0; i < results[0].length - 1; i++) {
             holdTimeAux[i] = results[0][i].dateTime;
@@ -248,14 +240,22 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });
         }
 
-        for (var j = 0; j < filtered.length - 1; j++) {
+        for (var j = 0; j < results[1].length - 1; j++) {
+            holdTimeSpeed[j] = results[1][j].dateTime;
+            holdSpeed[j] = results[1][j].speed;
+            dataPointsSpeed.push({
+                x: new Date(holdTimeSpeed[j]),
+                y: holdSpeed[j]
+            });
+        }
+        /*for (var j = 0; j < filtered.length - 1; j++) {
             holdTimeSpeed[j] = filtered[j].dateTime;
             holdSpeed[j] = filtered[j].speed;
             dataPointsSpeed.push({
                 x: new Date(holdTimeSpeed[j]),
                 y: holdSpeed[j]
             });
-        }
+        }*/
 
         dataSeries[0].dataPoints = dataPointsAux;
         dataSeries[1].dataPoints = dataPointsSpeed;
