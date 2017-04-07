@@ -130,16 +130,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
-                for (var j = 0; j < results[1].length; j++) {
+                /*for (var j = 0; j < results[1].length; j++) {
                     if (results[1][j].speed == 0){
                         results[1][j].speed=null;
                     }
-                }
-                console.log("MASSIVE ARRAY",results);
-                results[1] = results[1].filter(function(element){
-                    return (element.speed != 0 && element.speed!=null);
-                })
-                console.log("LESS MASSIVE ARRAY",results);
+                }*/
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
