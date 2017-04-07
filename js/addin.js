@@ -149,35 +149,38 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
-                var rawSpeed = results[1];
-                var firstRecord;
-                var lastRecord;
-                var timeCurrent, timeOld;
-                var drivingSessions = [];
-                var temp;
+                if (results[1]){
+                    var rawSpeed = results[1];
+                    var firstRecord = null;
+                    var lastRecord = null;
+                    var timeCurrent = null, timeOld = null;
+                    var drivingSessions = [];
+                    var temp = null;
 
-                for (var i = 0; i < rawSpeed.length; i++) {
-                    if(rawSpeed[i].speed > 5){
-                        if(firstRecord == null){
-                            firstRecord = rawSpeed[i];
+
+                    for (var i = 0; i < rawSpeed.length; i++) {
+                        if(rawSpeed[i].speed > 5){
+                            if(firstRecord == null){
+                                firstRecord = rawSpeed[i];
+                                lastRecord = rawSpeed[i];
+                            }
+                            timeCurrent = new Date(rawSpeed[i].dateTime).getTime();
+                            timeOld = new Date(lastRecord.dateTime).getTime();
+                            if ( (timeCurrent - timeOld)/(1000*60) >= sessionThreshold){
+                                //current point is a new session already!
+                                temp = new Date(firstRecord.dateTime);
+                                temp.setMinutes(temp.getMinutes()-2);
+                                drivingSessions.push([temp,new Date(lastRecord.dateTime)]);
+                                firstRecord = rawSpeed[i];
+                            }
                             lastRecord = rawSpeed[i];
                         }
-                        timeCurrent = new Date(rawSpeed[i].dateTime).getTime();
-                        timeOld = new Date(lastRecord.dateTime).getTime();
-                        if ( (timeCurrent - timeOld)/(1000*60) >= sessionThreshold){
-                            //current point is a new session already!
-                            temp = new Date(firstRecord.dateTime);
-                            temp.setMinutes(temp.getMinutes()-2);
-                            drivingSessions.push([temp,new Date(lastRecord.dateTime)]);
-                            firstRecord = rawSpeed[i];
-                        }
-                        lastRecord = rawSpeed[i];
                     }
+                    temp = new Date(firstRecord.dateTime);
+                    temp.setMinutes(temp.getMinutes()-2);
+                    drivingSessions.push([temp, new Date(lastRecord.dateTime)]);
+                    console.log("All sessions",drivingSessions);
                 }
-                temp = new Date(firstRecord.dateTime);
-                temp.setMinutes(temp.getMinutes()-2);
-                drivingSessions.push([temp, new Date(lastRecord.dateTime)]);
-                console.log("All sessions",drivingSessions);
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
