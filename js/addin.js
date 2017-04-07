@@ -221,6 +221,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 filtered.push(rawSpeed[i]);
             }
         }
+        console.log("Filthered speed",filtered);
 
         for (var i = 0; i < results[0].length - 1; i++) {
             holdTimeAux[i] = results[0][i].dateTime;
@@ -247,17 +248,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });
         }
 
-        /*for (var j = 0; j < results[1].length - 1; j++) {
+        for (var j = 0; j < results[1].length - 1; j++) {
             holdTimeSpeed[j] = results[1][j].dateTime;
             holdSpeed[j] = results[1][j].speed;
-            dataPointsSpeed.push({
-                x: new Date(holdTimeSpeed[j]),
-                y: holdSpeed[j]
-            });
-        }*/
-        for (var j = 0; j < filtered; j++) {
-            holdTimeSpeed[j] = filtered[j].dateTime;
-            holdSpeed[j] = filtered[j].speed;
             dataPointsSpeed.push({
                 x: new Date(holdTimeSpeed[j]),
                 y: holdSpeed[j]
