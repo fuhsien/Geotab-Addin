@@ -135,6 +135,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         results[1][j].speed=null;
                     }
                 }
+                console.log("MASSIVE ARRAY",results);
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
@@ -304,7 +305,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
-        console.log("Speed array",holdSpeed);
         callback(holdTimeAux, output, vehicleID);
     };
 
