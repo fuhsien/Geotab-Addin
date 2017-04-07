@@ -7,18 +7,26 @@ Blue: 6495ED
 Red: A00C23
 
 
-THINGS TO DO:
-1) location info: log return latitude and longitude
-2) Algorithm for detection
-    Note: Beginning of the raise corresponds to the correct time.
-3) Create Table, append row when fuel theft detected
+New algorithm:
+Use raw data to detect fuel theft
+-> find area without speed!
+-> find drop    :::::> try identifying constant drop over time
+
+**Refill can use back old algorithm 
+Isolating part where the vehicle is not driving
+1) Need to get the var timerange where speed is not detected (speed < 5 to 10)
+But how ??
+Loop through the speed array holdSpeed,
+ - check if current point is more than threshold (10), 
+    if yes {
+        do a loop to get the previous point where speed is more than 10
+            Found previous point: check time
+            use current time minus previous time, how long is this
+    }
 
 
 
 
-
-FUll tank ~ 3.6V (if 5V max, 1.4V drop)    60L
-3rd April: 2.45V before filter, 1.9V after filter 40V
 
 
 
@@ -296,6 +304,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
+        console.log("Speed array",holdSpeed);
         callback(holdTimeAux, output, vehicleID);
     };
 
