@@ -170,8 +170,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 
                 //Double check time is in ascending order, if there's points not in order, merge two sessions
                 for(i=1; i<drivingSessions.length,i++){
-                    var NOW = drivingSessions[i].getTime();
-                    var LAST = drivingSessions[i-1].getTime();
+                    var NOW = new Date(drivingSessions[i]).getTime();
+                    var LAST = new Date(drivingSessions[i-1]).getTime();
+                    console.log(i);
                     if (NOW - LAST < 0){
                         console.log(drivingSessions[i]);
                     }
