@@ -155,7 +155,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                             //current point is a new session already!
                             temp = new Date(firstRecord.dateTime);
                             temp.setMinutes(temp.getMinutes()-2);
-                            drivingSessions.push(temp,new Date(lastRecord.dateTime));
+                            drivingSessions.push([temp,new Date(lastRecord.dateTime)]);
                             firstRecord = rawSpeed[i];
                         }
                         lastRecord = rawSpeed[i];
@@ -164,9 +164,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 if (firstRecord){
                     temp = new Date(firstRecord.dateTime);
                     temp.setMinutes(temp.getMinutes()-2);
-                    drivingSessions.push(temp, new Date(lastRecord.dateTime));
+                    drivingSessions.push([temp, new Date(lastRecord.dateTime)]);
                     console.log("All sessions",drivingSessions);
-
+                    
                     //Double check time is in ascending order, if there's points not in order, merge two sessions
                 }
 
