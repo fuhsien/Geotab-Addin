@@ -263,12 +263,21 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             color: "#6495ED", //blue
             axisYIndex: 1,
             showInLegend: true
+        }, {
+            name: "Stopped",
+            type: "line",
+            xValueFormatString: "DD MMM HH:mm",
+            lineThickness: 1,
+            color: "#3AF13A", //green
+            axisYIndex: 2,
+            showInLegend: true
         }];
         var dataSeries2 = {
             type: "splineArea"
         };
         var dataPointsAux = [];
         var dataPointsSpeed = [];
+        var dataPointsStop = [];
         var dataPoints2 = [];
         console.log("Selected Vehicle Aux:", results); //results return aux values
         
@@ -286,12 +295,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
-            /*dataPointsAux.push({
+            dataPointsAux.push({
                 x: new Date(holdTimeAux[i]),
                 //x: i,
                 //y: output[i]
                 y: holdVolt[i]
-            });*/
+            });
             dataPoints2.push({
                 x: i,
                 y: output[i]
@@ -300,7 +309,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         /*************************************************************************************************************************/
         /*************************************************************************************************************************/
         for (i=0; i<stopData.length; i++){
-            dataPointsAux.push({
+            dataPointsStop.push({
                 x: new Date(stopData[i].dateTime),
                 //x: i,
                 //y: output[i]
@@ -329,7 +338,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         dataSeries[0].dataPoints = dataPointsAux;
         dataSeries[1].dataPoints = dataPointsSpeed;
+        dataSeries[2].dataPoints = dataPointsStop;
         dataSeries2.dataPoints = dataPoints2;
+        data.push(dataSeries[2]);
         data.push(dataSeries[1]);
         data.push(dataSeries[0]);
         data2.push(dataSeries2);
@@ -362,6 +373,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 gridThickness: 0,
                 labelFontColor: "#6495ED",
                 titleFontColor: "#6495ED",
+                lineThickness: 2,
+                includeZero: false,
+            }, {
+                title: "Litres",
+                lineColor: "#3AF13A",
+                tickColor: "#3AF13A",
+                labelFontColor: "#3AF13A",
+                titleFontColor: "#3AF13A",
                 lineThickness: 2,
                 includeZero: false,
             }],
