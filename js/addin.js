@@ -188,7 +188,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 console.log("Length before appending", fuelSessions.length, drivingSessions.length);
                 var comparator = drivingSessions[1].getTime();
                 console.log("TIME TYPE",typeof drivingSessions[1]);
-                for (i=0,j=1;i<fuelSessions.length;i++){
+                for (i=0,j=1;i<fuelSessions.length || j<drivingSessions.length;i++){
                     var fuelTime = new Date(fuelSessions[i].dateTime).getTime();
                     if(comparator - fuelTime<0){
                         fuelSessions.splice(i++,0,null);
