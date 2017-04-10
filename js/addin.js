@@ -57,8 +57,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         avgPoints = 25,
         fuelThreshold = 5,
         sessionThreshold = 5, //in minutes
-        frontPadding = 0, //minutes
-        backPadding = 2,
+        frontPaddingMinutes = 2, //minutes
+        frontPaddingSeconds = 0, 
+        backPaddingMinutes = 1,
+        backPaddingSeconds = 30,
         tankSize = 80,
         selectedOpt,
         startPicker,
@@ -157,9 +159,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         if ( (timeCurrent - timeOld)/(1000*60) >= sessionThreshold){
                             //current point is a new session already!
                             begin = new Date(firstRecord.dateTime);
-                            begin.setMinutes(begin.getMinutes()-frontPadding);
+                            begin.setMinutes(begin.getMinutes()-frontPaddingMinutes);
+                            begin.setSeconds(begin.getSeconds()-frontPaddingSeconds);
                             ended = new Date(lastRecord.dateTime);
-                            ended.setMinutes(ended.getMinutes()+ backPadding);
+                            ended.setMinutes(ended.getMinutes()+ backPaddingMinutes);
+                            ended.setSeconds(ended.getSeconds()+ backPaddingSeconds);
                             drivingSessions.push(begin,ended);
                             firstRecord = rawSpeed[i];
                         }
@@ -168,9 +172,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
                 if (firstRecord){
                     begin = new Date(firstRecord.dateTime);
-                    begin.setMinutes(begin.getMinutes()-frontPadding);
+                    begin.setMinutes(begin.getMinutes()-frontPaddingMinutes);
+                    begin.setSeconds(begin.getSeconds()-frontPaddingSeconds);
                     ended = new Date(lastRecord.dateTime);
-                    ended.setMinutes(ended.getMinutes()+ backPadding);
+                    ended.setMinutes(ended.getMinutes()+ backPaddingMinutes);
+                    ended.setSeconds(ended.getSeconds()+ backPaddingSeconds);
                     drivingSessions.push(begin,ended);
                     console.log("All sessions",drivingSessions);
                 }
