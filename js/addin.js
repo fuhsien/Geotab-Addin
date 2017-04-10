@@ -135,7 +135,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             ], function(results) {
                 var rawFuel = results[0];
                 var rawSpeed = results[1];
-                var fuelSessions = rawFuel;         //Add in breaks to indicate different driving sessions
+                var fuelSessions = JSON.parse(JSON.stringify(results[0]));         //Add in breaks to indicate different driving sessions
                 var firstRecord = null;
                 var lastRecord = null;
                 var timeCurrent = null, timeOld = null;
@@ -201,7 +201,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }
                 console.log("After appending",fuelSessions);
-                console.log("raw api call: ",rawFuel);
+                console.log("raw api call: ",results);
                 //callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
