@@ -204,7 +204,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         fuelOnStop.push(rawFuel[i]);
                     }
                 }
-                console.log("After appending",rawFuel);
+                console.log("After appending",fuelOnStop);
 
 
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
