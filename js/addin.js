@@ -189,10 +189,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 var comparator = drivingSessions[0].getTime();
                 for (i=0,j=1;i<fuelSessions.length;i++){
                     var fuelTime = new Date(fuelSessions[i].dateTime).getTime();
-                    /*if(comparator - fuelTime<0){
+                    if(comparator - fuelTime<0){
                         fuelSessions.splice(i++,0,null);
                         comparator = drivingSessions[j++].getTime();
-                    }*/
+                    }
                 }
                 console.log("After appending",fuelSessions.length);
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
