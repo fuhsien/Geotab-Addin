@@ -191,7 +191,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     var fuelTime = new Date(fuelSessions[i].dateTime).getTime();
                     if(comparator - fuelTime<0){
                         console.log("Creating break at iteration ",i);
-                        fuelSessions.splice(i++,0,new Date(comparator).toISOString());
+                        fuelSessions.splice(i++,0,null);
+                        //fuelSessions.splice(i++,0,new Date(comparator).toISOString());
                         if(j == drivingSessions.length){
                             break;
                         }
