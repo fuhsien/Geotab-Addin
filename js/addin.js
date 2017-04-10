@@ -267,7 +267,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             name: "Stopped",
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
-            lineThickness: 1,
+            lineThickness: 4,
             color: "#3AF13A", //green
             axisYIndex: 2,
             showInLegend: true
@@ -340,9 +340,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         dataSeries[1].dataPoints = dataPointsSpeed;
         dataSeries[2].dataPoints = dataPointsStop;
         dataSeries2.dataPoints = dataPoints2;
-        data.push(dataSeries[2]);
         data.push(dataSeries[1]);
         data.push(dataSeries[0]);
+        data.push(dataSeries[2]);
         data2.push(dataSeries2);
 
         var options = {
