@@ -200,7 +200,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
                 console.log("After appending",fuelSessions);
                 console.log("raw api call: ",results);
-                //callback1(results, callback2, vehicleID); //plotData,callback2:createtable
+                callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
         }, function(e) {
