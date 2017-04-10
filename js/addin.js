@@ -191,18 +191,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 for (i=0,j=1;i<fuelSessions.length;i++){
                     var fuelTime = new Date(fuelSessions[i].dateTime).getTime();
                     if(comparator - fuelTime<0){
+                        console.log("Creating break at iteration ",i);
                         fuelSessions.splice(i++,0,null);
                         if(j == drivingSessions.length){
-                            console.log("breaking out");
                             break;
                         }
-                        console.log("iteration j",j);
                         comparator = drivingSessions[j++].getTime();
                     }
                 }
                 console.log("After appending",fuelSessions);
                 console.log("raw api call: ",results);
-                //callback1(results, callback2, vehicleID); //plotData,callback2:createtable
+                callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
         }, function(e) {
