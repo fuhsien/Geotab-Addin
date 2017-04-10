@@ -207,7 +207,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 console.log("After appending",fuelOnStop);
 
 
-                callback1(results, callback2, vehicleID); //plotData,callback2:createtable
+                callback1(results,fuelOnstop, callback2, vehicleID); //plotData,callback2:createtable
 
             });
         }, function(e) {
@@ -234,7 +234,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Loaded Google Sheet");
     };
 
-    var plotData = function(results, callback, vehicleID) {
+    var plotData = function(results,stopData, callback, vehicleID) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
@@ -286,17 +286,29 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
-            dataPointsAux.push({
+            /*dataPointsAux.push({
                 x: new Date(holdTimeAux[i]),
                 //x: i,
                 //y: output[i]
                 y: holdVolt[i]
-            });
+            });*/
             dataPoints2.push({
                 x: i,
                 y: output[i]
             });
         }
+        /*************************************************************************************************************************/
+        /*************************************************************************************************************************/
+        for (i=0; i<stopData.length; i++){
+            dataPointsAux.push({
+                x: new Date(stopData[i].dateTime),
+                //x: i,
+                //y: output[i]
+                y: stopData[i].data
+            });
+        }
+        /*************************************************************************************************************************/
+        /*************************************************************************************************************************/
 
         for (var j = 0; j < results[1].length - 1; j++) {
             holdTimeSpeed[j] = results[1][j].dateTime;
