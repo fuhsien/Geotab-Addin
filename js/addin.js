@@ -56,7 +56,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         eFlag = 0, //check if end date selected
         avgPoints = 25,
         fuelThreshold = 5,
-        sessionThreshold = 10, //in minutes
+        sessionThreshold = 5, //in minutes
         tankSize = 80,
         selectedOpt,
         startPicker,
@@ -172,13 +172,25 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 for(i=1; i<drivingSessions.length;i++){
                     var NOW = new Date(drivingSessions[i]).getTime();
                     var LAST = new Date(drivingSessions[i-1]).getTime();
-                    console.log(i);
                     if (NOW - LAST < 0){
-                        console.log(drivingSessions[i]);
+                        console.log("MERGING TWO SESSIONS!");
+                        var tempArray=[];
+                        tempArray.push(i-1);
                     }
                 }
+                if (tempArray){
+                    for (i=0;i<tempArray.length;i++){
+                        drivingSessions.splice(tempArray[i],2)
+                    };
+                }
 
-
+                // Adding sessions into fuel array
+                console.log("Length before appending", fuelSessions.length);
+                console.log("date type",typeof drivingSessions[0]);
+                /*var drivingSessions[];
+                for (i=0,j=0;i<fuelSessions.length;i++){
+                    new Date(drivingSessions[j]).getTime();
+                }*/
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
