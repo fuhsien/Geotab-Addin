@@ -1,6 +1,3 @@
-/*
-Refill RM100 = 45.5 Litres, from graph increase by 41 Litres
-*/
 /********************************************************************************
 
 Blue: 6495ED
@@ -8,42 +5,29 @@ Red: A00C23
 
 
 New algorithm:
-Use raw data to detect fuel theft
--> find area without speed!
--> find drop    :::::> try identifying constant drop over time
-
 **Refill can use back old algorithm 
-Isolating part where the vehicle is not driving
-1) Need to get the var timerange where speed is not detected (speed < 5 to 10)
-But how ??
-Loop through the speed array holdSpeed,
- - check if current point is more than threshold (5), 
-    if yes { 
-        is firstRecord = 0, if yes { firstRecord = currentpoint index = lastRecord}
-        current record time - lastRecord time >10 minutes?
-        if yes{
-            drivingSessions.push([firstRecord,lastRecord]);
-            firstRecord = current index
-        }
-        record most recent index, lastRecord = index
-    }
-Finish Looping: one more pushing 
+
 ---> get different driving session
 ---> loop hold Volt, only remain those session falls outside of driving session (indicate vehicle not moving)
 ---> check remaining data, for constant dropping
 
-*************************
-Driving Time range:
-if previous point (speed > 5) is more than 10 minutes ago (check using lastRecord),
-using the lastRecord, record ending time for previous session
-var drivingSessions.push()
-mark current point +2minutes ago gray time as beginning of session
 
-Ending:
-when finish looping speed array, 
+Need to reduce computational need! 
+ - Eliminate nested for loop (data points x driving sessions)
+ - Change driving sessions into a plain array (no object). 
+ - Duplicate rawFuel :::> processedFuel
+ - loop through driving sessions, for only once. 
+    Find where the Beginning/ end of driving session fits in processedFuel. 
+    Make a marking (by adding new element) at transition 
+ - Loop through processedFuel,
+    at every transition, change flag (drivingFlag) status
+    check flag status, do different things accordingly
 
 
-*************************
+type of flagging:
+ 1) use typeof (data is in object), can store extra info about transition
+ 2) use empty cell, trigger by if(null)
+
 
 
 
@@ -149,7 +133,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
+                var rawFuel = results[0];
                 var rawSpeed = results[1];
+                var fuelSessions = rawFuel;         //Add in breaks to indicate different driving sessions
                 var firstRecord = null;
                 var lastRecord = null;
                 var timeCurrent = null, timeOld = null;
@@ -169,7 +155,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                             //current point is a new session already!
                             temp = new Date(firstRecord.dateTime);
                             temp.setMinutes(temp.getMinutes()-2);
-                            drivingSessions.push([temp,new Date(lastRecord.dateTime)]);
+                            drivingSessions.push(temp,new Date(lastRecord.dateTime));
                             firstRecord = rawSpeed[i];
                         }
                         lastRecord = rawSpeed[i];
@@ -178,9 +164,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 if (firstRecord){
                     temp = new Date(firstRecord.dateTime);
                     temp.setMinutes(temp.getMinutes()-2);
-                    drivingSessions.push([temp, new Date(lastRecord.dateTime)]);
+                    drivingSessions.push(temp, new Date(lastRecord.dateTime));
                     console.log("All sessions",drivingSessions);
+
+                    //Double check time is in ascending order, if there's points not in order, merge two sessions
                 }
+
+
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
