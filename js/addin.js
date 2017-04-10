@@ -200,8 +200,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         comparator = drivingSessions[j++].getTime();
                     }
                 }
-                console.log("After appending",fuelSessions.length);
-                //callback1(results, callback2, vehicleID); //plotData,callback2:createtable
+                console.log("After appending",fuelSessions);
+                callback1(results, callback2, vehicleID); //plotData,callback2:createtable
 
             });
         }, function(e) {
