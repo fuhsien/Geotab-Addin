@@ -201,7 +201,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 console.log("Length before appending", rawFuel.length, drivingSessions.length);
                 var comparator = drivingSessions[0].getTime();
                 var driveFlag = false;
-                for (i=1,j=1;i<rawFuel.length -1;i++){
+                for (i=0,j=1;i<rawFuel.length;i++){
                     var fuelTime = new Date(rawFuel[i].dateTime).getTime();
                     if(comparator - fuelTime<0){
                         driveFlag = !driveFlag;
@@ -294,7 +294,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Selected Vehicle Aux:", results); //results return aux values
         
 
-        for (var i = 1; i < results[0].length - 1; i++) {
+        for (var i = 0; i < results[0].length - 1; i++) {
             holdTimeAux[i] = results[0][i].dateTime;
             holdVolt[i] = results[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / (4-0.05);
