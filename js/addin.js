@@ -201,7 +201,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 console.log("Length before appending", rawFuel.length, drivingSessions.length);
                 var comparator = drivingSessions[0].getTime();
                 var driveFlag = false;
-                for (i=1,j=1;i<rawFuel.length;i++){
+                for (i=1,j=1;i<rawFuel.length -1;i++){
                     var fuelTime = new Date(rawFuel[i].dateTime).getTime();
                     if(comparator - fuelTime<0){
                         driveFlag = !driveFlag;
