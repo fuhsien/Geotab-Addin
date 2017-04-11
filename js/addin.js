@@ -610,7 +610,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             table.appendChild(tbody);
             body.appendChild(table);
 
-            $("is-striped tr").click(function(){
+            $("#is-striped tr").click(function(){
                 $('.selected').removeClass('selected');
                 $(this).addClass('selected');
                 console.log("Row index is ",this.rowIndex);
