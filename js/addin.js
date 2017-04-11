@@ -216,7 +216,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         fuelOnStop.push(rawFuel[i]);
                     }
                 }
-                console.log("After appending",fuelOnStop);
+                console.log("Remaining data",fuelOnStop);
 
 
                 callback1(results,fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
@@ -610,7 +610,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             table.appendChild(tbody);
             body.appendChild(table);
 
-            $("tbody tr").click(function(){
+            $("is-striped tr").click(function(){
                 $('.selected').removeClass('selected');
                 $(this).addClass('selected');
                 console.log("Row index is ",this.rowIndex);
