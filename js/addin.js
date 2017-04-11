@@ -59,7 +59,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         sessionThreshold = 5, //in minutes
         frontPaddingMinutes = 0, //minutes
         frontPaddingSeconds = 30, 
-        backPaddingMinutes = 1,
+        backPaddingMinutes = 2,
         backPaddingSeconds = 30,
         tankSize = 80,
         selectedOpt,
