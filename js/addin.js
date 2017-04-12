@@ -319,12 +319,28 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //x: i,
                 y: holdVolt[i]
             });
-            dataPoints2.push({
+            /*dataPoints2.push({
                 x: i,
                 y: output[i]
-            });
+            });*/
         }
         /*************************************************************************************************************************/
+        for(i=0;i<output.length-1;i++){
+            if (output[i] && output[i-1]){
+                var prev = Math.sign(output[i]-output[i-1]);
+                var next = Math.sign(output[i+1]- output[i]);
+                if (prev == next){
+                    output.splice(i,1);
+                    holdTimeAux.splice(i--,1);
+                }
+            }
+        }
+        for(i=0;i<output.length;i++){
+            dataPoints2.push({
+                x:i,
+                y:output[i]
+            })
+        }
         /************************************************************************************************************************
         for (i=0; i<stopData.length; i++){
             dataPointsStop.push({
