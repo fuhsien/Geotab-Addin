@@ -454,6 +454,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
         callback(holdTimeAux, output, vehicleID);
+        console.log("Time Length" + holdTimeAux.length + ";Output Length" + output.length);
     };
 
     var createTable = function(time, fuel, vehicleID) {
