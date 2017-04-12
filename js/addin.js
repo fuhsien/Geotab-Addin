@@ -1,11 +1,17 @@
 /********************************************************************************
+
 Blue: 6495ED
 Red: A00C23
+
+
 New algorithm:
 **Refill can use back old algorithm 
+
 ---> get different driving session
 ---> loop hold Volt, only remain those session falls outside of driving session (indicate vehicle not moving)
 ---> check remaining data, for constant dropping
+
+
 Need to reduce computational need! 
  - Eliminate nested for loop (data points x driving sessions)
  - Change driving sessions into a plain array (no object). 
@@ -16,12 +22,29 @@ Need to reduce computational need!
  - Loop through processedFuel,
     at every transition, change flag (drivingFlag) status
     check flag status, do different things accordingly
+
+
 type of flagging:
  1) use typeof (data is in object), can store extra info about transition
  2) use empty cell, trigger by if(null)
+
+
+
+
+
 https://www.google.com/maps/place/3.18730235,101.676445
 "3.18730235,101.676445"
+
+
+
 https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
+
+
+
+
+
+
 *********************************************************************************/
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
@@ -291,13 +314,37 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 y: output[i]
                 //y: holdVolt[i]
             });
+            dataPointsStop.push({
+                x: new Date(holdTimeAux[i]),
+                //x: i,
+                y: holdVolt[i]
+            });
             dataPoints2.push({
                 x: i,
                 y: output[i]
             });
         }
         /*************************************************************************************************************************/
-        /*************************************************************************************************************************/
+        /*var output2 = JSON.parse(JSON.stringify(output));
+        var time2 = JSON.parse(JSON.stringify(holdTimeAux));
+
+        for(i=0;i<output2.length-1;i++){
+            if (output2[i] && output2[i-1]){
+                var prev = Math.sign(output2[i]-output2[i-1]);
+                var next = Math.sign(output2[i+1]- output2[i]);
+                if (prev == next){
+                    output2.splice(i,1);
+                    time2.splice(i--,1);
+                }
+            }
+        }
+        for(i=0;i<output2.length;i++){
+            dataPoints2.push({
+                x:i,
+                y:output2[i]
+            })
+        }*/
+        /************************************************************************************************************************
         for (i=0; i<stopData.length; i++){
             dataPointsStop.push({
                 x: new Date(stopData[i].dateTime),
@@ -306,7 +353,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 y: stopData[i].data
             });
         }
-        /*************************************************************************************************************************/
+        ************************************************************************************************************************/
         /*************************************************************************************************************************/
 
         for (var j = 0; j < results[1].length - 1; j++) {
