@@ -325,20 +325,22 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });*/
         }
         /*************************************************************************************************************************/
-        for(i=0;i<output.length-1;i++){
-            if (output[i] && output[i-1]){
-                var prev = Math.sign(output[i]-output[i-1]);
-                var next = Math.sign(output[i+1]- output[i]);
+        var output2 = JSON.parse(JSON.stringify(output));
+
+        for(i=0;i<output2.length-1;i++){
+            if (output2[i] && output2[i-1]){
+                var prev = Math.sign(output2[i]-output2[i-1]);
+                var next = Math.sign(output2[i+1]- output2[i]);
                 if (prev == next){
-                    output.splice(i,1);
+                    output2.splice(i,1);
                     holdTimeAux.splice(i--,1);
                 }
             }
         }
-        for(i=0;i<output.length;i++){
+        for(i=0;i<output2.length;i++){
             dataPoints2.push({
                 x:i,
-                y:output[i]
+                y:output2[i]
             })
         }
         /************************************************************************************************************************
