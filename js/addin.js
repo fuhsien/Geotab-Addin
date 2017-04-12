@@ -326,6 +326,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }
         /*************************************************************************************************************************/
         var output2 = JSON.parse(JSON.stringify(output));
+        var time2 = JSON.parse(JSON.stringify(holdTimeAux));
 
         for(i=0;i<output2.length-1;i++){
             if (output2[i] && output2[i-1]){
@@ -333,7 +334,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 var next = Math.sign(output2[i+1]- output2[i]);
                 if (prev == next){
                     output2.splice(i,1);
-                    holdTimeAux.splice(i--,1);
+                    time2.splice(i--,1);
                 }
             }
         }
@@ -449,11 +450,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             },
             data: data2
         };
-        if (output == output2){
-            console.log("YOU RE FUCKED!");
-        }else{
-            console.log("BACKTRACK");
-        }
+
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
         callback(holdTimeAux, output, vehicleID);
