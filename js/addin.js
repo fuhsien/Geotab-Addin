@@ -449,7 +449,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             },
             data: data2
         };
-
+        if (output == output2){
+            console.log("YOU RE FUCKED!");
+        }else{
+            console.log("BACKTRACK");
+        }
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
         callback(holdTimeAux, output, vehicleID);
