@@ -35,9 +35,10 @@ type of flagging:
 https://www.google.com/maps/place/3.18730235,101.676445
 "3.18730235,101.676445"
 
+
+
 https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
 
 
 
@@ -54,7 +55,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         vFlag = 0, //Check if vehicle selected
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
-        avgPoints = 25,
+        avgPoints = 28,
         fuelThreshold = 5,
         sessionThreshold = 5, //in minutes
         frontPaddingMinutes = 0, //minutes
