@@ -1,17 +1,11 @@
 /********************************************************************************
-
 Blue: 6495ED
 Red: A00C23
-
-
 New algorithm:
 **Refill can use back old algorithm 
-
 ---> get different driving session
 ---> loop hold Volt, only remain those session falls outside of driving session (indicate vehicle not moving)
 ---> check remaining data, for constant dropping
-
-
 Need to reduce computational need! 
  - Eliminate nested for loop (data points x driving sessions)
  - Change driving sessions into a plain array (no object). 
@@ -22,28 +16,12 @@ Need to reduce computational need!
  - Loop through processedFuel,
     at every transition, change flag (drivingFlag) status
     check flag status, do different things accordingly
-
-
 type of flagging:
  1) use typeof (data is in object), can store extra info about transition
  2) use empty cell, trigger by if(null)
-
-
-
-
-
 https://www.google.com/maps/place/3.18730235,101.676445
 "3.18730235,101.676445"
-
 https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css
-
-
-
-
-
-
-
-
 *********************************************************************************/
 geotab.addin.geotabFuelSensor = function(api, state) {
     // Your private functions and variables go here
@@ -54,7 +32,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         vFlag = 0, //Check if vehicle selected
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
-        avgPoints = 28,
+        avgPoints = 25,
         fuelThreshold = 5,
         sessionThreshold = 5, //in minutes
         frontPaddingMinutes = 0, //minutes
