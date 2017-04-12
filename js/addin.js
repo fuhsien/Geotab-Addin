@@ -319,13 +319,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //x: i,
                 y: holdVolt[i]
             });
-            /*dataPoints2.push({
+            dataPoints2.push({
                 x: i,
                 y: output[i]
-            });*/
+            });
         }
         /*************************************************************************************************************************/
-        var output2 = JSON.parse(JSON.stringify(output));
+        /*var output2 = JSON.parse(JSON.stringify(output));
         var time2 = JSON.parse(JSON.stringify(holdTimeAux));
 
         for(i=0;i<output2.length-1;i++){
@@ -343,7 +343,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 x:i,
                 y:output2[i]
             })
-        }
+        }*/
         /************************************************************************************************************************
         for (i=0; i<stopData.length; i++){
             dataPointsStop.push({
