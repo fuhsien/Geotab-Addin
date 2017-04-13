@@ -34,7 +34,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
         avgPoints = 25,
-        fuelThreshold = 5,
+        fuelThreshold = 4*5/80,
         sessionThreshold = 5, //in minutes
         frontPaddingMinutes = 0, //minutes
         frontPaddingSeconds = 30, 
@@ -330,7 +330,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 y:output2[i]
             })
         }
-
+        console.log("NEW FUEL ACTIVITY LIST",tempActivity);
         /************************************************************************************************************************
         for (i=0; i<stopData.length; i++){
             dataPointsStop.push({
@@ -441,7 +441,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
         callback(holdTimeAux, output, vehicleID);
-        console.log("Time Length" + holdTimeAux.length + ";Output Length" + output.length);
     };
 
     var createTable = function(time, fuel, vehicleID) {
