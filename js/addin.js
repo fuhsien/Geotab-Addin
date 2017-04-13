@@ -307,6 +307,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         /*************************************************************************************************************************/
         var output2 = JSON.parse(JSON.stringify(output));
         var time2 = JSON.parse(JSON.stringify(holdTimeAux));
+        var tempActivity =[];
 
         for(i=0;i<output2.length-1;i++){
             if (output2[i] && output2[i-1]){
@@ -319,11 +320,17 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
         }
         for(i=0;i<output2.length;i++){
+            if (i>0){
+                if (Math.abs(output2[i]-output2[i-1])>=5){
+                    tempActivity.push([time2[i],output2[i]]);
+                }
+            }
             dataPoints2.push({
                 x:i,
                 y:output2[i]
             })
         }
+
         /************************************************************************************************************************
         for (i=0; i<stopData.length; i++){
             dataPointsStop.push({
