@@ -322,7 +322,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         for(i=0;i<output2.length;i++){
             if (i>0){
                 if (Math.abs(output2[i]-output2[i-1])>=fuelThreshold){
-                    tempActivity.push([time2[i],output2[i]]);
+                    tempActivity.push([new Date(time2[i]),output2[i]]);
                 }
             }
             dataPoints2.push({
