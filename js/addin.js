@@ -3,34 +3,12 @@
 Blue: 6495ED
 Red: A00C23
 
+New array :::::> output2
+output2 is a copy of output (i.e. averaged aux) but only keep points where the state of gradient changes. (increase -> decrease, vice versa)
 
-New algorithm:
-**Refill can use back old algorithm 
-
----> get different driving session
----> loop hold Volt, only remain those session falls outside of driving session (indicate vehicle not moving)
----> check remaining data, for constant dropping
-
-
-Need to reduce computational need! 
- - Eliminate nested for loop (data points x driving sessions)
- - Change driving sessions into a plain array (no object). 
- - Duplicate rawFuel :::> processedFuel
- - loop through driving sessions, for only once. 
-    Find where the Beginning/ end of driving session fits in processedFuel. 
-    Make a marking (by adding new element) at transition 
- - Loop through processedFuel,
-    at every transition, change flag (drivingFlag) status
-    check flag status, do different things accordingly
-
-
-type of flagging:
- 1) use typeof (data is in object), can store extra info about transition
- 2) use empty cell, trigger by if(null)
-
-
-
-
+Potential solution:
+Add index to output2, so that can still trackback at which point it happen
+-> get only changes bigger than threshold
 
 https://www.google.com/maps/place/3.18730235,101.676445
 "3.18730235,101.676445"
@@ -300,11 +278,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             holdVolt[i] = results[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / (4-0.05);
             if (i >= avgPoints) {
-                averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
+                //averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
+                averager = averager + holdVolt[i] - holdVolt[i - avgPoints]; //50 points onwards, add new data, delete first data
                 output[i] = averager / avgPoints;
             } else {
                 output[i] = null;
-                averager += holdLitre[i];
+                //averager += holdLitre[i];
+                averager += holdVolt[i];
             }
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
@@ -394,7 +374,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //labelAngle: -20
             },
             axisY: [{
-                title: "Litres",
+                title: "Volts",
                 lineColor: "#A00C23",
                 tickColor: "#A00C23",
                 gridThickness: 2,
@@ -413,7 +393,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 lineThickness: 2,
                 includeZero: false,
             }, {
-                title: "Litres",
+                title: "Volts",
                 lineColor: "#3AF13A",
                 tickColor: "#3AF13A",
                 labelFontColor: "#3AF13A",
