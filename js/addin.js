@@ -187,7 +187,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         //rawFuel.splice(i++,0,null);
                         rawFuel.splice(i++,0,new Date(comparator).toISOString());
                         if(j < drivingSessions.length){
-                            console.log("iteration",j);
                             comparator = drivingSessions[j++].getTime();
                         }
                     }
@@ -195,7 +194,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         fuelOnStop.push(rawFuel[i]);
                     }
                 }
-                console.log("Remaining data",fuelOnStop);
+                //console.log("Remaining data",fuelOnStop);
 
 
                 callback1(results,fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
