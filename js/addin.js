@@ -307,7 +307,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         //var output2 = JSON.parse(JSON.stringify(output));
         var simplifiedAux = [];
         var time2 = JSON.parse(JSON.stringify(holdTimeAux));
-        var tempActivity =[];
+        var fuelActivity =[];
 
         for (i=0;i<output.length;i++){
             simplifiedAux[i] = [output[i],i];
@@ -323,10 +323,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
             }
         }
+        console.log("SIMPLIFIED AUX DATA",simplifiedAux);
         for(i=0;i<simplifiedAux.length;i++){
             if (i>0){
                 if (Math.abs(simplifiedAux[i][0] -simplifiedAux[i-1][0] )>=fuelThreshold){
-                    tempActivity.push([new Date(time2[i-1]),simplifiedAux[i-1][1],simplifiedAux[i-1][0],simplifiedAux[i][0]-simplifiedAux[i-1][0]]);
+                    fuelActivity.push([new Date(time2[i-1]),simplifiedAux[i-1][1],simplifiedAux[i-1][0],simplifiedAux[i][0]-simplifiedAux[i-1][0]]);
                 }
             }
             /*dataPoints2.push({
@@ -334,7 +335,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 y:output2[i]
             })*/
         }
-        console.log("NEW FUEL ACTIVITY LIST",tempActivity);
+        console.log("NEW FUEL ACTIVITY LIST",fuelActivity);
         /************************************************************************************************************************
         for (i=0; i<stopData.length; i++){
             dataPointsStop.push({
@@ -444,10 +445,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
-        callback(holdTimeAux, output, vehicleID);
+        callback(holdTimeAux, output,fuelActivity, vehicleID);
     };
 
-    var createTable = function(time, fuel, vehicleID) {
+    var createTable = function(time, fuel, fuelActivity, vehicleID) {
         //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
         //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
 
@@ -502,14 +503,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
-        var fuelChange;
+        /*var fuelChange;
         for (var i = 2 * avgPoints, j = 0; i < fuel.length; i++) {
             fuelChange = fuel[i] - fuel[i - avgPoints];
             if (Math.abs(fuelChange) > fuelThreshold) {
                 theftCount[j++] = [i, new Date(time[i]), fuel[i], fuelChange];
             }
         }
-        console.log("Refill/Theft", theftCount);
+        console.log("Refill/Theft", theftCount);*/
 
         //sorting theftCount into activities
         if (theftCount.length>0){
