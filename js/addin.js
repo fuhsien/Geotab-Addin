@@ -305,14 +305,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }
         /*************************************************************************************************************************/
         //var output2 = JSON.parse(JSON.stringify(output));
-        var simplifiedAux = []
+        var simplifiedAux = [];
         var time2 = JSON.parse(JSON.stringify(holdTimeAux));
         var tempActivity =[];
 
         for (i=0;i<output.length;i++){
             simplifiedAux[i] = [output[i],i];
         }
-        console.log("CHECKING AUX LENGTH, TIME LENGTH: ",simplifiedAux.length,time2.length);
 
         for(i=0;i<simplifiedAux.length-1;i++){
             if (simplifiedAux[i][0] && simplifiedAux[i-1][0]){
