@@ -559,7 +559,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             table.appendChild(tbody);
             body.appendChild(table);
 
-            console.log("NUMBER OF CALLS: ",multiCallArray.length);
+            console.log("HELLO IM CALLING YA: ",multiCallArray);
             api.multiCall(multiCallArray, function(results) {
                 console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
                 for (i=0;i<results.length;i++){
