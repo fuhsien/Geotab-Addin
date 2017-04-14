@@ -535,6 +535,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 td = tr.insertCell(4);
                 td.innerHTML = fuelActivity[i][2]+ fuelActivity[i][3];
             }
+            document.getElementById("disclaimer").innerHTML = '<span style="color:red"><b>**Disclaimer: </b></span> The following table is only meant to be a pointer. Please further investigate before making conclusion.';
+            table.appendChild(tbody);
+            body.appendChild(table);
         }
         /*if (theftCount.length>0){
             for(var i=0,newflag=1,counter=0,index=theftCount[0][0]-avgPoints;i<theftCount.length-1;i++){
