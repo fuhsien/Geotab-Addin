@@ -298,10 +298,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //x: i,
                 y: holdVolt[i]
             });
-            /*dataPoints2.push({
+            dataPoints2.push({
                 x: i,
                 y: output[i]
-            });*/
+            });
         }
         /*************************************************************************************************************************/
         var output2 = JSON.parse(JSON.stringify(output));
@@ -324,10 +324,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     tempActivity.push([new Date(time2[i-1]),output2[i-1],output2[i]-output2[i-1]]);
                 }
             }
-            dataPoints2.push({
+            /*dataPoints2.push({
                 x:i,
                 y:output2[i]
-            })
+            })*/
         }
         console.log("NEW FUEL ACTIVITY LIST",tempActivity);
         /************************************************************************************************************************
