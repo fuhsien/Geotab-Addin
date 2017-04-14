@@ -514,7 +514,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //sorting theftCount into activities
         if(fuelActivity.length>0){
-            for (i=0; i<fuelActivity;i++){
+            for (i=0; i<fuelActivity.length;i++){
                 tr = tbody.insertRow();
                 td = tr.insertCell(0);
                 td.innerHTML = fuelActivity[i][0];
@@ -534,7 +534,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
                 td = tr.insertCell(4);
                 td.innerHTML = fuelActivity[i][2]+ fuelActivity[i][3];
-                
+
                 }
             }
         }
