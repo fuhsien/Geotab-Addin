@@ -520,6 +520,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
                 else{
                     //indicates next point is the new activity
+                    console.log("Fuel array length: "+fuel.length+"Index: "+index);
 
                     index += Math.floor(counter/2);
                     tr = tbody.insertRow();
