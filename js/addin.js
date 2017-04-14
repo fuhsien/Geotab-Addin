@@ -509,7 +509,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //sorting theftCount into activities
         if (theftCount.length>0){
-            for(var i=0,newflag=1,counter=0,index=0 ;i<theftCount.length-1;i++){
+            for(var i=0,newflag=1,counter=0,index=theftCount[0][0]-avgPoints;i<theftCount.length-1;i++){
                 if (theftCount[i+1][0]-theftCount[i][0] <= 2){
                     if (newflag == 1){
                         //indicates new activity
