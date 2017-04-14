@@ -335,7 +335,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             })*/
         }
         fuelActivity.splice(0,1);
-        console.log("NEW FUEL ACTIVITY LIST",fuelActivity);
         /************************************************************************************************************************
         for (i=0; i<stopData.length; i++){
             dataPointsStop.push({
@@ -513,6 +512,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Refill/Theft", theftCount);*/
 
         //sorting theftCount into activities
+        console.log("NEW FUEL ACTIVITY LIST",fuelActivity);
         if(fuelActivity.length>0){
             for (i=0; i<fuelActivity.length;i++){
                 tr = tbody.insertRow();
@@ -534,8 +534,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
                 td = tr.insertCell(4);
                 td.innerHTML = fuelActivity[i][2]+ fuelActivity[i][3];
-
-                }
             }
         }
         /*if (theftCount.length>0){
