@@ -517,7 +517,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             for (i=0; i<fuelActivity.length;i++){
                 tr = tbody.insertRow();
                 td = tr.insertCell(0);
-                td.innerHTML = fuelActivity[i][0];
+                td.innerHTML = moment(fuelActivity[i][0]).format('dddd, MMM DD, h:mm a');
 
                 td = tr.insertCell(1);
                 if (Math.sign(fuelActivity[i][3]) == -1){
@@ -527,17 +527,64 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
 
                 td = tr.insertCell(2);
-                td.innerHTML = fuelActivity[i][3];
+                td.innerHTML = fuelActivity[i][3].toFixed(4);
 
                 td = tr.insertCell(3);
-                td.innerHTML = fuelActivity[i][2];
+                td.innerHTML = fuelActivity[i][2].toFixed(4);
 
                 td = tr.insertCell(4);
-                td.innerHTML = fuelActivity[i][2]+ fuelActivity[i][3];
+                td.innerHTML = (fuelActivity[i][2]+ fuelActivity[i][3]).toFixed(4);
+
+                //get location here
+                var theftStart = new Date(time[index]);
+                var theftEnd = new Date(time[index]);
+                theftStart.setMinutes(theftStart.getMinutes()-2);
+
+                multiCallArray.push(
+                    ["Get", {
+                        "typeName": "LogRecord",
+                        "search": {
+                            deviceSearch: {
+                                "id": vehicleID
+                            },
+                            fromDate: theftStart,
+                            toDate: theftEnd
+                        }
+                    }]
+                )
+
+
             }
             document.getElementById("disclaimer").innerHTML = '<span style="color:red"><b>**Disclaimer: </b></span> The following table is only meant to be a pointer. Please further investigate before making conclusion.';
             table.appendChild(tbody);
             body.appendChild(table);
+
+            console.log("NUMBER OF CALLS: ",multiCallArray.length);
+            api.multiCall(multiCallArray, function(results) {
+                console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
+                for (i=0;i<results.length;i++){
+                    var status = results[i];
+                    if (status[0]){
+                        status = status[status.length-1];
+                        theftLocation.push(status.latitude + "," + status.longitude);
+                    }else{
+                        theftLocation.push(null);
+                    }
+
+                }
+            });
+            console.log("TIME FOR OVERVIEW",theftLocation);
+
+
+            $(".table tbody tr").click(function(){
+                $('.selected').removeClass('selected');
+                $(this).addClass('selected');
+                console.log("Row index is ",this.rowIndex);
+                var coords = theftLocation[this.rowIndex-1],
+                    locationUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords + "&zoom=15&scale=false&size=300x300&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7C" + coords;
+                $('#deviceLocation').attr('src', locationUrl);
+                $('#activity-maps').attr('href',"http://www.google.com/maps/place/" + coords);
+            });
         }
         /*if (theftCount.length>0){
             for(var i=0,newflag=1,counter=0,index=theftCount[0][0]-avgPoints;i<theftCount.length-1;i++){
