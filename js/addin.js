@@ -323,7 +323,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
             }
         }
-        console.log("SIMPLIFIED AUX DATA",simplifiedAux);
         for(i=0;i<simplifiedAux.length;i++){
             if (i>0){
                 if (Math.abs(simplifiedAux[i][0] -simplifiedAux[i-1][0] )>=fuelThreshold){
@@ -335,6 +334,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 y:output2[i]
             })*/
         }
+        simplifiedAux.splice(0,1);
         console.log("NEW FUEL ACTIVITY LIST",fuelActivity);
         /************************************************************************************************************************
         for (i=0; i<stopData.length; i++){
