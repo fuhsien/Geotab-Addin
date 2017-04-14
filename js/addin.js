@@ -503,17 +503,41 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         /*****************************************************************************/
         // Algorithm for Fuel theft/refill detection
-        var fuelChange;
+        /*var fuelChange;
         for (var i = 2 * avgPoints, j = 0; i < fuel.length; i++) {
             fuelChange = fuel[i] - fuel[i - avgPoints];
             if (Math.abs(fuelChange) > fuelThreshold) {
                 theftCount[j++] = [i, new Date(time[i]), fuel[i], fuelChange];
             }
         }
-        console.log("Refill/Theft", theftCount);
+        console.log("Refill/Theft", theftCount);*/
 
         //sorting theftCount into activities
-        if (theftCount.length>0){
+        if(fuelActivity.length>0){
+            for (i=0; i<fuelActivity;i++){
+                tr = tbody.insertRow();
+                td = tr.insertCell(0);
+                td.innerHTML = fuelActivity[i][0];
+
+                td = tr.insertCell(1);
+                if (Math.sign(fuelActivity[i][3]) == -1){
+                    td.innerHTML = "Possible Fuel Theft";
+                }else {
+                    td.innerHTML = "Refill";
+                }
+
+                td = tr.insertCell(2);
+                td.innerHTML = fuelActivity[i][3];
+
+                td = tr.insertCell(3);
+                td.innerHTML = fuelActivity[i][2];
+
+                td = tr.insertCell(4);
+                td.innerHTML = fuelActivity[i][2]+ fuelActivity[i][3];
+                }
+            }
+        }
+        /*if (theftCount.length>0){
             for(var i=0,newflag=1,counter=0,index=theftCount[0][0]-avgPoints;i<theftCount.length-1;i++){
                 if (theftCount[i+1][0]-theftCount[i][0] <= 2){
                     if (newflag == 1){
@@ -635,7 +659,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 $('#deviceLocation').attr('src', locationUrl);
                 $('#activity-maps').attr('href',"http://www.google.com/maps/place/" + coords);
             });
-        }
+        }*/
     };
 
     var reset = function() {
