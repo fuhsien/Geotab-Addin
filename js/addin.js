@@ -304,24 +304,30 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });
         }
         /*************************************************************************************************************************/
-        var output2 = JSON.parse(JSON.stringify(output));
+        //var output2 = JSON.parse(JSON.stringify(output));
+        var simplifiedAux = []
         var time2 = JSON.parse(JSON.stringify(holdTimeAux));
         var tempActivity =[];
 
-        for(i=0;i<output2.length-1;i++){
-            if (output2[i] && output2[i-1]){
-                var prev = Math.sign(output2[i]-output2[i-1]);
-                var next = Math.sign(output2[i+1]- output2[i]);
+        for (i=0;i<output.length;i++){
+            simplifiedAux[i] = [output[i],i];
+        }
+        console.log("CHECKING AUX LENGTH, TIME LENGTH: ",simplifiedAux.length,time2.length);
+
+        for(i=0;i<simplifiedAux.length-1;i++){
+            if (simplifiedAux[i][0] && simplifiedAux[i-1][0]){
+                var prev = Math.sign(simplifiedAux[i][0] -simplifiedAux[i-1][0]);
+                var next = Math.sign(simplifiedAux[i+1][0] - simplifiedAux[i][0]);
                 if (prev == next){
-                    output2.splice(i,1);
+                    simplifiedAux.splice(i,1);
                     time2.splice(i--,1);
                 }
             }
         }
-        for(i=0;i<output2.length;i++){
+        for(i=0;i<simplifiedAux.length;i++){
             if (i>0){
-                if (Math.abs(output2[i]-output2[i-1])>=fuelThreshold){
-                    tempActivity.push([new Date(time2[i-1]),output2[i-1],output2[i]-output2[i-1]]);
+                if (Math.abs(simplifiedAux[i][0] -simplifiedAux[i-1][0] )>=fuelThreshold){
+                    tempActivity.push([new Date(time2[i-1]),simplifiedAux[i-1][1],simplifiedAux[i-1][0],simplifiedAux[i][0]-simplifiedAux[i-1][0]]);
                 }
             }
             /*dataPoints2.push({
@@ -519,8 +525,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 }
                 else{
                     //indicates next point is the new activity
-                    console.log("Fuel array length: "+fuel.length+"Index: "+index);
-
                     index += Math.floor(counter/2);
                     tr = tbody.insertRow();
                     td = tr.insertCell(0);
