@@ -565,15 +565,22 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             console.log("HELLO IM CALLING YA: ",multiCallArray);
             api.multiCall(multiCallArray, function(results) {
                 console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
-                for (i=0;i<results.length;i++){
-                    var status = results[i];
-                    if (status[0]){
-                        status = status[status.length-1];
-                        theftLocation.push(status.latitude + "," + status.longitude);
-                    }else{
-                        theftLocation.push(null);
-                    }
+                if (multiCallArray.length>1){
+                    for (i=0;i<results.length;i++){
+                        var status = results[i];
+                        if (status[0]){
+                            status = status[status.length-1];
+                            theftLocation.push(status.latitude + "," + status.longitude);
+                        }else{
+                            theftLocation.push(null);
+                        }
 
+                    }
+                }else{
+                    if (results[0]){
+                        var status = results[results.length-1];
+                        theftLocation.push(status.latitude + "," + status.longitude);
+                    }
                 }
             });
             //console.log("TIME FOR OVERVIEW",theftLocation);
