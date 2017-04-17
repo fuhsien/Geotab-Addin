@@ -201,7 +201,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //console.log("Remaining data",fuelOnStop);
 
 
-                callback1(results,fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
+                callback1(results,fuelOnStop, callback2, vehicleID,drivingSessions); //plotData,callback2:createtable
 
             });
         }, function(e) {
@@ -228,7 +228,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Loaded Google Sheet");
     };
 
-    var plotData = function(results,stopData, callback, vehicleID) {
+    var plotData = function(results,stopData, callback, vehicleID, drivingSessions) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
@@ -308,7 +308,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });*/
         }
         /*************************************************************************************************************************/
-        //var output2 = JSON.parse(JSON.stringify(output));
         var simplifiedAux = [];
         var time2 = JSON.parse(JSON.stringify(holdTimeAux));
         var fuelActivity =[];
@@ -440,10 +439,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
-        callback(holdTimeAux, output,fuelActivity, vehicleID);
+        callback(holdTimeAux, output,fuelActivity, vehicleID, drivingSessions);
     };
 
-    var createTable = function(time, fuel, fuelActivity, vehicleID) {
+    var createTable = function(time, fuel, fuelActivity, vehicleID,drivingSessions) {
         //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
         //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
 
