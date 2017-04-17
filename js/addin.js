@@ -335,7 +335,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
             dataPoints2.push({
                 x:i,
-                y:output2[i]
+                y:simplifiedAux[i][0]
             })
         }
         fuelActivity.splice(0,1);
