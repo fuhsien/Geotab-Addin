@@ -564,7 +564,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
             console.log("HELLO IM CALLING YA: ",multiCallArray);
             api.multiCall(multiCallArray, function(results) {
-                //console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
+                console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
                 for (i=0;i<results.length;i++){
                     var status = results[i];
                     if (status[0]){
