@@ -1,5 +1,9 @@
 /********************************************************************************
 
+COMPLETE SHIFTING TABLE TO NEW METHOD!!!!!!
+
+
+
 Blue: 6495ED
 Red: A00C23
 
@@ -536,8 +540,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 td.innerHTML = (fuelActivity[i][2]+ fuelActivity[i][3]).toFixed(4);
 
                 //get location here
-                var theftStart = new Date(fuelActivity[i][3]);
-                var theftEnd = new Date(fuelActivity[i][3]);
+                var theftStart = new Date(fuelActivity[i][0]);
+                var theftEnd = new Date(fuelActivity[i][0]);
                 theftStart.setMinutes(theftStart.getMinutes()-2);
 
                 multiCallArray.push(
