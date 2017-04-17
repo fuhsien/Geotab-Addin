@@ -302,10 +302,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //x: i,
                 y: holdVolt[i]
             });
-            dataPoints2.push({
+            /*dataPoints2.push({
                 x: i,
                 y: output[i]
-            });
+            });*/
         }
         /*************************************************************************************************************************/
         //var output2 = JSON.parse(JSON.stringify(output));
@@ -333,10 +333,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     fuelActivity.push([new Date(time2[i-1]),simplifiedAux[i-1][1],simplifiedAux[i-1][0],simplifiedAux[i][0]-simplifiedAux[i-1][0]]);
                 }
             }
-            /*dataPoints2.push({
+            dataPoints2.push({
                 x:i,
                 y:output2[i]
-            })*/
+            })
         }
         fuelActivity.splice(0,1);
         /************************************************************************************************************************
@@ -359,14 +359,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 y: holdSpeed[j]
             });
         }
-        /*for (var j = 0; j < filtered.length - 1; j++) {
-            holdTimeSpeed[j] = filtered[j].dateTime;
-            holdSpeed[j] = filtered[j].speed;
-            dataPointsSpeed.push({
-                x: new Date(holdTimeSpeed[j]),
-                y: holdSpeed[j]
-            });
-        }*/
 
         dataSeries[0].dataPoints = dataPointsAux;
         dataSeries[1].dataPoints = dataPointsSpeed;
@@ -518,6 +510,15 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         //sorting theftCount into activities
         console.log("NEW FUEL ACTIVITY LIST",fuelActivity);
         if(fuelActivity.length>0){
+            // Activity filtering
+            for (i=1;i<fuelActivity.length;i++){
+                if (fuelActivity[i][0] - fuelActivity[i-1][0]<=30){
+                    //need further checking
+                }else{
+                    //check if its in driving session
+                }
+            }
+
             for (i=0; i<fuelActivity.length;i++){
                 tr = tbody.insertRow();
                 td = tr.insertCell(0);
@@ -556,16 +557,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         }
                     }]
                 )
-
-
             }
-            document.getElementById("disclaimer").innerHTML = '<span style="color:red"><b>**Disclaimer: </b></span> The following table is only meant to be a pointer. Please further investigate before making conclusion.';
+
+
+            document.getElementById("disclaimer").innerHTML = '<span style="color:red"><b>**Disclaimer: </b></span> The following table is only meant to be a pointer. Please further investigate before drawing conclusion.';
             table.appendChild(tbody);
             body.appendChild(table);
 
             console.log("HELLO IM CALLING YA: ",multiCallArray);
             api.multiCall(multiCallArray, function(results) {
-                console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
+                //console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
                 for (i=0;i<results.length;i++){
                     var status = results[i];
                     if (status[0]){
@@ -577,7 +578,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
                 }
             });
-            console.log("TIME FOR OVERVIEW",theftLocation);
+            //console.log("TIME FOR OVERVIEW",theftLocation);
 
 
             $(".table tbody tr").click(function(){
@@ -591,127 +592,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             });
         }
         /*if (theftCount.length>0){
-            for(var i=0,newflag=1,counter=0,index=theftCount[0][0]-avgPoints;i<theftCount.length-1;i++){
-                if (theftCount[i+1][0]-theftCount[i][0] <= 2){
-                    if (newflag == 1){
-                        //indicates new activity
-                        index = theftCount[i][0]-avgPoints;     // minus avgPoints to remove time delayed by averaging
-                        newflag = 0;
-                    }       //no new activity found
-                    counter++;
-                }
-                else{
-                    //indicates next point is the new activity
-                    index += Math.floor(counter/2);
-                    tr = tbody.insertRow();
-                    td = tr.insertCell(0);
-                    td.innerHTML =moment(time[index]).format('dddd, MMM DD, h:mm a');
-
-                    td = tr.insertCell(1);
-                    if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
-                        td.innerHTML = "Possible Fuel Theft";
-                    }else {
-                        td.innerHTML = "Refill";
-                    }
-                    td = tr.insertCell(2);
-                    td.innerHTML = (theftCount[Math.ceil(i-counter/2)][3]).toFixed(4);
-
-                    td = tr.insertCell(3);
-                    td.innerHTML = fuel[index].toFixed(4);
-
-                    td = tr.insertCell(4);
-                    td.innerHTML = fuel[index+avgPoints].toFixed(4);
-
-                    //get location here
-                    var theftStart = new Date(time[index]);
-                    var theftEnd = new Date(time[index]);
-                    theftStart.setMinutes(theftStart.getMinutes()-2);
-
-                    //put info into multiCallArray
-                    multiCallArray.push(
-                        ["Get", {
-                            "typeName": "LogRecord",
-                            "search": {
-                                deviceSearch: {
-                                    "id": vehicleID
-                                },
-                                fromDate: theftStart,
-                                toDate: theftEnd
-                            }
-                        }]
-                    )
-
-                    newflag = 1;
-                    counter = 0;
-                }
-            }
-            
-            index += Math.floor(counter/2);
-            tr = tbody.insertRow();
-            td = tr.insertCell(0);
-            td.innerHTML =moment(time[index]).format('dddd, MMM DD, h:mm a');
-            td = tr.insertCell(1);
-            if(Math.sign( theftCount[Math.ceil(i-counter/2)][3] ) == -1){
-                td.innerHTML = "Possible Fuel Theft";
-            }else {
-                td.innerHTML = "Refill";
-            }
-            td = tr.insertCell(2);
-            td.innerHTML = theftCount[Math.ceil(i-counter/2)][3].toFixed(4);
-
-            td = tr.insertCell(3);
-            td.innerHTML = fuel[index].toFixed(4);
-
-            td = tr.insertCell(4);
-            td.innerHTML = fuel[index+avgPoints].toFixed(4);
-
-            //get location here
-            var theftStart = new Date(time[index]);
-            var theftEnd = new Date(time[index]);
-            theftStart.setMinutes(theftStart.getMinutes()-2);
-
-            multiCallArray.push(
-                ["Get", {
-                    "typeName": "LogRecord",
-                    "search": {
-                        deviceSearch: {
-                            "id": vehicleID
-                        },
-                        fromDate: theftStart,
-                        toDate: theftEnd
-                    }
-                }]
-            )
-
-            console.log("AMAZING ARRAY, NO JOKE",multiCallArray);
-            api.multiCall(multiCallArray, function(results) {
-                console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
-                for (i=0;i<results.length;i++){
-                    var status = results[i];
-                    if (status[0]){
-                        status = status[status.length-1];
-                        theftLocation.push(status.latitude + "," + status.longitude);
-                    }else{
-                        theftLocation.push(null);
-                    }
-
-                }
-            });
-            console.log("TIME FOR OVERVIEW",theftLocation);
-
-            document.getElementById("disclaimer").innerHTML = '<span style="color:red"><b>**Disclaimer: </b></span> The following table is only meant to be a pointer. Please further investigate before making conclusion.';
-            table.appendChild(tbody);
-            body.appendChild(table);
-
-            $(".table tbody tr").click(function(){
-                $('.selected').removeClass('selected');
-                $(this).addClass('selected');
-                console.log("Row index is ",this.rowIndex);
-                var coords = theftLocation[this.rowIndex-1],
-                    locationUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords + "&zoom=15&scale=false&size=300x300&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7C" + coords;
-                $('#deviceLocation').attr('src', locationUrl);
-                $('#activity-maps').attr('href',"http://www.google.com/maps/place/" + coords);
-            });
+            OLD ALGORITHM GOES HERE
         }*/
     };
 
