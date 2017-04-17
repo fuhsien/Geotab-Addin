@@ -541,7 +541,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //get location here
                 var theftStart = new Date(fuelActivity[i][0]);
                 var theftEnd = new Date(fuelActivity[i][0]);
-                theftStart.setMinutes(theftStart.getMinutes()-2);
+                theftStart.setMinutes(theftStart.getMinutes()-10);
 
                 multiCallArray.push(
                     ["Get", {
