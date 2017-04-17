@@ -17,56 +17,61 @@
     </head>
 
     <body>
-        <div id="fuel-sensor-main">
-            <div id="detail-selection">
-                <form class="pure-form pure-form-stacked">
-                    <fieldset>
-                        <label for="fuel-sensor-vehicle">Vehicle to inspect:</label>
-                            <div class="pure-g">
-                                <select id="fuel-sensor-vehicle" class="pure-u-1-1"></select>
-                            </div>
-                    </fieldset>
-                </form>
-                <form class="pure-form">
-                    <fieldset>
-                        <label for="startDate">
-                            From:
-                            <input type="text" placeholder="Start Date" id="startDate">
-                        </label>
-                        <label for="endDate">
-                            To:
-                            <input type="text" placeholder="End Date" id="endDate" disabled>
-                        </label>
-                        </t>
-                        <button id="render" class="pure-button pure-button-primary" disabled>Run!</button>
-                    </fieldset>
-                </form>
+        <header class="geotabPageHeader">
+            <h1 class="geotabPageName">Device Fuel Info <span class="subdued">sub-title</span></h1>
+            <div class="pageNameSecondary">
+                <h3 class="geotabSecondaryTitle">by: <span id="deviceFuelInfo-user"></span></h3>
             </div>
-            <!--<div class="container-fluid" style="border-style:solid;">
-                <div class="row">
-                    <div class="col-md-8" > <!-- THis is for the graph column
-                        <div class="row">
-                            <div id="chartContainer"></div><br>
+        </header>
+        
+        <div id="details-selection">
+            <form class="pure-form pure-form-stacked">
+                <fieldset>
+                    <label for="fuel-sensor-vehicle">Vehicle to inspect:</label>
+                        <div class="pure-g">
+                            <select id="fuel-sensor-vehicle" class="pure-u-1-1"></select>
                         </div>
-                        <div class="row">
-                            <br><div id="chartContainer2"></div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4" id="Location" style="border-style: solid;">
-                        <p>This is for location</p>
-                    </div>    
-                </div>
-            </div>-->
-                <div id="chartContainer" style="height: 35%; width: 100%;"></div>
-                <div id="chartContainer2" style="height: 25%; width: 100%;"></div>
-            <br>
-            <p id="disclaimer"></p>
-            <div id="for-table"></div>
-            <a id="activity-maps" target="_blank">
-                <img id="deviceLocation" />
-            </a>
+                </fieldset>
+            </form>
+            <form class="pure-form">
+                <fieldset>
+                    <label for="startDate">
+                        From:
+                        <input type="text" placeholder="Start Date" id="startDate">
+                    </label>
+                    <label for="endDate">
+                        To:
+                        <input type="text" placeholder="End Date" id="endDate" disabled>
+                    </label>
+                    </t>
+                    <button id="render" class="pure-button pure-button-primary" disabled>Run!</button>
+                </fieldset>
+            </form>
         </div>
+        <!--<div class="container-fluid" style="border-style:solid;">
+            <div class="row">
+                <div class="col-md-8" > <!-- THis is for the graph column
+                    <div class="row">
+                        <div id="chartContainer"></div><br>
+                    </div>
+                    <div class="row">
+                        <br><div id="chartContainer2"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" id="Location" style="border-style: solid;">
+                    <p>This is for location</p>
+                </div>    
+            </div>
+        </div>-->
+            <div id="chartContainer" style="height: 35%; width: 100%;"></div>
+            <div id="chartContainer2" style="height: 25%; width: 100%;"></div>
+        <br>
+        <p id="disclaimer"></p>
+        <div id="for-table"></div>
+        <a id="activity-maps" target="_blank">
+            <img id="deviceLocation" />
+        </a>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.js"></script>
         <script type="text/javascript" src="assets/jquery.canvasjs.min.js"></script>
         <script src="js/picker.js"></script> 
