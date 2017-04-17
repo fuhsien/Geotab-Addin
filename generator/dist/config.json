@@ -1,0 +1,13 @@
+{
+  "name": "Fuel addin-generator",
+  "supportEmail": "fuhsienng@proice.com",
+  "version": "0.0.1",
+  "items": [{
+    "url": "fuhsien.github.io/generator/fuelAddinGenerator.html",
+    "path": "ActivityLink/",
+    "menuName": {
+      "en": "Vehicle Fuel Info"
+    },
+    "icon": "fuhsien.github.io/generator/images/icon.svg"
+  }]
+}
