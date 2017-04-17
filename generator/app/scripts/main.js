@@ -43,7 +43,7 @@ geotab.addin.fuelAddinGenerator = function () {
 
       // getting the current user to display in the UI
       freshApi.getSession(session => {
-        elAddin.querySelector('#fuelAddinGenerator-user').textContent = session.userName;
+        elAddin.querySelector('#fuelAddinGenerator-user').innerHTML = session.userName;
       });
 
       // show main content

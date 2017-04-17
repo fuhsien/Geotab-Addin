@@ -6,12 +6,13 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fuel addin-generator</title>
+  <title>Device Fuel Info</title>
 
   
   <!-- build:css styles/vendor.css -->
   <!-- bower:css -->
-  <!-- endbower -->
+  <!-- endbower -->  
+  <link rel="stylesheet" href="styles/vendor/bulma.css">
   <!-- endbuild -->
 
   <!-- build:css styles/main.css -->
@@ -24,21 +25,48 @@
   <!-- endbuild -->
 
   <!-- build:js scripts/main.js -->
-  <script src="scripts/main.js"></script>
   <!-- endbuild -->
   
 </head>
 
 <body>
 
-  <div id="fuelAddinGenerator" class="hidden">
+  <div id="deviceFuelInfo" >
     
         <header class="geotabPageHeader">
-          <h1 class="geotabPageName">Fuel addin-generator <span class="subdued">sub title</span></h1>
+          <h1 class="geotabPageName">Device Fuel Info <span class="subdued">sub-title</span></h1>
           <div class="pageNameSecondary">
-            <h3 class="geotabSecondaryTitle">by: <span id="fuelAddinGenerator-user"></span></h3>
+            <h3 class="geotabSecondaryTitle">by: <span id="deviceFuelInfo-user"></span></h3>
           </div>
         </header>
+    <div id="divContainer"> 
+        <h1>Demo</h1>
+        <table class="table" >
+ 
+            <!-- TABLE HEADER-->
+            <thead>
+               <tr><td colspan=3>DEMO</td></tr>
+                <tr>
+                    <th>Product</th><th>Inflation Rate</th><th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="p">Coke® Inflation Index</td><td class="i">7.23%</td><td class="n">Yeah, it's about $2/bottle now</td>
+                </tr>
+                <tr>
+                    <td class="p">Gas Inflation Index</td><td class="i">6.94%</td><td class="n">Such a pain at the pump!</td>
+                 </tr>
+                <tr>
+                    <td class="p">How could I select this row</td><td class="i">6.94%</td><td class="n">Hello</td>
+                 </tr>
+                <tr>
+                    <td class="p">Nope cannot select this row either</td><td class="i">6.94%</td><td class="n">Nothing</td>
+                 </tr>
+
+            </tbody>
+         </table>
+    </div>
     
   </div>
 
