@@ -201,7 +201,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //console.log("Remaining data",fuelOnStop);
 
 
-                callback1(results,fuelOnStop, callback2, vehicleID,drivingSessions); //plotData,callback2:createtable
+                callback1(results,fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
 
             });
         }, function(e) {
@@ -228,7 +228,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Loaded Google Sheet");
     };
 
-    var plotData = function(results,stopData, callback, vehicleID, drivingSessions) {
+    var plotData = function(results,stopData, callback, vehicleID) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
@@ -439,10 +439,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
-        callback(holdTimeAux, output,fuelActivity, vehicleID, drivingSessions);
+        callback(holdTimeAux, output,fuelActivity, vehicleID);
     };
 
-    var createTable = function(time, fuel, fuelActivity, vehicleID,drivingSessions) {
+    var createTable = function(time, fuel, fuelActivity, vehicleID) {
         //Create table here: result return as Array of array [Array[80], Array[230]] -> [Aux 1, Speed]
         //Table will include: Thead, Columns:[Date, fuel level, Device?, location?]
 
@@ -511,10 +511,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         if(fuelActivity.length>0){
             // Activity filtering
             for (i=1;i<fuelActivity.length;i++){
-                if (fuelActivity[i][0] - fuelActivity[i-1][0]<=30){
+                if (fuelActivity[i][1] - fuelActivity[i-1][1]<=30){
                     //need further checking
-                }else{
-                    //check if its in driving session
+                    console.log('Closeby activity found around \n',fuelActivity[i][0]);
                 }
             }
 
