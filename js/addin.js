@@ -564,7 +564,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
             console.log("HELLO IM CALLING YA: ",multiCallArray);
             api.multiCall(multiCallArray, function(results) {
-                console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
+                //console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
                 if (multiCallArray.length>1){
                     for (i=0;i<results.length;i++){
                         var status = results[i];
@@ -602,7 +602,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     };
 
     var reset = function() {
-        document.getElementById("mapreplay-options-vehicle").innerHTML = "";
+        document.getElementById("fuel-sensor-vehicle").innerHTML = "";
         document.getElementById("chartContainer").innerHTML = "";
         document.getElementById("chartContainer2").innerHTML = "";
         document.getElementById("disclaimer").innerHTML = "";
@@ -622,14 +622,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         sFlag = false;
         eFlag = false;
 
-        $('#mapreplay-options-vehicle').unbind();
+        $('#fuel-sensor-vehicle').unbind();
         $('#render').unbind();
 
     };
 
     /*****************************HTML functionality***********************************/
     var populateVehicleSelect = function() {
-        var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
+        var vehicleSelect = document.getElementById("fuel-sensor-vehicle");
         vehicleSelect.appendChild((function() {
             var defaultOption = document.createElement("option");
             defaultOption.default = true;
@@ -649,7 +649,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     };
 
     var initializeEventHandler = function() {
-        var vehicleSelect = document.getElementById("mapreplay-options-vehicle");
+        var vehicleSelect = document.getElementById("fuel-sensor-vehicle");
         var button = document.getElementById("render");
         var $inputStart = $("#startDate").pickadate({
             closeOnSelect: false,
@@ -672,7 +672,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         s.readOnly = false;
         e.readOnly = false;
 
-        $("#mapreplay-options-vehicle").change(function() {
+        $("#fuel-sensor-vehicle").change(function() {
             selectedOpt = this.value;
             if (selectedOpt) {
                 selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
