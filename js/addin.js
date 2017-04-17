@@ -510,8 +510,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("NEW FUEL ACTIVITY LIST",fuelActivity);
         if(fuelActivity.length>0){
             // Activity filtering
-            for (i=1;i<fuelActivity.length;i++){
-                if (fuelActivity[i][1] - fuelActivity[i-1][1]<=30){
+            for (i=0;i<fuelActivity.length-1;i++){
+                if (fuelActivity[i+1][1] - fuelActivity[i][1]<=30){
                     //need further checking
                     console.log('Closeby activity found around \n',fuelActivity[i][0]);
                 }
