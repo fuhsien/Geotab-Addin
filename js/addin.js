@@ -258,7 +258,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             axisYIndex: 1,
             showInLegend: true
         }, {
-            name: "Stopped",
+            name: "Raw Data",
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 2,
