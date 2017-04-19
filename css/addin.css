@@ -19,3 +19,18 @@ table.is-striped tr.selected {
     vertical-align: middle;
     padding: 1.5em;
 }
+
+.fueladdin-row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.fueladdin-row:before,
+.fueladdin-row:after{
+  display: table;
+  content: " ";
+}
+
+.fueladdin-row:after{
+  clear: both;
+}
