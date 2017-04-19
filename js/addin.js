@@ -698,6 +698,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 button.disabled = true;
             }
         });
+        $('#shrink').click(function(){
+            $('#fuelsensor-graphs').addClass('col-md-9');
+            $('#fuelsensor-deviceLocation').addClass('col-md-3');
+        })
 
         //Event handler for Date picker
         $('#startDate').change(function() {
