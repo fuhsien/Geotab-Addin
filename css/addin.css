@@ -42,3 +42,7 @@ table.is-striped tr.selected {
 #genDeviceFuelInfo, .container-fluid{
   height:100%;
 }
+
+#deviceLocation{
+  margin: auto;
+}
