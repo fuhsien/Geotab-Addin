@@ -590,6 +590,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             $(".table tbody tr").click(function(){
                 $('.selected').removeClass('selected');
                 $(this).addClass('selected');
+                $('#fuelsensor-graphs').addCLass('col-md-8');
+                $('#fuelsensor-activityLocation').addCLass('col-md-3');
                 console.log("Row index is ",this.rowIndex);
                 var coords = theftLocation[this.rowIndex-1],
                     locationUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords + "&zoom=15&scale=false&size=300x300&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7C" + coords;
