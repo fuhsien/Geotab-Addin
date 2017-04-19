@@ -23,7 +23,7 @@ https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.0/css/bulma.min.css">
 
 
-
+style="border-style:solid;"
 
 
 
