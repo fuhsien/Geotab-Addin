@@ -28,9 +28,9 @@
             <form class="pure-form pure-form-stacked">
                 <fieldset>
                     <label for="fuel-sensor-vehicle">Vehicle to inspect:</label>
-                        <div class="pure-g">
-                            <select id="fuel-sensor-vehicle" class="pure-u-1-1"></select>
-                        </div>
+                    <div class="pure-g">
+                        <select id="fuel-sensor-vehicle" class="pure-u-1-1"></select>
+                    </div>
                 </fieldset>
             </form>
             <form class="pure-form">
@@ -49,40 +49,44 @@
             </form>
         </div>
 
-        <div id="genDeviceFuelInfo" >
-        <div class="container-fluid" style="border-style:solid;">
-            <div class="fueladdin-row" style=" border-style:solid;border-color:red;">
-                <div class="col-md-9" > 
-                    <div class="fueladdin-row">
-                        <div id="chartContainer" style="height: 35%;border-style: solid;border-color:blue;"></div><br>
+        <div id="genDeviceFuelInfo">
+            <div class="container-fluid" style="border-style:solid;">
+                <div class="fueladdin-row" style=" border-style:solid;border-color:red;">
+                    <div class="col-md-9">
+                        <div class="fueladdin-row">
+                            <div id="chartContainer" style="height: 35%;border-style: solid;border-color:blue;"></div>
+                            <br>
+                        </div>
+                        <div class="fueladdin-row">
+                            <br>
+                            <div id="chartContainer2" style="height: 25%;border-style: solid;border-color:blue;"></div>
+                        </div>
                     </div>
-                    <div class="fueladdin-row">
-                        <br><div id="chartContainer2" style="height: 25%;border-style: solid;border-color:blue;"></div>
+
+                    <div class="col-md-2" id="Location" style="border-style: solid;border-color:green;">
+                        <p>This is for location</p>
                     </div>
                 </div>
-
-                <div class="col-md-2" id="Location" style="border-style: solid;border-color:green;">
-                    <p>This is for location</p>
-                </div>    
+                <div class="fueladdin-row">
+                    <p id="disclaimer"></p>
+                    <div id="for-table"></div>
+                </div>
             </div>
-        </div>
 
-        <!--<div id="chartContainer" style="height: 35%; width: 100%;"></div>
+            <!--<div id="chartContainer" style="height: 35%; width: 100%;"></div>
         <div id="chartContainer2" style="height: 25%; width: 100%;"></div>-->
-        <br>
-        <p id="disclaimer"></p>
-        <div class="fueladdin-row">
-            <div id="for-table"></div>
-        </div>
+            <br>
+
         </div>
         <a id="activity-maps" target="_blank">
             <img id="deviceLocation" />
         </a>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.js"></script>
         <script type="text/javascript" src="assets/jquery.canvasjs.min.js"></script>
-        <script src="js/picker.js"></script> 
-        <script src="js/picker.date.js"></script> 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> 
+        <script src="js/picker.js"></script>
+        <script src="js/picker.date.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script type="text/javascript" src="js/addin.js"></script>
     </body>
+
 </html>
