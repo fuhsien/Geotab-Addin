@@ -43,12 +43,12 @@ geotab.addin.genDeviceFuelInfo = function() {
 
             // getting the current user to display in the UI
             freshApi.getSession(session => {
-                elAddin.querySelector('#genDeviceFuelInfo-user').textContent = session.userName;
+                document.querySelector('#genDeviceFuelInfo-user').textContent = session.userName;
             });
             //document.getElementById('demo').innerHTML = "PRINTING NO PROBLEM";
-            /*$(function(){
-                console.log('ready!');
-            });*/
+            $('#button').click(function(){
+                alert('Button pressed!');
+            })
             // show main content
             elAddin.className = '';
         },
