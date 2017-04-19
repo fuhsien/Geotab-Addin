@@ -15,7 +15,7 @@
   "dev": {
     "root": "genDeviceFuelInfo",
     "dist": {
-      "host": "fuhsien.github.io/generator/dist/"
+      "host": "https://fuhsien.github.io/generator/dist/"
     }
   }
 }

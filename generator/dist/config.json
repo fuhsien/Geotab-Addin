@@ -3,11 +3,11 @@
   "supportEmail": "fuhsienng@proice.com",
   "version": "0.0.1",
   "items": [{
-    "url": "fuhsien.github.io/generator/dist/genDeviceFuelInfo.html",
+    "url": "https://fuhsien.github.io/generator/dist/genDeviceFuelInfo.html",
     "path": "ActivityLink/",
     "menuName": {
       "en": "Fuel Activity"
     },
-    "icon": "fuhsien.github.io/generator/dist/images/icon.svg"
+    "icon": "https://fuhsien.github.io/generator/dist/images/icon.svg"
   }]
 }
