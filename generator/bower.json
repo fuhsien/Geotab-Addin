@@ -1,7 +1,12 @@
 {
   "name": "gendevicefuelinfo",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "pickadate": "^3.5.6",
+    "bootstrap-css": "^3.3.7",
+    "pure": "^0.6.2",
+    "moment": "^2.18.1"
+  },
   "devDependencies": {
     "dialog-polyfill": "^0.4.3"
   }

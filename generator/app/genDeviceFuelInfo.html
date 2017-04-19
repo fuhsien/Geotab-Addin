@@ -11,7 +11,13 @@
   
   <!-- build:css styles/vendor.css -->
   <!-- bower:css -->
+  <link rel="stylesheet" href="/bower_components/pickadate/lib/themes/default.css" />
+  <link rel="stylesheet" href="/bower_components/pickadate/lib/themes/default.date.css" />
+  <link rel="stylesheet" href="/bower_components/pickadate/lib/themes/default.time.css" />
+  <link rel="stylesheet" href="/bower_components/bootstrap-css/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/bower_components/pure/pure.css" />
   <!-- endbower -->
+  <link rel="stylesheet" href="styles/vendor/bulma.css">
   <!-- endbuild -->
 
   <!-- build:css styles/main.css -->
@@ -20,7 +26,14 @@
 
   <!-- build:js scripts/vendor.js -->
   <!-- bower:js -->
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/bower_components/pickadate/lib/picker.js"></script>
+  <script src="/bower_components/pickadate/lib/picker.date.js"></script>
+  <script src="/bower_components/pickadate/lib/picker.time.js"></script>
+  <script src="/bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+  <script src="/bower_components/moment/moment.js"></script>
   <!-- endbower -->
+  <script src="scripts/vendor/jquery.canvasjs.min.js"></script>
   <!-- endbuild -->
 
   <!-- build:js scripts/main.js -->
@@ -32,9 +45,8 @@
 <body>
 
   <div id="genDeviceFuelInfo" class="hidden">
-    
         <header class="geotabPageHeader">
-          <h1 class="geotabPageName">gen-deviceFuelInfo <span class="subdued">sub title</span></h1>
+          <h1 class="geotabPageName">Device Fuel Info <span class="subdued">sub title</span></h1>
           <div class="pageNameSecondary">
             <h3 class="geotabSecondaryTitle">by: <span id="genDeviceFuelInfo-user"></span></h3>
           </div>
