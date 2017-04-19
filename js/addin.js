@@ -700,7 +700,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
         $('#reshape').click(function(){
             console.log("click detected!");
-            $('#fuelsensor-graphs').addClass('col-md-9');
+            $('#fuelsensor-graphs').addClass('col-md-8');
             $('#fuelsensor-deviceLocation').addClass('col-md-3');
         })
 
