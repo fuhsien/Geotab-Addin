@@ -1,59 +1,66 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>gen-deviceFuelInfo</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>gen-deviceFuelInfo</title>
 
-  
-  <!-- build:css styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="/bower_components/pickadate/lib/themes/default.css" />
-  <link rel="stylesheet" href="/bower_components/pickadate/lib/themes/default.date.css" />
-  <link rel="stylesheet" href="/bower_components/pickadate/lib/themes/default.time.css" />
-  <link rel="stylesheet" href="/bower_components/bootstrap-css/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="/bower_components/pure/pure.css" />
-  <!-- endbower -->
-  <link rel="stylesheet" href="styles/vendor/bulma.css">
-  <!-- endbuild -->
 
-  <!-- build:css styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild -->
+        <!-- build:css styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="/bower_components/pickadate/lib/themes/default.css" />
+        <link rel="stylesheet" href="/bower_components/pickadate/lib/themes/default.date.css" />
+        <link rel="stylesheet" href="/bower_components/pickadate/lib/themes/default.time.css" />
+        <link rel="stylesheet" href="/bower_components/bootstrap-css/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/bower_components/pure/pure.css" />
+        <!-- endbower -->
+        <link rel="stylesheet" href="styles/vendor/bulma.css">
+        <!-- endbuild -->
 
-  <!-- build:js scripts/vendor.js -->
-  <!-- bower:js -->
-  <script src="/bower_components/jquery/dist/jquery.js"></script>
-  <script src="/bower_components/pickadate/lib/picker.js"></script>
-  <script src="/bower_components/pickadate/lib/picker.date.js"></script>
-  <script src="/bower_components/pickadate/lib/picker.time.js"></script>
-  <script src="/bower_components/bootstrap-css/js/bootstrap.min.js"></script>
-  <script src="/bower_components/moment/moment.js"></script>
-  <!-- endbower -->
-  <script src="scripts/vendor/jquery.canvasjs.min.js"></script>
-  <!-- endbuild -->
+        <!-- build:css styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
 
-  <!-- build:js scripts/main.js -->
-  <script src="scripts/main.js"></script>
-  <!-- endbuild -->
-  
-</head>
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <script src="/bower_components/pickadate/lib/picker.js"></script>
+        <script src="/bower_components/pickadate/lib/picker.date.js"></script>
+        <script src="/bower_components/pickadate/lib/picker.time.js"></script>
+        <script src="/bower_components/bootstrap-css/js/bootstrap.min.js"></script>
+        <script src="/bower_components/moment/moment.js"></script>
+        <!-- endbower -->
+        <script src="scripts/vendor/jquery.canvasjs.min.js"></script>
+        <!-- endbuild -->
 
-<body>
+        <!-- build:js scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
 
-  <div id="genDeviceFuelInfo" class="hidden">
+    </head>
+
+    <body>
         <header class="geotabPageHeader">
-          <h1 class="geotabPageName">Device Fuel Info <span class="subdued">sub title</span></h1>
-          <div class="pageNameSecondary">
-            <h3 class="geotabSecondaryTitle">by: <span id="genDeviceFuelInfo-user"></span></h3>
-          </div>
+            <h1 class="geotabPageName">Device Fuel Info <span class="subdued">sub title</span></h1>
+            <div class="pageNameSecondary">
+                <h3 class="geotabSecondaryTitle">by: <span id="genDeviceFuelInfo-user"></span></h3>
+            </div>
         </header>
-    
-  </div>
+        <div id="genDeviceFuelInfo" class="hidden">
+            <form class="pure-form">
+                <fieldset>
+                    <label for="startDate">
+                        From:
+                        <input type="text" placeholder="Start Date" id="startDate">
+                    </label>
+                </fieldset>
+            </form>
+        <p id="demo"></p>
+        </div>
 
-</body>
+    </body>
 
 </html>
