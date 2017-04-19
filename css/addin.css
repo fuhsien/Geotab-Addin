@@ -44,5 +44,6 @@ table.is-striped tr.selected {
 }
 
 #deviceLocation{
+  display: block;
   margin: auto;
 }
