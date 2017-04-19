@@ -71,7 +71,7 @@ describe('User visits addin', function () {
 
   describe('Show addin content after initialized and focus is called', function () {
     it('should display root div', function () {
-      browser.assert.style('#fuelAddinGenerator', 'display', '');
+      browser.assert.style('#genDeviceFuelInfo', 'display', '');
     });
   });
 

@@ -1,4 +1,4 @@
-// generated on 2017-04-17 using generator-addin 1.0.0
+// generated on 2017-04-19 using generator-addin 1.0.0
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import browserSync from 'browser-sync';
@@ -256,6 +256,7 @@ gulp.task('test', ['styles', 'scripts', 'fonts'], () => {
 gulp.task('wiredep', () => {
   gulp.src('app/*.html')
     .pipe(wiredep({
+      src: 'app/genDeviceFuelInfo.html',
       ignorePath: /^(\.\.\/)*\.\./
     }))
     .pipe(gulp.dest('app'));

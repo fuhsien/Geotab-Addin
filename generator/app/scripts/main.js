@@ -1,7 +1,7 @@
 /**
  * @returns {{initialize: Function, focus: Function, blur: Function}}
  */
-geotab.addin.fuelAddinGenerator = function () {
+geotab.addin.genDeviceFuelInfo = function () {
   'use strict';
 
   // the root container
@@ -19,7 +19,7 @@ geotab.addin.fuelAddinGenerator = function () {
      *        for display to the user.
      */
     initialize: function (freshApi, freshState, initializeCallback) {
-      elAddin = document.querySelector('#fuelAddinGenerator');
+      elAddin = document.querySelector('#genDeviceFuelInfo');
       // MUST call initializeCallback when done any setup
       initializeCallback();
     },
@@ -43,7 +43,7 @@ geotab.addin.fuelAddinGenerator = function () {
 
       // getting the current user to display in the UI
       freshApi.getSession(session => {
-        elAddin.querySelector('#fuelAddinGenerator-user').innerHTML = session.userName;
+        elAddin.querySelector('#genDeviceFuelInfo-user').textContent = session.userName;
       });
 
       // show main content

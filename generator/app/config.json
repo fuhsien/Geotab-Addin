@@ -1,21 +1,21 @@
 {
-  "name": "Fuel addin-generator",
+  "name": "gen-deviceFuelInfo",
   "supportEmail": "fuhsienng@proice.com",
   "version": "0.0.1",
   "items": [{
     
-    "url": "fuelAddinGenerator.html",
+    "url": "genDeviceFuelInfo.html",
     "path": "ActivityLink/",
     "menuName": {
-      "en": "Vehicle Fuel Info"
+      "en": "Fuel Activity"
     },
     
     "icon": "images/icon.svg"
   }],
   "dev": {
-    "root": "fuelAddinGenerator",
+    "root": "genDeviceFuelInfo",
     "dist": {
-      "host": "fuhsien.github.io/generator/"
+      "host": "fuhsien.github.io/generator/dist/"
     }
   }
 }

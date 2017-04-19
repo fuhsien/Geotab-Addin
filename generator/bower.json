@@ -1,5 +1,5 @@
 {
-  "name": "fueladdingenerator",
+  "name": "gendevicefuelinfo",
   "private": true,
   "dependencies": {},
   "devDependencies": {
