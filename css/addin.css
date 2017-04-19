@@ -38,3 +38,7 @@ table.is-striped tr.selected {
 .fueladdin-row:after{
   clear: both;
 }
+
+#genDeviceFuelInfo, .container-fluid, .fueladdin-row{
+  height:100%;
+}
