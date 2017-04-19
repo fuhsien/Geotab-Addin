@@ -39,6 +39,6 @@ table.is-striped tr.selected {
   clear: both;
 }
 
-#genDeviceFuelInfo, .container-fluid, .fueladdin-row{
+#genDeviceFuelInfo, .container-fluid{
   height:100%;
 }
