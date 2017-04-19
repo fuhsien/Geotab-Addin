@@ -698,7 +698,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 button.disabled = true;
             }
         });
-        $('#shrink').click(function(){
+        $('#reshape').click(function(){
             console.log("click detected!");
             $('#fuelsensor-graphs').addClass('col-md-9');
             $('#fuelsensor-deviceLocation').addClass('col-md-3');
