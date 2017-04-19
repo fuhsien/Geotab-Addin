@@ -38,7 +38,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
         avgPoints = 25,
-        fuelThreshold = 4*5/80,
+        fuelThreshold = 5,  //4*5/80 for volts
         sessionThreshold = 5, //in minutes
         frontPaddingMinutes = 0, //minutes
         frontPaddingSeconds = 30, 
@@ -281,13 +281,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             holdVolt[i] = results[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / (4-0.05);
             if (i >= avgPoints) {
-                //averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
-                averager = averager + holdVolt[i] - holdVolt[i - avgPoints]; //50 points onwards, add new data, delete first data
+                averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
+                //averager = averager + holdVolt[i] - holdVolt[i - avgPoints]; //50 points onwards, add new data, delete first data
                 output[i] = averager / avgPoints;
             } else {
                 output[i] = null;
-                //averager += holdLitre[i];
-                averager += holdVolt[i];
+                averager += holdLitre[i];
+                //averager += holdVolt[i];
             }
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
@@ -300,7 +300,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             dataPointsStop.push({
                 x: new Date(holdTimeAux[i]),
                 //x: i,
-                y: holdVolt[i]
+                //y: holdVolt[i]
+                y: holdLitres[i]
             });
             /*dataPoints2.push({
                 x: i,
@@ -380,7 +381,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //labelAngle: -20
             },
             axisY: [{
-                title: "Volts",
+                title: "Litres",
                 lineColor: "#A00C23",
                 tickColor: "#A00C23",
                 gridThickness: 2,
@@ -399,7 +400,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 lineThickness: 2,
                 includeZero: false,
             }, {
-                title: "Volts",
+                title: "Litres",
                 lineColor: "#3AF13A",
                 tickColor: "#3AF13A",
                 labelFontColor: "#3AF13A",
