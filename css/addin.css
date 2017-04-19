@@ -4,6 +4,10 @@
 	padding: 1em;
 }
 
+.hidden {
+    display: none;
+}
+
 }
 div.charts-container{
 	height: auto;
