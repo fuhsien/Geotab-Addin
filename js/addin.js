@@ -682,7 +682,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $("#fuel-sensor-vehicle").change(function() {
             selectedOpt_name = this.textContent;
             selectedOpt = this.value;
-            console.log(selectedOpt,selectedOpt_name);
+            console.log(typeof selectedOpt_name);
             if (selectedOpt) {
                 selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
                 vFlag = true;
