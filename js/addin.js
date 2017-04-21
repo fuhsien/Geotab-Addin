@@ -628,8 +628,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         sFlag = false;
         eFlag = false;
 
-        $('#fuel-sensor-vehicle').unbind();
-        $('#render').unbind();
 
     };
 
