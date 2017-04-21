@@ -2,7 +2,7 @@
 
 COMPLETE SHIFTING TABLE TO NEW METHOD!!!!!!
 
-
+GO TO LINE 703
 
 Blue: 6495ED
 Red: A00C23
@@ -698,9 +698,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //After vehicle selected
         $('#render').click(function() {
-            //$('#subdued').html(selectedOpt_name);
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
+            $('#subdued').html(selectedOpt.serialNumber);
+
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData, createTable); //rawData is results from getAux1
