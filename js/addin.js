@@ -702,6 +702,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             console.log("click detected!");
             $('#fuelsensor-graphs').addClass('col-md-8');
             $('#fuelsensor-deviceLocation').addClass('col-md-3');
+            $("#chartContainer").CanvasJSChart().render();
         })
 
         //Event handler for Date picker
