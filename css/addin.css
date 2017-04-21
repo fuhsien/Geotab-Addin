@@ -55,8 +55,6 @@ table.is-striped tr.selected {
 }
 
 #fuelsensor-deviceLocation{
-  border-style: solid;
-  border-color: green;
   float: right;
 }
 
