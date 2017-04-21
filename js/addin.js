@@ -682,7 +682,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $("#fuel-sensor-vehicle").change(function() {
             selectedOpt_name = this.textContent;
             selectedOpt = this.value;
-            console.log(selectedOpt);
+            console.log(selectedOpt,selectedOpt_name);
             if (selectedOpt) {
                 selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
                 vFlag = true;
@@ -698,7 +698,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         //After vehicle selected
         $('#render').click(function() {
-            $('#subdued').html(selectedOpt_name);
+            //$('#subdued').html(selectedOpt_name);
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
             if (selectedVehicleId) {
