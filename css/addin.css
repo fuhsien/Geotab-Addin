@@ -47,3 +47,25 @@ table.is-striped tr.selected {
   display: block;
   margin: auto;
 }
+
+#fuelsensor-graphs,
+#chartContainer,
+#chartContainer2{
+  height: 100%;
+}
+
+#fuelsensor-deviceLocation{
+  float:right;
+}
+
+#fueladdin-graphicalDisplay{
+  height: 70%;
+}
+
+#fueladdin-graphOne{
+  height: 50%;
+}
+
+#fueladdin-graphTwo{
+  height: 45%;
+}
