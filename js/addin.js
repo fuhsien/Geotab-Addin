@@ -756,6 +756,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 button.disabled = true;
             }
         });
+
+        $('#fueladdin-closeImage').click(function(){
+            $('#fuelsensor-deviceLocation').addClass('hidden');
+            $('#fuelsensor-graphs').removeClass('col-md-8');
+            $('#fuelsensor-deviceLocation').removeClass('col-md-3');
+            $("#chartContainer").CanvasJSChart().render();
+            $("#chartContainer2").CanvasJSChart().render();
+        })
     };
 
     /**************************************Start the code***********************************/
