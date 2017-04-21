@@ -55,7 +55,9 @@ table.is-striped tr.selected {
 }
 
 #fuelsensor-deviceLocation{
-  float:right;
+  border-style: solid;
+  border-color: green;
+  float: right;
 }
 
 #fueladdin-graphicalDisplay{
