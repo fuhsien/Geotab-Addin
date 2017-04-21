@@ -680,6 +680,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#fuel-sensor-vehicle").change(function() {
             selectedOpt = this.value;
+            console.log(selectedOpt);
             if (selectedOpt) {
                 selectedOpt = $.parseJSON(selectedOpt.replace(/'/g, '"'));
                 vFlag = true;
@@ -699,13 +700,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             var selectedVehicleSN = selectedOpt.serialNumber;
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
-                getAux1(selectedVehicleId, selectedVehicleSN, plotData, createTable); //rawData is results from getAux1
-                button.disabled = true;
+                //getAux1(selectedVehicleId, selectedVehicleSN, plotData, createTable); //rawData is results from getAux1
+                button.disabled = true;            
+                $('#fuelsensor-deviceLocation').addClass('hidden');
+                $('#fuelsensor-graphs').removeClass('col-md-8');
+                $('#fuelsensor-deviceLocation').removeClass('col-md-3');        
             }
-            
-            $('#fuelsensor-deviceLocation').addClass('hidden');
-            $('#fuelsensor-graphs').removeClass('col-md-8');
-            $('#fuelsensor-deviceLocation').removeClass('col-md-3');        
         });
 
         //Event handler for Date picker
