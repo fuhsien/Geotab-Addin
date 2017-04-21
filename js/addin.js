@@ -590,6 +590,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             $(".table tbody tr").click(function(){
                 $('.selected').removeClass('selected');
                 $(this).addClass('selected');
+                $('#fuelsensor-graphs').addClass('col-md-8');
+                $('#fuelsensor-deviceLocation').addClass('col-md-3');
+                $("#chartContainer").CanvasJSChart().render();
+                $("#chartContainer2").CanvasJSChart().render();
                 console.log("Row index is ",this.rowIndex);
                 var coords = theftLocation[this.rowIndex-1],
                     locationUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords + "&zoom=15&scale=false&size=300x300&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7C" + coords;
@@ -700,9 +704,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         });
         $('#reshape').click(function(){
             console.log("click detected!");
-            $('#fuelsensor-graphs').addClass('col-md-8');
+            /*$('#fuelsensor-graphs').addClass('col-md-8');
             $('#fuelsensor-deviceLocation').addClass('col-md-3');
             $("#chartContainer").CanvasJSChart().render();
+            $("#chartContainer2").CanvasJSChart().render();*/
         })
 
         //Event handler for Date picker
