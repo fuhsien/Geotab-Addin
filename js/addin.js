@@ -628,7 +628,9 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         sFlag = false;
         eFlag = false;
 
-
+        $('#fuelsensor-deviceLocation').addClass('hidden');
+        $('#fuelsensor-graphs').removeClass('col-md-8');
+        $('#fuelsensor-deviceLocation').removeClass('col-md-3');
     };
 
     /*****************************HTML functionality***********************************/
@@ -653,8 +655,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     };
 
     var initializeEventHandler = function() {
-        var vehicleSelect = document.getElementById("fuel-sensor-vehicle");
-        var button = document.getElementById("render");
         var $inputStart = $("#startDate").pickadate({
             closeOnSelect: false,
             closeOnClear: true,
@@ -700,6 +700,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData, createTable); //rawData is results from getAux1
                 button.disabled = true;
             }
+
+            $('#fuelsensor-deviceLocation').addClass('hidden');
+            $('#fuelsensor-graphs').removeClass('col-md-8');
+            $('#fuelsensor-deviceLocation').removeClass('col-md-3');
         });
 
         //Event handler for Date picker
