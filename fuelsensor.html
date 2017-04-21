@@ -45,28 +45,27 @@
                     </label>
                     </t>
                     <button id="render" class="pure-button pure-button-primary" disabled>Run!</button>
-                    <button id="reshape" class="geotabButton">Shrink</button>
                 </fieldset>
             </form>
         </div>
 
         <div id="genDeviceFuelInfo">
-            <div class="container-fluid" style="border-style:solid;">
-                <div class="fueladdin-row" style=" height: 70%;border-style:solid;border-color:red;">
-                    <div id="fuelsensor-graphs" style="height: 100%;">
-                        <div class="fueladdin-row" style="height: 50%;">
-                            <div id="chartContainer" style="height:100%; border-style: solid;border-color:blue;"></div>
+            <div class="container-fluid">
+                <div id="fueladdin-graphicalDisplay" class="fueladdin-row" >
+                    <div id="fuelsensor-graphs">
+                        <div id="fueladdin-graphOne" class="fueladdin-row">
+                            <div id="chartContainer"></div>
                             <br>
                         </div>
-                        <div class="fueladdin-row" style="height: 45%;">
+                        <div id="fueladdin-graphTwo" class="fueladdin-row" >
                             <br>
-                            <div id="chartContainer2" style="height: 100%;border-style: solid;border-color:blue;"></div>
+                            <div id="chartContainer2"></div>
                         </div>
                     </div>
 
-                    <div id="fuelsensor-deviceLocation" class="panel-group hidden" style="float: right;">
+                    <div id="fuelsensor-deviceLocation" class="panel-group hidden">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Activity location
+                            <div class="panel-heading">Activity Location
                                 <button id="fueladdin-closeImage"type="button" class="close">&times;</button>
                             </div>
                             <div class="panel-body">
