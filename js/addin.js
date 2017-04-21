@@ -700,7 +700,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             var selectedVehicleSN = selectedOpt.serialNumber;
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
-                //getAux1(selectedVehicleId, selectedVehicleSN, plotData, createTable); //rawData is results from getAux1
+                getAux1(selectedVehicleId, selectedVehicleSN, plotData, createTable); //rawData is results from getAux1
                 button.disabled = true;            
                 $('#fuelsensor-deviceLocation').addClass('hidden');
                 $('#fuelsensor-graphs').removeClass('col-md-8');
