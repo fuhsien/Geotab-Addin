@@ -655,6 +655,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
     };
 
     var initializeEventHandler = function() {
+        var vehicleSelect = document.getElementById("fuel-sensor-vehicle");
         var $inputStart = $("#startDate").pickadate({
             closeOnSelect: false,
             closeOnClear: true,
