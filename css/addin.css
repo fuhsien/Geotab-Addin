@@ -64,8 +64,12 @@ table.is-striped tr.selected {
 
 #fueladdin-graphOne{
   height: 50%;
+  margin-right: 0px;
+  margin-left: 0px;
 }
 
 #fueladdin-graphTwo{
   height: 45%;
+  margin-right: 0px;
+  margin-left: 0px;
 }
