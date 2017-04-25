@@ -86,9 +86,7 @@ geotab.addin.addinTemplate = function(api, state) {
 					if (result.length === 0) {
 						throw "Unable to find currently logged on user."
 					}
-					document.getElementById("template-displayName").innerHTML = result[0].firstName + " " + result[0].lastName;
 					document.getElementById("template-container").style.display = "block";
-					initializeCallback();
 
 				}, function (error) {
 					throw "Error while trying to load currently logged on user. " + error;
