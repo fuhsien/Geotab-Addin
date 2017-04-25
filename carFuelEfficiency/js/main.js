@@ -1,35 +1,80 @@
 /**
- * Your Add-In code goes inside the addinTemplate function. This is the constructor for your Add-In.
- *
- * This function will automatically get called to construct your Add-In by MyGeotab at the right time.  You need to
- * return a function  that contains three methods: initialize(), focus() and blur(). These will be called at the
- * appropriate times during the life of the Add-In.
- *
- * @param api The GeotabApi object for making calls to MyGeotab.
- * @param state The state object allows access to URL, page navigation and global group filter.
- * @returns {{initialize: Function, focus: Function, blur: Function}}
+	========================================
+	Add in name: Fuel Efficiency Report
+	Owner: Pro ICE
+	Created: 25 April 2017
+	Created by: Fu Hsien Ng 
+ 	Contact email: fuhsienng@proice.com
+	========================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  */
 geotab.addin.addinTemplate = function(api, state) {
 
-	// Your private functions and variables go here
-	var totalVisits = 0;
+	/*********************************Global variables***********************************/
+	var fromSheet;
+	/************************************************************************************/
+
+
+	/**********************************Retrieve data*************************************/
+	//API call for fuel data
+	//Pull JSON from Google Sheet
+    var initializeJSON = function() {
+        var spreadsheetID = "1VBDZZoYqCSWV3ABO7-eBqb21WQjgPLkO3uOBtAQsnr8";
+        //var url = "https://spreadsheets.google.com/feeds/list/" + spreadsheetID + "/od6/public/values?alt=json";
+        var url = "https://script.google.com/macros/s/AKfycbygukdW3tt8sCPcFDlkMnMuNu9bH5fpt7bKV50p2bM/exec?id=" + spreadsheetID + "&sheet=Sheet1";
+        $.getJSON(url, function(data) {
+            // loop to build html output for each row
+            fromSheet = data.Sheet1;
+            console.log("fromSheet", fromSheet);
+        });
+        /*$.getJSON(url, function(data) {
+            // loop to build html output for each row
+            var entry = data.feed.entry;
+            var line = entry[0]['gsx$device']['$t'];
+            var test = entry[0].content;
+        });*/
+        console.log("Loaded Google Sheet");
+    };
+	var getVehicles = function(finishedCallback) {
+        api.call("Get", {
+            typeName: "Device"
+        }, function(results) {
+            console.log("Device", results);
+            vehicles = results.map(function(vehicle) {
+                return {
+                    name: vehicle.name,
+                    id: vehicle.id,
+                    serialNumber: vehicle.serialNumber
+                };
+            });
+            console.log("Vehicles loaded", vehicles);
+            finishedCallback();
+        }, function(errorString) {
+            alert(errorString);
+        });
+    };
+	/************************************************************************************/
+
+
+	/*******************************Results presentation*********************************/
+	
+	/************************************************************************************/
 
 	return {
-        /**
-         * initialize() is called only once when the Add-In is first loaded. Use this function to initialize the
-         * Add-In's state such as default values or make API requests (MyGeotab or external) to ensure interface
-         * is ready for the user.
-         * @param api The GeotabApi object for making calls to MyGeotab.
-         * @param state The page state object allows access to URL, page navigation and global group filter.
-         * @param initializeCallback Call this when your initialize route is complete. Since your initialize routine
-         *        might be doing asynchronous operations, you must call this method when the Add-In is ready
-         *        for display to the user.
-         */
 	    initialize: function(api, state, initializeCallback) {
-
-			// The api object exposes a method we can call to get the current user identity. This is useful for
-			// determining user context, such as regional settings, language preference and name. Use the api
-			// to retrieve the currently logged on user object.
 			api.getSession(function (session) {
 				var currentUser = session.userName;
 				api.call("Get", {
@@ -49,18 +94,13 @@ geotab.addin.addinTemplate = function(api, state) {
 					throw "Error while trying to load currently logged on user. " + error;
 				});
 			});
+			initializeJSON();
+			getVehicles(initializeCallback);
+
 	    },
 
         /**
          * focus() is called whenever the Add-In receives focus.
-         *
-         * The first time the user clicks on the Add-In menu, initialize() will be called and when completed, focus().
-         * focus() will be called again when the Add-In is revisited. Note that focus() will also be called whenever
-         * the global state of the MyGeotab application changes, for example, if the user changes the global group
-         * filter in the UI.
-         *
-         * @param api The GeotabApi object for making calls to MyGeotab.
-         * @param page The page state object allows access to URL, page navigation and global group filter.
          */
 	    focus: function(api, state) {
 
@@ -73,11 +113,6 @@ geotab.addin.addinTemplate = function(api, state) {
 		
 		/**
 		 * blur() is called whenever the user navigates away from the Add-In.
-		 *
-		 * Use this function to save the page state or commit changes to a data store or release memory.
-		 *
-         * @param api The GeotabApi object for making calls to MyGeotab.
-         * @param page The page state object allows access to URL, page navigation and global group filter.
 		 */
 		blur: function(api, state) {
 			console.log('Closing testing one')
