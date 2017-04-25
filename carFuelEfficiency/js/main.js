@@ -52,8 +52,8 @@ geotab.addin.addinTemplate = function(api, state) {
         api.call("Get", {
             typeName: "Device"
         }, function(results) {
-			if (result.length === 0) {
-				throw "Unable to find currently logged on user."
+			if (results.length === 0) {
+				throw "No vehicle found!";
 			}
             console.log("Device", results);
             vehicles = results.map(function(vehicle) {
