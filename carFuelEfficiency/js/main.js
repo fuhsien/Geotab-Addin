@@ -52,6 +52,9 @@ geotab.addin.addinTemplate = function(api, state) {
         api.call("Get", {
             typeName: "Device"
         }, function(results) {
+			if (result.length === 0) {
+				throw "Unable to find currently logged on user."
+			}
             console.log("Device", results);
             vehicles = results.map(function(vehicle) {
                 return {
@@ -61,9 +64,11 @@ geotab.addin.addinTemplate = function(api, state) {
                 };
             });
             console.log("Vehicles loaded", vehicles);
+
+			document.getElementById("fuelEff-container").style.display = "block";
             finishedCallback();
         }, function(errorString) {
-            alert(errorString);
+        	throw "Error while trying to load vehicles. " + error;
         });
     };
 	/************************************************************************************/
@@ -86,7 +91,6 @@ geotab.addin.addinTemplate = function(api, state) {
 					if (result.length === 0) {
 						throw "Unable to find currently logged on user."
 					}
-					document.getElementById("template-container").style.display = "block";
 
 				}, function (error) {
 					throw "Error while trying to load currently logged on user. " + error;
@@ -101,9 +105,6 @@ geotab.addin.addinTemplate = function(api, state) {
          * focus() is called whenever the Add-In receives focus.
          */
 	    focus: function(api, state) {
-
-			totalVisits = totalVisits + 2;
-			document.getElementById("template-visitCount").innerHTML = totalVisits;
 			var test = state.getState();
 			console.log(test);
 
