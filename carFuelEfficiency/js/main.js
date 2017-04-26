@@ -25,6 +25,7 @@ geotab.addin.addinTemplate = function(api, state) {
 
 	/*********************************Global variables***********************************/
 	var fromSheet;
+	var vehicles;
 	/************************************************************************************/
 
 
@@ -73,6 +74,11 @@ geotab.addin.addinTemplate = function(api, state) {
 	};
 
 	var getFuel = function() {
+		/******************************************************************************************/
+		//reset variables;
+		var multiCallArray = [];
+		/******************************************************************************************/
+
 		api.call("Get", {
 			"typeName": "Diagnostic",
 			"search": {
@@ -90,16 +96,23 @@ geotab.addin.addinTemplate = function(api, state) {
 			reportStart.setSeconds(0);
 			reportStart.setMilliseconds(0);
 
-			api.call("Get", {
-				"typeName": "StatusData",
-				"search": {
-					diagnosticSearch: {
-						"id": auxID
-					},
-					fromDate: reportStart,
-					toDate: reportEnd
-				},
-			}, function(results) {
+			for (var i = 0; i < vehicles.length; i++) {
+				var vehicleID = vehicles[i].id;
+				multiCallArray.push(
+					["Get", {
+						"typeName": "StatusData",
+						"search": {
+							deviceSearch: {
+								"id": vehicleID
+							},
+							fromDate: theftStart,
+							toDate: theftEnd
+						}
+					}]
+				)
+			}
+
+			api.multiCall(multiCallArray, function(results) {
 				console.log("Diagnostic data ", results);
 			}, function(errorString) {
 				throw "Error retrieving fuel data. " + error;
