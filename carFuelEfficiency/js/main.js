@@ -91,14 +91,11 @@ geotab.addin.addinTemplate = function(api, state) {
 			reportStart.setMilliseconds(0);
 
 			api.call("Get", {
-				"typeName": "Diagnostic",
+				"typeName": "StatusData",
 				"search": {
 					diagnosticSearch: {
 						"id": auxID
 					},
-					deviceSearch: {
-                        "id": "b2"
-                    },
 					fromDate: reportStart,
 					toDate: reportEnd
 				},

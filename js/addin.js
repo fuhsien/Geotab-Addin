@@ -38,10 +38,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
         avgPoints = 25,
-        fuelThreshold = 5,  //4*5/80 for volts
+        fuelThreshold = 5, //4*5/80 for volts
         sessionThreshold = 5, //in minutes
         frontPaddingMinutes = 0, //minutes
-        frontPaddingSeconds = 30, 
+        frontPaddingSeconds = 30,
         backPaddingMinutes = 2,
         backPaddingSeconds = 30,
         tankSize = 80,
@@ -122,61 +122,62 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             ], function(results) {
                 var rawFuel = JSON.parse(JSON.stringify(results[0]));
                 var rawSpeed = results[1];
-                var fuelOnStop = [];         //store fuel info for which the vehicle is not moving
+                var fuelOnStop = []; //store fuel info for which the vehicle is not moving
                 var firstRecord = null;
                 var lastRecord = null;
-                var timeCurrent = null, timeOld = null;
+                var timeCurrent = null,
+                    timeOld = null;
                 var drivingSessions = [];
                 var begin = null;
                 var ended = null;
 
 
                 for (var i = 0; i < rawSpeed.length; i++) {
-                    if(rawSpeed[i].speed > 5){
-                        if(firstRecord == null){        //initialization
+                    if (rawSpeed[i].speed > 5) {
+                        if (firstRecord == null) { //initialization
                             firstRecord = rawSpeed[i];
                             lastRecord = rawSpeed[i];
                         }
                         timeCurrent = new Date(rawSpeed[i].dateTime).getTime();
                         timeOld = new Date(lastRecord.dateTime).getTime();
-                        if ( (timeCurrent - timeOld)/(1000*60) >= sessionThreshold){
+                        if ((timeCurrent - timeOld) / (1000 * 60) >= sessionThreshold) {
                             //current point is a new session already!
                             begin = new Date(firstRecord.dateTime);
-                            begin.setMinutes(begin.getMinutes()-frontPaddingMinutes);
-                            begin.setSeconds(begin.getSeconds()-frontPaddingSeconds);
+                            begin.setMinutes(begin.getMinutes() - frontPaddingMinutes);
+                            begin.setSeconds(begin.getSeconds() - frontPaddingSeconds);
                             ended = new Date(lastRecord.dateTime);
-                            ended.setMinutes(ended.getMinutes()+ backPaddingMinutes);
-                            ended.setSeconds(ended.getSeconds()+ backPaddingSeconds);
-                            drivingSessions.push(begin,ended);
+                            ended.setMinutes(ended.getMinutes() + backPaddingMinutes);
+                            ended.setSeconds(ended.getSeconds() + backPaddingSeconds);
+                            drivingSessions.push(begin, ended);
                             firstRecord = rawSpeed[i];
                         }
                         lastRecord = rawSpeed[i];
                     }
                 }
-                if (firstRecord){
+                if (firstRecord) {
                     begin = new Date(firstRecord.dateTime);
-                    begin.setMinutes(begin.getMinutes()-frontPaddingMinutes);
-                    begin.setSeconds(begin.getSeconds()-frontPaddingSeconds);
+                    begin.setMinutes(begin.getMinutes() - frontPaddingMinutes);
+                    begin.setSeconds(begin.getSeconds() - frontPaddingSeconds);
                     ended = new Date(lastRecord.dateTime);
-                    ended.setMinutes(ended.getMinutes()+ backPaddingMinutes);
-                    ended.setSeconds(ended.getSeconds()+ backPaddingSeconds);
-                    drivingSessions.push(begin,ended);
-                    console.log("All sessions",drivingSessions);
+                    ended.setMinutes(ended.getMinutes() + backPaddingMinutes);
+                    ended.setSeconds(ended.getSeconds() + backPaddingSeconds);
+                    drivingSessions.push(begin, ended);
+                    console.log("All sessions", drivingSessions);
                 }
-                
+
                 //Double check time is in ascending order, if there's points not in order, merge two sessions
-                for(i=1; i<drivingSessions.length;i++){
+                for (i = 1; i < drivingSessions.length; i++) {
                     var NOW = new Date(drivingSessions[i]).getTime();
-                    var LAST = new Date(drivingSessions[i-1]).getTime();
-                    if (NOW - LAST < 0){
+                    var LAST = new Date(drivingSessions[i - 1]).getTime();
+                    if (NOW - LAST < 0) {
                         console.log("MERGING TWO SESSIONS!");
-                        var tempArray=[];
-                        tempArray.push(i-1);
+                        var tempArray = [];
+                        tempArray.push(i - 1);
                     }
                 }
-                if (tempArray){
-                    for (i=0;i<tempArray.length;i++){
-                        drivingSessions.splice(tempArray[i],2);
+                if (tempArray) {
+                    for (i = 0; i < tempArray.length; i++) {
+                        drivingSessions.splice(tempArray[i], 2);
                     }
                 }
 
@@ -184,24 +185,24 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 console.log("Length before appending", rawFuel.length, drivingSessions.length);
                 var comparator = drivingSessions[0].getTime();
                 var driveFlag = false;
-                for (i=0,j=1;i<rawFuel.length-1;i++){
+                for (i = 0, j = 1; i < rawFuel.length - 1; i++) {
                     var fuelTime = new Date(rawFuel[i].dateTime).getTime();
-                    if(comparator - fuelTime<0){
+                    if (comparator - fuelTime < 0) {
                         driveFlag = !driveFlag;
                         //rawFuel.splice(i++,0,null);
-                        rawFuel.splice(i++,0,new Date(comparator).toISOString());
-                        if(j < drivingSessions.length){
+                        rawFuel.splice(i++, 0, new Date(comparator).toISOString());
+                        if (j < drivingSessions.length) {
                             comparator = drivingSessions[j++].getTime();
                         }
                     }
-                    if (!driveFlag){
+                    if (!driveFlag) {
                         fuelOnStop.push(rawFuel[i]);
                     }
                 }
                 //console.log("Remaining data",fuelOnStop);
 
 
-                callback1(results,fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
+                callback1(results, fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
 
             });
         }, function(e) {
@@ -228,7 +229,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Loaded Google Sheet");
     };
 
-    var plotData = function(results,stopData, callback, vehicleID) {
+    var plotData = function(results, stopData, callback, vehicleID) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
@@ -274,12 +275,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataPointsStop = [];
         var dataPoints2 = [];
         console.log("Selected Vehicle Aux:", results); //results return aux values
-        
+
 
         for (var i = 0; i < results[0].length - 1; i++) {
             holdTimeAux[i] = results[0][i].dateTime;
             holdVolt[i] = results[0][i].data;
-            holdLitre[i] = tankSize * holdVolt[i] / (4-0.05);
+            holdLitre[i] = tankSize * holdVolt[i] / (4 - 0.05);
             if (i >= avgPoints) {
                 averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
                 //averager = averager + holdVolt[i] - holdVolt[i - avgPoints]; //50 points onwards, add new data, delete first data
@@ -295,7 +296,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 x: new Date(holdTimeAux[i]),
                 //x: i,
                 y: output[i]
-                //y: holdVolt[i]
+                    //y: holdVolt[i]
             });
             dataPointsStop.push({
                 x: new Date(holdTimeAux[i]),
@@ -311,34 +312,34 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         /*************************************************************************************************************************/
         var simplifiedAux = [];
         var time2 = JSON.parse(JSON.stringify(holdTimeAux));
-        var fuelActivity =[];
+        var fuelActivity = [];
 
-        for (i=0;i<output.length;i++){
-            simplifiedAux[i] = [output[i],i];
+        for (i = 0; i < output.length; i++) {
+            simplifiedAux[i] = [output[i], i];
         }
 
-        for(i=0;i<simplifiedAux.length-1;i++){
-            if (simplifiedAux[i][0] && simplifiedAux[i-1][0]){
-                var prev = Math.sign(simplifiedAux[i][0] -simplifiedAux[i-1][0]);
-                var next = Math.sign(simplifiedAux[i+1][0] - simplifiedAux[i][0]);
-                if (prev == next){
-                    simplifiedAux.splice(i,1);
-                    time2.splice(i--,1);
+        for (i = 0; i < simplifiedAux.length - 1; i++) {
+            if (simplifiedAux[i][0] && simplifiedAux[i - 1][0]) {
+                var prev = Math.sign(simplifiedAux[i][0] - simplifiedAux[i - 1][0]);
+                var next = Math.sign(simplifiedAux[i + 1][0] - simplifiedAux[i][0]);
+                if (prev == next) {
+                    simplifiedAux.splice(i, 1);
+                    time2.splice(i--, 1);
                 }
             }
         }
-        for(i=0;i<simplifiedAux.length;i++){
-            if (i>0){
-                if (Math.abs(simplifiedAux[i][0] -simplifiedAux[i-1][0] )>=fuelThreshold){
-                    fuelActivity.push([new Date(time2[i-1]),simplifiedAux[i-1][1],simplifiedAux[i-1][0],simplifiedAux[i][0]-simplifiedAux[i-1][0]]);
+        for (i = 0; i < simplifiedAux.length; i++) {
+            if (i > 0) {
+                if (Math.abs(simplifiedAux[i][0] - simplifiedAux[i - 1][0]) >= fuelThreshold) {
+                    fuelActivity.push([new Date(time2[i - 1]), simplifiedAux[i - 1][1], simplifiedAux[i - 1][0], simplifiedAux[i][0] - simplifiedAux[i - 1][0]]);
                 }
             }
             dataPoints2.push({
-                x:i,
-                y:simplifiedAux[i][0]
+                x: i,
+                y: simplifiedAux[i][0]
             })
         }
-        fuelActivity.splice(0,1);
+        fuelActivity.splice(0, 1);
         /************************************************************************************************************************
         for (i=0; i<stopData.length; i++){
             dataPointsStop.push({
@@ -440,7 +441,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $("#chartContainer").CanvasJSChart(options);
         $("#chartContainer2").CanvasJSChart(options2);
-        callback(holdTimeAux, output,fuelActivity, vehicleID);
+        callback(holdTimeAux, output, fuelActivity, vehicleID);
     };
 
     var createTable = function(time, fuel, fuelActivity, vehicleID) {
@@ -455,16 +456,16 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             $('#deviceLocation').attr('src', '');
             status = null;
         }
-        
+
         //document.getElementById("deviceLocation").setAttribute("src", locationUrl);
-        
+
 
         /*****************************************************************************/
         var body = document.getElementById("for-table");
         var table = document.createElement('table');
         var tbody = document.createElement('tbody');
         var tr, td;
-        var activityCounter=0;
+        var activityCounter = 0;
         var theftCount = [];
         var theftLocation = [];
         var multiCallArray = [];
@@ -486,7 +487,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         th = document.createElement('th');
         th.innerHTML = "Fuel Amount (Litres)";
-        Hrow.appendChild(th);        
+        Hrow.appendChild(th);
 
         th = document.createElement('th');
         th.innerHTML = "Before (Litres)";
@@ -509,25 +510,25 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Refill/Theft", theftCount);*/
 
         //sorting theftCount into activities
-        console.log("NEW FUEL ACTIVITY LIST",fuelActivity);
-        if(fuelActivity.length>0){
+        console.log("NEW FUEL ACTIVITY LIST", fuelActivity);
+        if (fuelActivity.length > 0) {
             // Activity filtering
-            for (i=0;i<fuelActivity.length-1;i++){
-                if (fuelActivity[i+1][1] - fuelActivity[i][1]<=30){
+            for (i = 0; i < fuelActivity.length - 1; i++) {
+                if (fuelActivity[i + 1][1] - fuelActivity[i][1] <= 30) {
                     //need further checking
-                    console.log('Closeby activity found around \n',fuelActivity[i][0]);
+                    console.log('Closeby activity found around \n', fuelActivity[i][0]);
                 }
             }
 
-            for (i=0; i<fuelActivity.length;i++){
+            for (i = 0; i < fuelActivity.length; i++) {
                 tr = tbody.insertRow();
                 td = tr.insertCell(0);
                 td.innerHTML = moment(fuelActivity[i][0]).format('dddd, MMM DD, h:mm a');
 
                 td = tr.insertCell(1);
-                if (Math.sign(fuelActivity[i][3]) == -1){
+                if (Math.sign(fuelActivity[i][3]) == -1) {
                     td.innerHTML = "Possible Fuel Theft";
-                }else {
+                } else {
                     td.innerHTML = "Refill";
                 }
 
@@ -538,12 +539,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 td.innerHTML = fuelActivity[i][2].toFixed(4);
 
                 td = tr.insertCell(4);
-                td.innerHTML = (fuelActivity[i][2]+ fuelActivity[i][3]).toFixed(4);
+                td.innerHTML = (fuelActivity[i][2] + fuelActivity[i][3]).toFixed(4);
 
                 //get location here
                 var theftStart = new Date(fuelActivity[i][0]);
                 var theftEnd = new Date(fuelActivity[i][0]);
-                theftStart.setMinutes(theftStart.getMinutes()-10);
+                theftStart.setMinutes(theftStart.getMinutes() - 10);
 
                 multiCallArray.push(
                     ["Get", {
@@ -564,23 +565,23 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             table.appendChild(tbody);
             body.appendChild(table);
 
-            console.log("HELLO IM CALLING YA: ",multiCallArray);
+            console.log("HELLO IM CALLING YA: ", multiCallArray);
             api.multiCall(multiCallArray, function(results) {
                 //console.log("LESS O-SOME BUT STILL CHECKIT AAAUT", results);
-                if (multiCallArray.length>1){
-                    for (i=0;i<results.length;i++){
+                if (multiCallArray.length > 1) {
+                    for (i = 0; i < results.length; i++) {
                         var status = results[i];
-                        if (status[0]){
-                            status = status[status.length-1];
+                        if (status[0]) {
+                            status = status[status.length - 1];
                             theftLocation.push(status.latitude + "," + status.longitude);
-                        }else{
+                        } else {
                             theftLocation.push(null);
                         }
 
                     }
-                }else{
-                    if (results[0]){
-                        var status = results[results.length-1];
+                } else {
+                    if (results[0]) {
+                        var status = results[results.length - 1];
                         theftLocation.push(status.latitude + "," + status.longitude);
                     }
                 }
@@ -588,7 +589,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             //console.log("TIME FOR OVERVIEW",theftLocation);
 
 
-            $(".table tbody tr").click(function(){
+            $(".table tbody tr").click(function() {
                 $('.selected').removeClass('selected');
                 $(this).addClass('selected');
                 $('#fuelsensor-graphs').addClass('col-md-8');
@@ -596,11 +597,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 $("#chartContainer").CanvasJSChart().render();
                 $("#chartContainer2").CanvasJSChart().render();
                 $('#fuelsensor-deviceLocation').removeClass('hidden');
-                console.log("Row index is ",this.rowIndex);
-                var coords = theftLocation[this.rowIndex-1],
+                console.log("Row index is ", this.rowIndex);
+                var coords = theftLocation[this.rowIndex - 1],
                     locationUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + coords + "&zoom=15&scale=false&size=300x300&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7C" + coords;
                 $('#deviceLocation').attr('src', locationUrl);
-                $('#activity-maps').attr('href',"http://www.google.com/maps/place/" + coords);
+                $('#activity-maps').attr('href', "http://www.google.com/maps/place/" + coords);
             });
         }
         /*if (theftCount.length>0){
@@ -631,7 +632,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         $('#fuelsensor-deviceLocation').addClass('hidden');
         $('#fuelsensor-graphs').removeClass('col-md-8');
-        $('#fuelsensor-deviceLocation').removeClass('col-md-3');        
+        $('#fuelsensor-deviceLocation').removeClass('col-md-3');
     };
 
     /*****************************HTML functionality***********************************/
@@ -705,10 +706,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
                 getAux1(selectedVehicleId, selectedVehicleSN, plotData, createTable); //rawData is results from getAux1
-                button.disabled = true;            
+                button.disabled = true;
                 $('#fuelsensor-deviceLocation').addClass('hidden');
                 $('#fuelsensor-graphs').removeClass('col-md-8');
-                $('#fuelsensor-deviceLocation').removeClass('col-md-3');        
+                $('#fuelsensor-deviceLocation').removeClass('col-md-3');
             }
         });
 
@@ -758,7 +759,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
         });
 
-        $('#fueladdin-closeImage').click(function(){
+        $('#fueladdin-closeImage').click(function() {
             $('#fuelsensor-deviceLocation').addClass('hidden');
             $('#fuelsensor-graphs').removeClass('col-md-8');
             $('#fuelsensor-deviceLocation').removeClass('col-md-3');
