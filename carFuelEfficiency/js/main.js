@@ -26,6 +26,7 @@ geotab.addin.addinTemplate = function(api, state) {
 	/*********************************Global variables***********************************/
 	var fromSheet;
 	var vehicles;
+	var avgPoints = 20;
 	/************************************************************************************/
 
 
@@ -128,6 +129,12 @@ geotab.addin.addinTemplate = function(api, state) {
 
 	/*******************************Intermediate functions*******************************/
 	var processFuel = function(fuelArray){
+		for (i=0;i<fuelArray.length;i++){
+			if(fuelArray[i].length<avgPoints){
+				fuelArray.splice(i,1,"Need more data to calibrate fuel level");
+
+			}
+		}
 		console.log("Vehicle Fuel info ", fuelArray);
 	};
 	/************************************************************************************/	
