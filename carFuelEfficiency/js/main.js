@@ -73,12 +73,12 @@ geotab.addin.addinTemplate = function(api, state) {
 		});
 	};
 
-	var getFuel = function() {
+	var getFuel = function(callback) {
 		/****************************************************************************************************/
 		// reset variable 
 		var multiCallArray = [];
 		/****************************************************************************************************/
-		
+
 		api.call("Get", {
 			"typeName": "Diagnostic",
 			"search": {
@@ -116,7 +116,7 @@ geotab.addin.addinTemplate = function(api, state) {
 			}
 
 			api.multiCall(multiCallArray, function(results) {
-				console.log("Diagnostic data ", results);
+				callback(results);
 			}, function(errorString) {
 				throw "Error retrieving fuel data. " + error;
 			});
@@ -124,6 +124,13 @@ geotab.addin.addinTemplate = function(api, state) {
 		});
 	};
 	/************************************************************************************/
+
+
+	/*******************************Intermediate functions*******************************/
+	var processFuel = function(fuelArray){
+		console.log("Vehicle Fuel info ", results);
+	};
+	/************************************************************************************/	
 
 
 	/*******************************Results presentation*********************************/
@@ -141,7 +148,7 @@ geotab.addin.addinTemplate = function(api, state) {
 		 * focus() is called whenever the Add-In receives focus.
 		 */
 		focus: function(api, state) {
-			getFuel();
+			getFuel(processFuel);
 		},
 
 		/**
