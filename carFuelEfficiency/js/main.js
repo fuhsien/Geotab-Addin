@@ -71,6 +71,17 @@ geotab.addin.addinTemplate = function(api, state) {
         	throw "Error while trying to load vehicles. " + error;
         });
     };
+
+    var getFuel = function(){
+    	api.call("Get", {
+            "typeName": "Diagnostic",
+            "search": {
+                "name": "Analog aux 1"
+            },
+        },function(result){
+        	console.log(result);
+        }
+    }
 	/************************************************************************************/
 
 
@@ -80,22 +91,6 @@ geotab.addin.addinTemplate = function(api, state) {
 
 	return {
 	    initialize: function(api, state, initializeCallback) {
-			api.getSession(function (session) {
-				var currentUser = session.userName;
-				api.call("Get", {
-					"typeName" : "User",
-					"search" : {
-						"name" : currentUser
-					}
-				}, function (result) {
-					if (result.length === 0) {
-						throw "Unable to find currently logged on user."
-					}
-
-				}, function (error) {
-					throw "Error while trying to load currently logged on user. " + error;
-				});
-			});
 			initializeJSON();
 			getVehicles(initializeCallback);
 
@@ -107,7 +102,7 @@ geotab.addin.addinTemplate = function(api, state) {
 	    focus: function(api, state) {
 			var test = state.getState();
 			console.log(test);
-
+			getFuel();
 		},
 		
 		/**
