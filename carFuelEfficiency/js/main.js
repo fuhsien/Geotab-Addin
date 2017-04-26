@@ -74,6 +74,11 @@ geotab.addin.addinTemplate = function(api, state) {
 	};
 
 	var getFuel = function() {
+		/****************************************************************************************************/
+		// reset variable 
+		var multiCallArray = [];
+		/****************************************************************************************************/
+		
 		api.call("Get", {
 			"typeName": "Diagnostic",
 			"search": {
