@@ -22,9 +22,12 @@
 
  */
 geotab.addin.addinTemplate = function(api, state) {
+
 	/*********************************Global variables***********************************/
 	var fromSheet;
 	/************************************************************************************/
+
+
 	/**********************************Retrieve data*************************************/
 	//API call for fuel data
 	//Pull JSON from Google Sheet
@@ -61,12 +64,14 @@ geotab.addin.addinTemplate = function(api, state) {
 				};
 			});
 			//console.log("Vehicles loaded", vehicles);
+
 			document.getElementById("fuelEff-container").style.display = "block";
 			finishedCallback();
 		}, function(errorString) {
 			throw "Error while trying to load vehicles. " + error;
 		});
 	};
+
 	var getFuel = function() {
 		api.call("Get", {
 			"typeName": "Diagnostic",
@@ -78,11 +83,13 @@ geotab.addin.addinTemplate = function(api, state) {
 			var auxID = result[0].id;
 			var reportStart = new Date();
 			var reportEnd = new Date();
+
 			reportStart.setDate(1);
 			reportStart.setHours(0);
 			reportStart.setMinutes(0);
 			reportStart.setSeconds(0);
 			reportStart.setMilliseconds(0);
+
 			api.call("Get", {
 				"typeName": "Diagnostic",
 				"search": {
@@ -97,22 +104,30 @@ geotab.addin.addinTemplate = function(api, state) {
 			}, function(errorString) {
 				throw "Error retrieving fuel data. " + error;
 			});
+
 		});
 	};
 	/************************************************************************************/
+
+
 	/*******************************Results presentation*********************************/
+
 	/************************************************************************************/
+
 	return {
 		initialize: function(api, state, initializeCallback) {
 			initializeJSON();
 			getVehicles(initializeCallback);
+
 		},
+
 		/**
 		 * focus() is called whenever the Add-In receives focus.
 		 */
 		focus: function(api, state) {
 			getFuel();
 		},
+
 		/**
 		 * blur() is called whenever the user navigates away from the Add-In.
 		 */
