@@ -74,11 +74,6 @@ geotab.addin.addinTemplate = function(api, state) {
 	};
 
 	var getFuel = function() {
-		/******************************************************************************************/
-		//reset variables;
-		var multiCallArray = [];
-		/******************************************************************************************/
-
 		api.call("Get", {
 			"typeName": "Diagnostic",
 			"search": {
@@ -105,8 +100,11 @@ geotab.addin.addinTemplate = function(api, state) {
 							deviceSearch: {
 								"id": vehicleID
 							},
-							fromDate: theftStart,
-							toDate: theftEnd
+							diagnosticSearch: {
+								"id": auxID
+							},
+							fromDate: reportStart,
+							toDate: reportEnd
 						}
 					}]
 				)
