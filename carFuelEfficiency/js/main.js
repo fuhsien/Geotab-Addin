@@ -98,10 +98,11 @@ geotab.addin.addinTemplate = function(api, state) {
 					},
 					fromDate: reportStart,
 					toDate: reportEnd
-	            },function(results){
+	            }, function(results){
 	            	console.log(results);
-	            },function(errorString){
+	            }, function(errorString){
 	            	throw "Error retrieving fuel data. " + error;
+	            }
             });
 
         });
