@@ -80,7 +80,7 @@ geotab.addin.addinTemplate = function(api, state) {
             },
         },function(result){
         	//Report for this month
-        	var AuxID = result[0].id;
+        	var auxID = result[0].id;
         	var reportStart = new Date();
         	var reportEnd = new Date();
 
