@@ -79,7 +79,31 @@ geotab.addin.addinTemplate = function(api, state) {
                 "name": "Analog aux 1"
             },
         },function(result){
-        	console.log(result);
+        	//Report for this month
+        	var AuxID = result[0].id;
+        	var reportStart = new Date();
+        	var reportEnd = new Date();
+
+        	reportStart.setDate(1);
+			reportStart.setHours(0);
+			reportStart.setMinutes(0);
+			reportStart.setSeconds(0);
+			reportStart.setMilliseconds(0);
+
+        	api.call("Get", {
+	            "typeName": "Diagnostic",
+	            "search": {
+	                diagnosticSearch: {
+						"id": auxID
+					},
+					fromDate: reportStart,
+					toDate: reportEnd
+	            },function(results){
+	            	console.log(results);
+	            },function(errorString){
+	            	throw "Error retrieving fuel data. " + error;
+            });
+
         });
     };
 	/************************************************************************************/
