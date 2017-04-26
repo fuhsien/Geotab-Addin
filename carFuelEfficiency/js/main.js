@@ -80,8 +80,8 @@ geotab.addin.addinTemplate = function(api, state) {
             },
         },function(result){
         	console.log(result);
-        }
-    }
+        });
+    };
 	/************************************************************************************/
 
 
