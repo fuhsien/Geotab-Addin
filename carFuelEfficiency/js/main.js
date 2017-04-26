@@ -128,7 +128,7 @@ geotab.addin.addinTemplate = function(api, state) {
 
 	/*******************************Intermediate functions*******************************/
 	var processFuel = function(fuelArray){
-		console.log("Vehicle Fuel info ", results);
+		console.log("Vehicle Fuel info ", fuelArray);
 	};
 	/************************************************************************************/	
 
