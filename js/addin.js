@@ -701,7 +701,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $('#render').click(function() {
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
-            $('#subdued').html(selectedOpt.serialNumber);
+            for (i=0;i<vehicles.length;i++){
+                if (vehicles[i].id == selectedVehicleId){
+                    $('#subdued').html(vehicles[i].name);
+                    break;
+                }
+            }
 
             if (selectedVehicleId) {
                 //Get Aux Data for this vehicle
