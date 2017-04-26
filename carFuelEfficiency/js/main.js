@@ -97,7 +97,7 @@ geotab.addin.addinTemplate = function(api, state) {
 						"id": auxID
 					},
 					deviceSearch: {
-                        "id": vehicleID
+                        "id": "b2"
                     },
 					fromDate: reportStart,
 					toDate: reportEnd
