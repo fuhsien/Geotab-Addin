@@ -55,7 +55,7 @@ geotab.addin.addinTemplate = function(api, state) {
 			if (results.length === 0) {
 				throw "No vehicle found!";
 			}
-            console.log("Device", results);
+            //console.log("Device", results);
             vehicles = results.map(function(vehicle) {
                 return {
                     name: vehicle.name,
@@ -63,7 +63,7 @@ geotab.addin.addinTemplate = function(api, state) {
                     serialNumber: vehicle.serialNumber
                 };
             });
-            console.log("Vehicles loaded", vehicles);
+            //console.log("Vehicles loaded", vehicles);
 
 			document.getElementById("fuelEff-container").style.display = "block";
             finishedCallback();
@@ -99,7 +99,7 @@ geotab.addin.addinTemplate = function(api, state) {
 					fromDate: reportStart,
 					toDate: reportEnd
 	            }, function(results){
-	            	console.log(results);
+	            	console.log("Diagnostic data ",results);
 	            }, function(errorString){
 	            	throw "Error retrieving fuel data. " + error;
 	            }
