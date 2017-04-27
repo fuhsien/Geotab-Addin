@@ -248,14 +248,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 3,
-            //color: "#A00C23", //red
+            color: "#A00C23", //red
             showInLegend: true
         }, {
             name: "Speed",
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 1,
-            //color: "#6495ED", //blue
+            color: "#6495ED", //blue
             axisYIndex: 1,
             showInLegend: true
         }, {
@@ -263,7 +263,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 2,
-            //color: "#3AF13A", //green
+            color: "#3AF13A", //green
             axisYIndex: 2,
             showInLegend: true
         }];
@@ -410,7 +410,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 includeZero: false,
             }],
             data: data,
-            /*legend: {
+            legend: {
                 cursor: "pointer",
                 itemclick: function(e) {
                     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -420,7 +420,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                     $("#chartContainer").CanvasJSChart().render();
                 }
-            }*/
+            }
         };
 
         var options2 = {
