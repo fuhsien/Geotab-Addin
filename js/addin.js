@@ -381,7 +381,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 valueFormatString: "MMM DD| h TT",
                 //labelAngle: -20
             },
-            axisY: [{
+            /*axisY: [{
                 title: "Litres",
                 lineColor: "#A00C23",
                 tickColor: "#A00C23",
@@ -408,7 +408,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 titleFontColor: "#3AF13A",
                 lineThickness: 2,
                 includeZero: false,
-            }],
+            }],*/
             data: data,
             legend: {
                 cursor: "pointer",
