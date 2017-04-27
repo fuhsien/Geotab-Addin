@@ -258,14 +258,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 1,
             color: "#6495ED", //blue
-            showInLegend: true
+            //showInLegend: true
         }, {
             name: "Raw Data",
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 2,
             color: "#3AF13A", //green
-            showInLegend: true
+            //showInLegend: true
         }];
         var dataSeries2 = {
             type: "splineArea"
@@ -309,7 +309,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 y: output[i]
             });*/
         }
-        
+
         for (var j = 0; j < results[1].length - 1; j++) {
             holdTimeSpeed[j] = results[1][j].dateTime;
             holdSpeed[j] = results[1][j].speed;
