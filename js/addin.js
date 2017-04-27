@@ -248,6 +248,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataSeries = [{
             name: "Fuel Level",
             type: "line",
+            markerType: "none",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 3,
             color: "#A00C23", //red
@@ -255,6 +256,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }, {
             name: "Speed",
             type: "line",
+            markerType: "none",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 1,
             color: "#6495ED", //blue
@@ -262,6 +264,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         }, {
             name: "Raw Data",
             type: "line",
+            markerType: "none",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 2,
             color: "#3AF13A", //green
