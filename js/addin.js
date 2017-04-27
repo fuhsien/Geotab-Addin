@@ -292,7 +292,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             }
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
-            /*dataPointsAux.push({
+            dataPointsAux.push({
                 x: new Date(holdTimeAux[i]),
                 //x: i,
                 y: output[i]
@@ -303,55 +303,21 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //x: i,
                 //y: holdVolt[i]
                 y: holdLitre[i]
-            });*/
+            });
             /*dataPoints2.push({
                 x: i,
                 y: output[i]
             });*/
         }
-
-        /*for (var j = 0; j < results[1].length - 1; j++) {
+        
+        for (var j = 0; j < results[1].length - 1; j++) {
             holdTimeSpeed[j] = results[1][j].dateTime;
             holdSpeed[j] = results[1][j].speed;
             dataPointsSpeed.push({
                 x: new Date(holdTimeSpeed[j]),
                 y: holdSpeed[j]
             });
-        }*/
-        dataPointsAux.push(
-            {x: new Date( 2012, 01, 1, 1,0), y: 26 },
-            {x: new Date( 2012, 01, 1,2,0 ), y: 38  },
-            {x: new Date( 2012, 01, 1,3,0), y: 43 },
-            {x: new Date( 2012, 01, 1,4,0), y: 29},
-            {x: new Date( 2012, 01, 1,5,0), y: 41},
-            {x: new Date( 2012, 01, 1,6,0), y: 54},
-            {x: new Date( 2012, 01, 1,7,0), y: 66},
-            {x: new Date( 2012, 01, 1,8,0), y: 60},
-            {x: new Date( 2012, 01, 1,9,0), y: 53},
-            {x: new Date( 2012, 01, 1,10,0), y: 60}
-        )
-        dataPointsStop.push(
-            { x: new Date( 2012, 01, 1, 1,0), y: 20 },
-            { x: new Date( 2012, 01, 1, 2,0), y: 44},
-            { x: new Date( 2012, 01, 1, 3,0), y: 35 },
-            { x: new Date( 2012, 01, 1, 4,0), y: 40 },
-            { x: new Date( 2012, 01, 1, 5,0), y: 90 },
-            { x: new Date( 2012, 01, 1, 6,0), y: 50 },
-            { x: new Date( 2012, 01, 1, 7,0), y: 18 },
-            { x: new Date( 2012, 01, 1, 8,0), y: 30 },
-            { x: new Date( 2012, 01, 1, 9,0), y: 11}
-        )
-        dataPointsSpeed.push(
-            { x: new Date( 2012, 01, 1, 1,0), y: 20 },
-            { x: new Date( 2012, 01, 1, 2,0), y: 44},
-            { x: new Date( 2012, 01, 1, 3,0), y: 35 },
-            { x: new Date( 2012, 01, 1, 4,0), y: 40 },
-            { x: new Date( 2012, 01, 1, 5,0), y: 90 },
-            { x: new Date( 2012, 01, 1, 6,0), y: 50 },
-            { x: new Date( 2012, 01, 1, 7,0), y: 18 },
-            { x: new Date( 2012, 01, 1, 8,0), y: 30 },
-            { x: new Date( 2012, 01, 1, 9,0), y: 11}
-        )
+        }
         /*************************************************************************************************************************/
         var simplifiedAux = [];
         var time2 = JSON.parse(JSON.stringify(holdTimeAux));
