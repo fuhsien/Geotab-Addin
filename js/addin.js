@@ -256,7 +256,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 1,
             color: "#6495ED", //blue
-            //showInLegend: true
+            showInLegend: true
         }, {
             name: "Raw Data",
             type: "line",
