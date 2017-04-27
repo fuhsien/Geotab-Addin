@@ -249,7 +249,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 3,
             color: "#A00C23", //red
-            //showInLegend: true
+            showInLegend: true
         }, {
             name: "Speed",
             type: "line",
@@ -263,7 +263,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 2,
             color: "#3AF13A", //green
-            //showInLegend: true
+            showInLegend: true
         }];
         var dataSeries2 = {
             type: "splineArea"
