@@ -245,14 +245,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         var data = [];
         var data2 = [];
-        var dataSeries = [{
+        var dataSeries = [/*{
             name: "Fuel Level",
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 3,
             color: "#A00C23", //red
             showInLegend: true
-        }, {
+        }, */{
             name: "Speed",
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
@@ -298,12 +298,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 y: output[i]
                     //y: holdVolt[i]
             });
-            dataPointsStop.push({
+            /*dataPointsStop.push({
                 x: new Date(holdTimeAux[i]),
                 //x: i,
                 //y: holdVolt[i]
                 y: holdLitre[i]
-            });
+            });*/
             /*dataPoints2.push({
                 x: i,
                 y: output[i]
@@ -363,11 +363,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         dataSeries[0].dataPoints = dataPointsAux;
         dataSeries[1].dataPoints = dataPointsSpeed;
-        dataSeries[2].dataPoints = dataPointsStop;
+        //dataSeries[2].dataPoints = dataPointsStop;
         dataSeries2.dataPoints = dataPoints2;
         data.push(dataSeries[1]);
         data.push(dataSeries[0]);
-        data.push(dataSeries[2]);
+        //data.push(dataSeries[2]);
         data2.push(dataSeries2);
 
         var options = {
