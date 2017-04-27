@@ -249,23 +249,21 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 3,
             color: "#A00C23", //red
-            showInLegend: true
+            //showInLegend: true
         }, {
             name: "Speed",
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 1,
             color: "#6495ED", //blue
-            axisYIndex: 1,
-            showInLegend: true
+            //showInLegend: true
         }, {
             name: "Raw Data",
             type: "line",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 2,
             color: "#3AF13A", //green
-            axisYIndex: 2,
-            showInLegend: true
+            //showInLegend: true
         }];
         var dataSeries2 = {
             type: "splineArea"
@@ -376,12 +374,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             title: {
                 text: "Fuel Graph"
             },
-            axisX: {
+            /*axisX: {
                 intervalType: "day",
                 valueFormatString: "MMM DD| h TT",
                 //labelAngle: -20
-            },
-            /*axisY: [{
+            },*/
+            axisY: {
                 title: "Litres",
                 lineColor: "#A00C23",
                 tickColor: "#A00C23",
@@ -391,24 +389,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 titleFontColor: "#A00C23",
                 lineThickness: 2,
                 includeZero: false,
-            }, {
-                title: "km/h",
-                lineColor: "#6495ED",
-                tickColor: "#6495ED",
-                gridThickness: 0,
-                labelFontColor: "#6495ED",
-                titleFontColor: "#6495ED",
-                lineThickness: 2,
-                includeZero: false,
-            }, {
-                title: "Litres",
-                lineColor: "#3AF13A",
-                tickColor: "#3AF13A",
-                labelFontColor: "#3AF13A",
-                titleFontColor: "#3AF13A",
-                lineThickness: 2,
-                includeZero: false,
-            }],*/
+            },
             data: data,
             legend: {
                 cursor: "pointer",
