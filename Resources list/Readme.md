@@ -14,7 +14,7 @@ List of resources
 - [Free HD images - Unsplash](https://unsplash.com/)
 - [Free HD images - StockSnap](https://stocksnap.io/)
 - [Free HD images - PixaBay](https://pixabay.com/)
-- [Image editor](www.fotor.com)
+- [Image editor](https://h5.fotor.com/)
 - [JPG to PNG - Transparent Background](http://www.online-image-editor.com/)
 - [Wordpress additional resources list by: Hogan Chua](http://hoganchua.com/ultimate-resources-building-wordpress-website-blog/)
 - [Free static site hosting - Github Pages](https://pages.github.com/)
