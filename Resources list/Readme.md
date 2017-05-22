@@ -15,6 +15,7 @@ List of resources
 - [Free HD images - StockSnap](https://stocksnap.io/)
 - [Free HD images - PixaBay](https://pixabay.com/)
 - [Image editor](https://h5.fotor.com/)
+- [Colour Picker](http://htmlcolorcodes.com/)
 - [JPG to PNG - Transparent Background](http://www.online-image-editor.com/)
 - [Wordpress additional resources list by: Hogan Chua](http://hoganchua.com/ultimate-resources-building-wordpress-website-blog/)
 - [Free static site hosting - Github Pages](https://pages.github.com/)
