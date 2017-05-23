@@ -189,7 +189,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //console.log("Remaining data",fuelOnStop);*/
 
 
-                callback1(results, fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
+                callback1(results, callback2, vehicleID); //plotData,callback2:createtable
+                //callback1(results, fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
 
             });
         }, function(e) {
@@ -216,7 +217,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Loaded Google Sheet");
     };
 
-    var plotData = function(results, stopData, callback, vehicleID) {
+    var plotData = function(results, callback, vehicleID) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
