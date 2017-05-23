@@ -105,7 +105,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
-                var rawFuel = JSON.parse(JSON.stringify(results[0]));
+                /*var rawFuel = JSON.parse(JSON.stringify(results[0]));
                 var rawSpeed = results[1];
                 var fuelOnStop = []; //store fuel info for which the vehicle is not moving
                 var firstRecord = null;
@@ -186,7 +186,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         }
                     }
                 }
-                //console.log("Remaining data",fuelOnStop);
+                //console.log("Remaining data",fuelOnStop);*/
 
 
                 callback1(results, fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
@@ -278,7 +278,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //averager += holdLitre[i];
                 averager += holdVolt[i];
             }
-            
+
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
             dataPointsAux.push({
