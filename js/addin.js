@@ -23,7 +23,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
         avgPoints = 25,
-        fuelThreshold = 5, //4*5/80 for volts
+        fuelThreshold = 4*5/80, //4*5/80 for volts, 5 for litres
         sessionThreshold = 5, //in minutes
         frontPaddingMinutes = 0, //minutes
         frontPaddingSeconds = 30,
@@ -105,7 +105,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
-                var rawFuel = JSON.parse(JSON.stringify(results[0]));
+                /*var rawFuel = JSON.parse(JSON.stringify(results[0]));
                 var rawSpeed = results[1];
                 var fuelOnStop = []; //store fuel info for which the vehicle is not moving
                 var firstRecord = null;
@@ -186,10 +186,11 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         }
                     }
                 }
-                //console.log("Remaining data",fuelOnStop);
+                //console.log("Remaining data",fuelOnStop);*/
 
 
-                callback1(results, fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
+                callback1(results, callback2, vehicleID); //plotData,callback2:createtable
+                //callback1(results, fuelOnStop, callback2, vehicleID); //plotData,callback2:createtable
 
             });
         }, function(e) {
@@ -216,7 +217,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Loaded Google Sheet");
     };
 
-    var plotData = function(results, stopData, callback, vehicleID) {
+    var plotData = function(results, callback, vehicleID) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
@@ -278,7 +279,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 //averager += holdLitre[i];
                 averager += holdVolt[i];
             }
-            
+
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
             dataPointsAux.push({
