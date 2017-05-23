@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Fuel Data</title>
+
+        <link rel="stylesheet" href="css/addin.css">
+        <link rel="stylesheet" href="css/vendor.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="css/classic.css">
+        <link rel="stylesheet" href="css/classic.date.css">
+
+
+    </head>
+
+    <body>
+        <header class="geotabPageHeader">
+            <h1 class="geotabPageName">Device Fuel Info <span id="subdued" class="subdued"></span></h1>
+            <div class="pageNameSecondary">
+                <h3 class="geotabSecondaryTitle">by: ProICE</h3>
+            </div>
+        </header>
+
+        <div id="details-selection">
+            <form class="pure-form pure-form-stacked">
+                <fieldset>
+                    <label for="fuel-sensor-vehicle">Vehicle to inspect:</label>
+                    <div class="pure-g">
+                        <select id="fuel-sensor-vehicle" class="pure-u-1-1"></select>
+                    </div>
+                </fieldset>
+            </form>
+            <form class="pure-form">
+                <fieldset>
+                    <label for="startDate">
+                        From:
+                        <input type="text" placeholder="Start Date" id="startDate">
+                    </label>
+                    <label for="endDate">
+                        To:
+                        <input type="text" placeholder="End Date" id="endDate" disabled>
+                    </label>
+                    </t>
+                    <button id="render" class="pure-button pure-button-primary" disabled>Run!</button>
+                </fieldset>
+            </form>
+        </div>
+
+        <div id="genDeviceFuelInfo">
+            <div class="container-fluid">
+                <div id="fueladdin-graphicalDisplay" class="fueladdin-row" >
+                    <div id="fuelsensor-graphs">
+                        <div id="fueladdin-graphOne" class="fueladdin-row">
+                            <div id="chartContainer"></div>
+                            <br>
+                        </div>
+                        <div id="fueladdin-graphTwo" class="fueladdin-row" style="width: 100%">
+                            <br>
+                            <div id="chartContainer2"></div>
+                        </div>
+                    </div>
+
+                    <div id="fuelsensor-deviceLocation" class="panel-group hidden">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Activity Location
+                                <button id="fueladdin-closeImage"type="button" class="close">&times;</button>
+                            </div>
+                            <div class="panel-body">
+                                <a id="activity-maps" target="_blank">
+                                    <img id="deviceLocation" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fueladdin-row">
+                    <p id="disclaimer"></p>
+                    <div id="for-table"></div>
+                </div>
+            </div>
+            <br>
+
+        </div>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js"></script>
+        <script src="js/picker.js"></script>
+        <script src="js/picker.date.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+        <script type="text/javascript" src="js/addin.js"></script>
+    </body>
+
+</html>
