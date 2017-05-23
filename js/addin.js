@@ -1,22 +1,7 @@
 /********************************************************************************
 
-COMPLETE SHIFTING TABLE TO NEW METHOD!!!!!!
-
-GO TO LINE 703
-
 Blue: 6495ED
 Red: A00C23
-
-New array :::::> output2
-output2 is a copy of output (i.e. averaged aux) but only keep points where the state of gradient changes. (increase -> decrease, vice versa)
-
-Potential solution:
-Add index to output2, so that can still trackback at which point it happen
--> get only changes bigger than threshold
-
-https://www.google.com/maps/place/3.18730235,101.676445
-"3.18730235,101.676445"
-
 
 
 https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css
@@ -285,27 +270,28 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             holdVolt[i] = results[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / (4 - 0.05);
             if (i >= avgPoints) {
-                averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
-                //averager = averager + holdVolt[i] - holdVolt[i - avgPoints]; //50 points onwards, add new data, delete first data
+                //averager = averager + holdLitre[i] - holdLitre[i - avgPoints]; //50 points onwards, add new data, delete first data
+                averager = averager + holdVolt[i] - holdVolt[i - avgPoints]; //50 points onwards, add new data, delete first data
                 output[i] = averager / avgPoints;
             } else {
                 output[i] = null;
-                averager += holdLitre[i];
-                //averager += holdVolt[i];
+                //averager += holdLitre[i];
+                averager += holdVolt[i];
             }
+            
             //console.log("Avg", typeof(averager));
             //console.log("hold", typeof(holdVolt[i]));
             dataPointsAux.push({
                 x: new Date(holdTimeAux[i]),
                 //x: i,
                 y: output[i]
-                    //y: holdVolt[i]
             });
+
             dataPointsStop.push({
                 x: new Date(holdTimeAux[i]),
                 //x: i,
-                //y: holdVolt[i]
-                y: holdLitre[i]
+                y: holdVolt[i]
+                //y: holdLitre[i]
             });
             /*dataPoints2.push({
                 x: i,
@@ -370,8 +356,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         dataSeries[2].dataPoints = dataPointsStop;
         dataSeries2.dataPoints = dataPoints2;
         data.push(dataSeries[1]);
-        data.push(dataSeries[0]);
         data.push(dataSeries[2]);
+        data.push(dataSeries[0]);
         data2.push(dataSeries2);
 
         var options = {
@@ -380,13 +366,13 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             title: {
                 text: "Fuel Graph"
             },
-            /*axisX: {
+            axisX: {
                 intervalType: "day",
                 valueFormatString: "MMM DD| h TT",
                 //labelAngle: -20
-            },*/
+            },
             axisY: {
-                title: "Litres",
+                title: "Volts",
                 lineColor: "#A00C23",
                 tickColor: "#A00C23",
                 gridThickness: 2,
