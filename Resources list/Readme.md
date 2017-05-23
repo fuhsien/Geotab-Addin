@@ -24,6 +24,9 @@ List of resources
 - [Top paid PowerPoint template (uncracked)](https://graphicriver.net/item/motagua-multipurpose-powerpoint-template/10348960?ref=Jetfabrik&clickthrough_id=997182954&redirect_back=true)
 - [Award winning website design](https://www.awwwards.com/)
 
+Geotab Add in
+------------------------------
+ - [GitHub - Generator addin (sandbox css)](https://github.com/Geotab/generator-addin)
 
 Video Tutorials
 ------------------------------

@@ -10,7 +10,14 @@ https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css
 
 style="border-style:solid;"
 
-
+aux data 
+initialize number time
+For loop (
+    convert time into number
+    record minute interval
+    record index of begin, end
+    average the points within the minute
+)
 
 *********************************************************************************/
 geotab.addin.geotabFuelSensor = function(api, state) {
@@ -105,88 +112,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                 }]
             ], function(results) {
-                /*var rawFuel = JSON.parse(JSON.stringify(results[0]));
-                var rawSpeed = results[1];
-                var fuelOnStop = []; //store fuel info for which the vehicle is not moving
-                var firstRecord = null;
-                var lastRecord = null;
-                var timeCurrent = null,
-                    timeOld = null;
-                var drivingSessions = [];
-                var begin = null;
-                var ended = null;
-
-
-                for (var i = 0; i < rawSpeed.length; i++) {
-                    if (rawSpeed[i].speed > 5) {
-                        if (firstRecord == null) { //initialization
-                            firstRecord = rawSpeed[i];
-                            lastRecord = rawSpeed[i];
-                        }
-                        timeCurrent = new Date(rawSpeed[i].dateTime).getTime();
-                        timeOld = new Date(lastRecord.dateTime).getTime();
-                        if ((timeCurrent - timeOld) / (1000 * 60) >= sessionThreshold) {
-                            //current point is a new session already!
-                            begin = new Date(firstRecord.dateTime);
-                            begin.setMinutes(begin.getMinutes() - frontPaddingMinutes);
-                            begin.setSeconds(begin.getSeconds() - frontPaddingSeconds);
-                            ended = new Date(lastRecord.dateTime);
-                            ended.setMinutes(ended.getMinutes() + backPaddingMinutes);
-                            ended.setSeconds(ended.getSeconds() + backPaddingSeconds);
-                            drivingSessions.push(begin, ended);
-                            firstRecord = rawSpeed[i];
-                        }
-                        lastRecord = rawSpeed[i];
-                    }
-                }
-                if (firstRecord) {
-                    begin = new Date(firstRecord.dateTime);
-                    begin.setMinutes(begin.getMinutes() - frontPaddingMinutes);
-                    begin.setSeconds(begin.getSeconds() - frontPaddingSeconds);
-                    ended = new Date(lastRecord.dateTime);
-                    ended.setMinutes(ended.getMinutes() + backPaddingMinutes);
-                    ended.setSeconds(ended.getSeconds() + backPaddingSeconds);
-                    drivingSessions.push(begin, ended);
-                    console.log("All sessions", drivingSessions);
-                }
-
-                //Double check time is in ascending order, if there's points not in order, merge two sessions
-                for (i = 1; i < drivingSessions.length; i++) {
-                    var NOW = new Date(drivingSessions[i]).getTime();
-                    var LAST = new Date(drivingSessions[i - 1]).getTime();
-                    if (NOW - LAST < 0) {
-                        console.log("MERGING TWO SESSIONS!");
-                        var tempArray = [];
-                        tempArray.push(i - 1);
-                    }
-                }
-                if (tempArray) {
-                    for (i = 0; i < tempArray.length; i++) {
-                        drivingSessions.splice(tempArray[i], 2);
-                    }
-                }
-
-                // Adding sessions into fuel array
-                console.log("Length before appending", rawFuel.length, drivingSessions.length);
-                if (drivingSessions.length>0){
-                    var comparator = drivingSessions[0].getTime();
-                    var driveFlag = false;
-                    for (i = 0, j = 1; i < rawFuel.length - 1; i++) {
-                        var fuelTime = new Date(rawFuel[i].dateTime).getTime();
-                        if (comparator - fuelTime < 0) {
-                            driveFlag = !driveFlag;
-                            //rawFuel.splice(i++,0,null);
-                            rawFuel.splice(i++, 0, new Date(comparator).toISOString());
-                            if (j < drivingSessions.length) {
-                                comparator = drivingSessions[j++].getTime();
-                            }
-                        }
-                        if (!driveFlag) {
-                            fuelOnStop.push(rawFuel[i]);
-                        }
-                    }
-                }
-                //console.log("Remaining data",fuelOnStop);*/
+                /* deleted session info*/
 
 
                 callback1(results, callback2, vehicleID); //plotData,callback2:createtable
@@ -221,6 +147,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
+        numberTimeAux = 0;
         holdTimeAux = [];
         holdTimeSpeed = [];
         holdVolt = [];
@@ -265,8 +192,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataPoints2 = [];
         console.log("Selected Vehicle Aux:", results); //results return aux values
 
-
+        var numberTimeAux = results[0][i].dateTime.getTime();
         for (var i = 0; i < results[0].length - 1; i++) {
+            /********************************************************************************************/
+            
+            /********************************************************************************************/
+
             holdTimeAux[i] = results[0][i].dateTime;
             holdVolt[i] = results[0][i].data;
             holdLitre[i] = tankSize * holdVolt[i] / (4 - 0.05);
