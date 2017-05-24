@@ -12,9 +12,12 @@ style="border-style:solid;"
 
 aux data 
 initialize number time
+previous minute mark
+next minute mark
 For loop (
     convert time into number
     record minute interval
+
     record index of begin, end
     average the points within the minute
 )

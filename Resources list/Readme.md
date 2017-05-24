@@ -35,3 +35,8 @@ Video Tutorials
 - [Build a website with Wordpress from scratch by James Stafford](https://youtu.be/OVoXDk8ps10)
 - [cPanel - Create Subdomain and install Wordpress](https://youtu.be/c0yQHucyENk)
 - [Recreate Motagua PowerPoint slide](https://youtu.be/xARUSwhA0DM)
+
+High Res Audio
+------------------------------
+ - [High Res Websites](http://www.findhdmusic.com/high-res-audio/free-music/)
+ - [Spek - Audio Quality Checker](spek.cc)
