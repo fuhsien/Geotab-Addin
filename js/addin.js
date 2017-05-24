@@ -150,7 +150,6 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         /*======================================================================================*/
         //Reset points before plotting to prevent accumulation
         averager = 0;
-        numberTimeAux = 0;
         holdTimeAux = [];
         holdTimeSpeed = [];
         holdVolt = [];
@@ -195,7 +194,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataPoints2 = [];
         console.log("Selected Vehicle Aux:", results); //results return aux values
 
-        var numberTimeAux = results[0][i].dateTime.getTime();
+        //var numberTimeAux = results[0][i].dateTime.getTime();
         for (var i = 0; i < results[0].length - 1; i++) {
             /********************************************************************************************/
             
