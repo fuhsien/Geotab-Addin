@@ -184,6 +184,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             lineThickness: 2,
             color: "#3AF13A", //green
             showInLegend: true
+        }, {
+            name: "New Algorithm",
+            type: "line",
+            markerType: "none",
+            xValueFormatString: "DD MMM HH:mm",
+            lineThickness: 2,
+            color: "#7000FF", //purple
+            showInLegend: true
         }];
         var dataSeries2 = {
             type: "splineArea"
@@ -191,6 +199,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         var dataPointsAux = [];
         var dataPointsSpeed = [];
         var dataPointsStop = [];
+        var dataPointsFuel = [];
         var dataPoints2 = [];
         console.log("Selected Vehicle Aux:", results); //results return aux values
 
@@ -221,6 +230,10 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                     }
                     avgMinute = avgMinute/points;
                     outputNew.push([new Date(prevMinute),avgMinute]);
+                    dataPointsFuel.push({
+                        x: new Date(prevMinute),
+                        y: avgMinute
+                    });
                     //console.log("#############Check", upperIndex,lowerIndex,avgMinute);
                     //update variables
                     prevMinute = Math.floor(currentAuxTime/(1000*60)) * 1000*60;
@@ -324,10 +337,12 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         dataSeries[0].dataPoints = dataPointsAux;
         dataSeries[1].dataPoints = dataPointsSpeed;
         dataSeries[2].dataPoints = dataPointsStop;
+        dataSeries[3].dataPoints = dataPointsFuel;
         dataSeries2.dataPoints = dataPoints2;
         data.push(dataSeries[1]);
         data.push(dataSeries[2]);
         data.push(dataSeries[0]);
+        data.push(dataSeries[3]);
         data2.push(dataSeries2);
 
         var options = {
