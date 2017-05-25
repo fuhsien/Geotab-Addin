@@ -197,8 +197,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         /******************************************************************************************/
         if (results[0]){
             var currentAuxTime;
-            var prevAuxTime = new Date(results[0][0].dateTime);
-            prevAuxTime = prevAuxTime.getTime();
+            var prevAuxTime = new Date(results[0][0].dateTime).getTime();
+            //prevAuxTime = prevAuxTime.getTime();
             var prevMinute = Math.floor(prevAuxTime/(1000*60)) * 1000*60;
             var nextMinute = Math.ceil(prevAuxTime/(1000*60)) * 1000*60;
 
