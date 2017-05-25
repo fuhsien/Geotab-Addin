@@ -341,8 +341,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         dataSeries2.dataPoints = dataPoints2;
         data.push(dataSeries[1]);
         data.push(dataSeries[2]);
-        data.push(dataSeries[0]);
         data.push(dataSeries[3]);
+        data.push(dataSeries[0]);
         data2.push(dataSeries2);
 
         var options = {
