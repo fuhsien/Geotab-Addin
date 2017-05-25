@@ -205,14 +205,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             var nextMinute = Math.ceil(currentAuxTime/(1000*60)) * 1000*60;
 
             console.log("Minute range: " + new Date(prevMinute) + "to" + new Date(nextMinute));
-            for (var i=1;i<2;i++){
+            for (var i=1;i<results[0].length;i++){
                 if (prevMinute == nextMinute){
                     nextMinute += 60*1000;
                 }
                 currentAuxTime = new Date(results[0][i].dateTime).getTime();
                 if (currentAuxTime<nextMinute && currentAuxTime>prevMinute){        //still within same minute
 
-                } else{
+                } else{                                                             // Exceeded previous minute, average prev minute and update var
                     lowerIndex = i-1; //close the minute
                     //start averaging
                     points = lowerIndex - upperIndex +1;
@@ -220,9 +220,14 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         avgMinute += results[0][j].data;
                     }
                     avgMinute = avgMinute/points;
+                    outputNew.push(avgMinute);
                     console.log("#############Check", upperIndex,lowerIndex,avgMinute);
+                    //update variables
+                    upperIndex = i;
+                    avgMinute = 0;
                 }
             }
+            console.log("==================NEW OUTPUT",outputNew);
         }
         /******************************************************************************************/
 
