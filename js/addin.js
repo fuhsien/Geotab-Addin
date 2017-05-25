@@ -220,8 +220,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                         avgMinute += results[0][j].data;
                     }
                     avgMinute = avgMinute/points;
-                    outputNew.push(avgMinute);
-                    console.log("#############Check", upperIndex,lowerIndex,avgMinute);
+                    outputNew.push([prevMinute,avgMinute]);
+                    //console.log("#############Check", upperIndex,lowerIndex,avgMinute);
                     //update variables
                     prevMinute = Math.floor(currentAuxTime/(1000*60)) * 1000*60;
                     nextMinute = Math.ceil(currentAuxTime/(1000*60)) * 1000*60;
