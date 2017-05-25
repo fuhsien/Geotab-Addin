@@ -196,18 +196,32 @@ geotab.addin.geotabFuelSensor = function(api, state) {
 
         /******************************************************************************************/
         if (results[0]){
-            var currentAuxTime;
-            var prevAuxTime = new Date(results[0][0].dateTime).getTime();
-            //prevAuxTime = prevAuxTime.getTime();
-            var prevMinute = Math.floor(prevAuxTime/(1000*60)) * 1000*60;
-            var nextMinute = Math.ceil(prevAuxTime/(1000*60)) * 1000*60;
+            var avgMinute=0;
+            var points=0;
+            var outputNew=[];
+            var upperIndex = 0,lowerIndex = 0;
+            var currentAuxTime = new Date(results[0][0].dateTime).getTime();
+            var prevMinute = Math.floor(currentAuxTime/(1000*60)) * 1000*60;
+            var nextMinute = Math.ceil(currentAuxTime/(1000*60)) * 1000*60;
 
             console.log("Minute range: " + new Date(prevMinute) + "to" + new Date(nextMinute));
-            for (var i=1;i<results[0].length;i++){
+            for (var i=1;i<2;i++){
                 if (prevMinute == nextMinute){
                     nextMinute += 60*1000;
                 }
                 currentAuxTime = new Date(results[0][i].dateTime).getTime();
+                if (currentAuxTime<nextMinute && currentAuxTime>prevMinute){        //still within same minute
+
+                } else{
+                    lowerIndex = i-1; //close the minute
+                    //start averaging
+                    points = lowerIndex - upperIndex +1;
+                    for (var j=upperIndex;j<=lowerIndex;j++){
+                        avgMinute += results[0][j].data;
+                    }
+                    avgMinute = avgMinute/points;
+                    console.log("#############Check", upperIndex,lowerIndex,avgMinute);
+                }
             }
         }
         /******************************************************************************************/
