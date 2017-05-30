@@ -23,6 +23,7 @@ List of resources
 - [Code Cleaner](https://dirtymarkup.com/)
 - [Top paid PowerPoint template (uncracked)](https://graphicriver.net/item/motagua-multipurpose-powerpoint-template/10348960?ref=Jetfabrik&clickthrough_id=997182954&redirect_back=true)
 - [Award winning website design](https://www.awwwards.com/)
+- [File Different Identifier](https://www.diffchecker.com/)
 
 Geotab Add in
 ------------------------------
