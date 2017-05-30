@@ -33,7 +33,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         sFlag = 0, //check if start date selected
         eFlag = 0, //check if end date selected
         avgPoints = 25,
-        fuelThreshold = 4*5/80, //4*5/80 for volts, 5 for litres
+        fuelThreshold = 4 * 5 / 80, //4*5/80 for volts, 5 for litres
         sessionThreshold = 5, //in minutes
         frontPaddingMinutes = 0, //minutes
         frontPaddingSeconds = 30,
@@ -190,7 +190,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             markerType: "none",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 2,
-            color: "#7000FF", //purple
+            color: "#FFFF00", //yellow
             showInLegend: true
         }];
         var dataSeries2 = {
@@ -204,45 +204,46 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         console.log("Selected Vehicle Aux:", results); //results return aux values
 
         /******************************************************************************************/
-        if (results[0]){
-            var avgMinute=0;
-            var points=0;
-            var outputNew=[];
-            var upperIndex = 0,lowerIndex = 0;
+        if (results[0]) {
+            var avgMinute = 0;
+            var points = 0;
+            var outputNew = [];
+            var upperIndex = 0,
+                lowerIndex = 0;
             var currentAuxTime = new Date(results[0][0].dateTime).getTime();
-            var prevMinute = Math.floor(currentAuxTime/(1000*60)) * 1000*60;
-            var nextMinute = Math.ceil(currentAuxTime/(1000*60)) * 1000*60;
+            var prevMinute = Math.floor(currentAuxTime / (1000 * 60)) * 1000 * 60;
+            var nextMinute = Math.ceil(currentAuxTime / (1000 * 60)) * 1000 * 60;
 
             console.log("Minute range: " + new Date(prevMinute) + "to" + new Date(nextMinute));
-            for (var i=1;i<results[0].length;i++){
-                if (prevMinute == nextMinute){
-                    nextMinute += 60*1000;
+            for (var i = 1; i < results[0].length; i++) {
+                if (prevMinute == nextMinute) {
+                    nextMinute += 60 * 1000;
                 }
                 currentAuxTime = new Date(results[0][i].dateTime).getTime();
-                if (currentAuxTime<nextMinute && currentAuxTime>prevMinute){        //still within same minute
+                if (currentAuxTime < nextMinute && currentAuxTime > prevMinute) { //still within same minute
 
-                } else{                                                             // Exceeded previous minute, average prev minute and update var
-                    lowerIndex = i-1; //close the minute
+                } else { // Exceeded previous minute, average prev minute and update var
+                    lowerIndex = i - 1; //close the minute
                     //start averaging
-                    points = lowerIndex - upperIndex +1;
-                    for (var j=upperIndex;j<=lowerIndex;j++){
+                    points = lowerIndex - upperIndex + 1;
+                    for (var j = upperIndex; j <= lowerIndex; j++) {
                         avgMinute += results[0][j].data;
                     }
-                    avgMinute = avgMinute/points;
-                    outputNew.push([new Date(prevMinute),avgMinute]);
+                    avgMinute = avgMinute / points;
+                    outputNew.push([new Date(prevMinute), avgMinute]);
                     dataPointsFuel.push({
                         x: new Date(prevMinute),
                         y: avgMinute
                     });
                     //console.log("#############Check", upperIndex,lowerIndex,avgMinute);
                     //update variables
-                    prevMinute = Math.floor(currentAuxTime/(1000*60)) * 1000*60;
-                    nextMinute = Math.ceil(currentAuxTime/(1000*60)) * 1000*60;
+                    prevMinute = Math.floor(currentAuxTime / (1000 * 60)) * 1000 * 60;
+                    nextMinute = Math.ceil(currentAuxTime / (1000 * 60)) * 1000 * 60;
                     upperIndex = i;
                     avgMinute = 0;
                 }
             }
-            console.log("==================NEW OUTPUT",outputNew);
+            console.log("==================NEW OUTPUT", outputNew);
         }
         /******************************************************************************************/
 
@@ -274,7 +275,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
                 x: new Date(holdTimeAux[i]),
                 //x: i,
                 y: holdVolt[i]
-                //y: holdLitre[i]
+                    //y: holdLitre[i]
             });
             /*dataPoints2.push({
                 x: i,
@@ -659,8 +660,8 @@ geotab.addin.geotabFuelSensor = function(api, state) {
         $('#render').click(function() {
             var selectedVehicleId = selectedOpt.id;
             var selectedVehicleSN = selectedOpt.serialNumber;
-            for (i=0;i<vehicles.length;i++){
-                if (vehicles[i].id == selectedVehicleId){
+            for (i = 0; i < vehicles.length; i++) {
+                if (vehicles[i].id == selectedVehicleId) {
                     $('#subdued').html(vehicles[i].name);
                     break;
                 }
