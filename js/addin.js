@@ -190,7 +190,7 @@ geotab.addin.geotabFuelSensor = function(api, state) {
             markerType: "none",
             xValueFormatString: "DD MMM HH:mm",
             lineThickness: 2,
-            color: "#FFFF00", //yellow
+            color: "#196F3D", //Dark green
             showInLegend: true
         }];
         var dataSeries2 = {

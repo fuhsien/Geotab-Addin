@@ -25,6 +25,7 @@ List of resources
 - [Award winning website design](https://www.awwwards.com/)
 - [File Different Identifier](https://www.diffchecker.com/)
 - [Video Compressor](https://clipchamp.com/en/dashboard#)
+- [Adobe Acrobat XI SN generator](https://www.serials.be/serial/Adobe_Acrobat_XI_Pro_68805216.html)
 
 Geotab Add in
 ------------------------------
