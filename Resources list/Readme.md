@@ -9,6 +9,7 @@ List of resources
 
 
 - [Icon packs](http://www.flaticon.com/)
+- [Icon packs - Web](http://fontawesome.io/cheatsheet/)
 - [Icon format converter](https://cloudconvert.com/svg-to-emf)
 - [Website Design tips](http://rankingbts.com/final/)
 - [Free HD images - Unsplash](https://unsplash.com/)
