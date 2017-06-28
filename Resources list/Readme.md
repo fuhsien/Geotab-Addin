@@ -28,6 +28,7 @@ List of resources
 - [Video Compressor](https://clipchamp.com/en/dashboard#)
 - [Adobe Acrobat XI SN generator](https://www.serials.be/serial/Adobe_Acrobat_XI_Pro_68805216.html)
 - [Image to Font](https://www.myfonts.com/WhatTheFont/)
+- [Text to Audio](http://www.fromtexttospeech.com/)
 
 Geotab Add in
 ------------------------------
