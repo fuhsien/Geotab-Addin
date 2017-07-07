@@ -29,7 +29,7 @@ List of resources
 - [Adobe Acrobat XI SN generator](https://www.serials.be/serial/Adobe_Acrobat_XI_Pro_68805216.html)
 - [Image to Font](https://www.myfonts.com/WhatTheFont/)
 - [Text to Audio](http://www.fromtexttospeech.com/)
-
+- [Premiere Pro Effects](https://rampantdesigntools.com/kvmsoi-sdf-1943-dksir/)
 Geotab Add in
 ------------------------------
  - [GitHub - Generator addin (sandbox css)](https://github.com/Geotab/generator-addin)
@@ -41,6 +41,7 @@ Video Tutorials
 - [Build a website with Wordpress from scratch by James Stafford](https://youtu.be/OVoXDk8ps10)
 - [cPanel - Create Subdomain and install Wordpress](https://youtu.be/c0yQHucyENk)
 - [Recreate Motagua PowerPoint slide](https://youtu.be/xARUSwhA0DM)
+- [After Effect Tutorials](http://www.videocopilot.net/)
 
 High Res Audio
 ------------------------------
