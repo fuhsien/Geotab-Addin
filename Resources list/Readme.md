@@ -35,7 +35,7 @@ Geotab Add in
 ------------------------------
  - [GitHub - Generator addin (sandbox css)](https://github.com/Geotab/generator-addin)
 
-Video Tutorials
+Video Resources
 ------------------------------
 
 - [Build a website with Wordpress from scratch by Hogan Chua](https://youtu.be/grItaOxuyTE)
@@ -43,6 +43,7 @@ Video Tutorials
 - [cPanel - Create Subdomain and install Wordpress](https://youtu.be/c0yQHucyENk)
 - [Recreate Motagua PowerPoint slide](https://youtu.be/xARUSwhA0DM)
 - [After Effect Tutorials](http://www.videocopilot.net/)
+- [Free Musics for video](https://www.legendfromheaven.com/)
 
 High Res Audio
 ------------------------------
