@@ -44,6 +44,7 @@ Video Resources
 - [Recreate Motagua PowerPoint slide](https://youtu.be/xARUSwhA0DM)
 - [After Effect Tutorials](http://www.videocopilot.net/)
 - [Free Musics for video](https://www.legendfromheaven.com/)
+- [Free Sound effects for video](https://www.zapsplat.com/sound-effect-categories/)
 
 High Res Audio
 ------------------------------
