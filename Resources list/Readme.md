@@ -30,6 +30,7 @@ List of resources
 - [Image to Font](https://www.myfonts.com/WhatTheFont/)
 - [Text to Audio](http://www.fromtexttospeech.com/)
 - [Premiere Pro Effects](https://rampantdesigntools.com/kvmsoi-sdf-1943-dksir/)
+- [Laracasts - Coding Academy](https://laracasts.com/)
 
 Geotab Add in
 ------------------------------
